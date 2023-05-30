@@ -24,12 +24,31 @@ public class MainActivity extends ReactActivity {
   @Override
   protected ReactActivityDelegate createReactActivityDelegate() {
     return new DefaultReactActivityDelegate(
-        this,
-        getMainComponentName(),
-        // If you opted-in for the New Architecture, we enable the Fabric Renderer.
-        DefaultNewArchitectureEntryPoint.getFabricEnabled(), // fabricEnabled
-        // If you opted-in for the New Architecture, we enable Concurrent React (i.e. React 18).
-        DefaultNewArchitectureEntryPoint.getConcurrentReactEnabled() // concurrentRootEnabled
-        );
+      this,
+      getMainComponentName(),
+      // If you opted-in for the New Architecture, we enable the Fabric Renderer.
+      DefaultNewArchitectureEntryPoint.getFabricEnabled(), // fabricEnabled
+      // If you opted-in for the New Architecture, we enable Concurrent React (i.e. React 18).
+      DefaultNewArchitectureEntryPoint.getConcurrentReactEnabled() // concurrentRootEnabled
+    );
   }
+  // @Override
+  // protected void onNewIntent(Intent intent) {
+  //   super.onNewIntent(intent);
+  //   Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
+
+  //   if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(intent.getAction())) {
+  //     Parcelable[] rawMessages = intent.getParcelableArrayExtra(
+  //       NfcAdapter.EXTRA_NDEF_MESSAGES
+  //     );
+  //     if (rawMessages != null) {
+  //       NdefMessage[] messages = new NdefMessage[rawMessages.length];
+  //       for (int i = 0; i < rawMessages.length; i++) {
+  //         messages[i] = (NdefMessage) rawMessages[i];
+  //       }
+  //       // Process the messages array.
+
+  //     }
+  //   }
+  // }
 }
