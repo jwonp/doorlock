@@ -10,8 +10,10 @@ const NFCScanScreen = () => {
     try {
       // register for the NFC tag with NDEF in it
       await NfcManager.requestTechnology(NfcTech.Ndef);
+
       // the resolved tag object will contain `ndefMessage` property
       const tag = await NfcManager.getTag();
+
       setTag(tag);
       console.warn('Tag found', tag);
     } catch (ex) {
@@ -26,8 +28,45 @@ const NFCScanScreen = () => {
     <View style={styles.wrapper}>
       <TouchableOpacity onPress={readNdef}>
         <Text style={styles.text}>Scan a Tag</Text>
-        <Text style={styles.text}>{tag === null ? 'NO DATA' : tag.id}</Text>
       </TouchableOpacity>
+      {tag === null ? (
+        <Text>NO DATA</Text>
+      ) : (
+        <View>
+          <Text style={styles.text}>{tag.id}</Text>
+          <Text style={styles.text}>{tag.maxSize}</Text>
+          <Text style={styles.text}>NDEF Message</Text>
+          {tag?.ndefMessage ? (
+            tag?.ndefMessage.map(message => {
+              return (
+                <View>
+                  <Text style={styles.text}>{message.id}</Text>
+                  <Text style={styles.text}>{message.payload}</Text>
+                  <Text style={styles.text}>{message.tnf}</Text>
+                  <Text style={styles.text}>{message.type}</Text>
+                </View>
+              );
+            })
+          ) : (
+            <Text style={styles.text}>NO NDEF MESSAGE</Text>
+          )}
+          <Text style={styles.text}>Tech Types</Text>
+          {tag?.techTypes ? (
+            tag?.techTypes.map(type => {
+              return (
+                <View>
+                  <Text style={styles.text}>{type}</Text>
+                </View>
+              );
+            })
+          ) : (
+            <Text style={styles.text}>NO TECH TYPES</Text>
+          )}
+
+          <Text style={styles.text}>Type</Text>
+          <Text style={styles.text}>{tag?.type}</Text>
+        </View>
+      )}
     </View>
   );
 };
