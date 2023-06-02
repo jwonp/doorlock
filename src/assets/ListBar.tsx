@@ -1,25 +1,27 @@
 import {Text, StyleSheet, Pressable} from 'react-native';
 
-import {UserState, setUser, user} from '../redux/features/userState';
+import {
+  UserDataState,
+  UserState,
+  setUser,
+  setUserId,
+  setUserLastTagged,
+  setUserName,
+  setUserPrivateKey,
+} from '../redux/features/userState';
 import {useState} from 'react';
 
 import {useAppDispatch} from '../redux/hooks';
 
-const ListBar = ({index}: {index: number}) => {
+const ListBar = ({userData,index}: {userData:UserDataState,index: number}) => {
   const dispatch = useAppDispatch();
-  const [userData, setUserData] = useState<UserState>({
-    id: `User ID${index}`,
-    name: `User Name${index}`,
-    privateKey: `Private Key${index}`,
-    lastTagged: `Last Tagged${index}`,
-  });
+
+
   return (
-    <Pressablez
+    <Pressable
       style={listStyles.itemContainer}
       onPress={() => {
         dispatch(setUser(userData));
-
-        console.warn(`${index} is pressed ${userData.id}`);
       }}
       onLongPress={() => {
         console.warn(`${index} is long pressed`);
