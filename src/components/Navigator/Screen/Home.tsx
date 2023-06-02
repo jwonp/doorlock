@@ -1,4 +1,4 @@
-import {View, Button, Text, StyleSheet} from 'react-native';
+import {View, Button, Text, StyleSheet, Modal} from 'react-native';
 
 const HomeScreen = ({navigation}: {navigation: any}) => {
   return (
@@ -41,6 +41,7 @@ const HomeScreen = ({navigation}: {navigation: any}) => {
 };
 const styles = StyleSheet.create({
   container: {
+    padding: '5%',
     flex: 1,
     backgroundColor: '#F5FCFF',
   },

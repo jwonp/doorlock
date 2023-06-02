@@ -8,6 +8,7 @@ import NFCDataScreen from './src/components/Navigator/Screen/NFCData';
 import CardScreen from './src/components/Navigator/Screen/NFCCard';
 import {Provider} from 'react-redux';
 import {store} from './src/redux/store';
+import NewUserModalButton from './src/assets/buttons/NewUserModalButton';
 
 const Stack = createNativeStackNavigator();
 const App = (): JSX.Element => {
@@ -18,9 +19,17 @@ const App = (): JSX.Element => {
           <Stack.Screen
             name="Home"
             component={HomeScreen}
-            options={{title: 'Welcome Home'}}
+            options={{
+              title: 'Welcome Home',
+            }}
           />
-          <Stack.Screen name="User" component={UserScreen} />
+          <Stack.Screen
+            name="User"
+            component={UserScreen}
+            options={{
+              headerRight: () => <NewUserModalButton />,
+            }}
+          />
           <Stack.Screen name="Card" component={CardScreen} />
           <Stack.Screen name="Data" component={NFCDataScreen} />
           <Stack.Screen name="Scan" component={NFCScanScreen} />

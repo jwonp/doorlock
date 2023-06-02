@@ -1,17 +1,25 @@
 import {View, Text, StyleSheet, TextInput, ScrollView} from 'react-native';
 import ListBar from '../../../assets/ListBar';
 import {useAppSelector} from '../../../redux/hooks';
-import {getUser} from '../../../redux/features/userState';
+import {getSelectedUser, getUserList} from '../../../redux/features/userState';
+
+import NewUserModal from '../../Modal/NewUserModal';
 
 const UserScreen = ({route}: {route: any}) => {
-  const TEMP_LISTBAR = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-  const user = useAppSelector(getUser);
+  const userList = useAppSelector(getUserList);
+  const user = useAppSelector(getSelectedUser);
+
   return (
     <View style={styles.container}>
+      <NewUserModal />
       <View style={dataStyles.dataContainer}>
         <View style={dataStyles.itemContainer}>
-          <Text>{user.id}</Text>
-          <TextInput style={styles.whiteText} value={user.id} />
+          <Text>User ID</Text>
+          <TextInput
+            style={styles.whiteText}
+            value={user.id}
+            editable={false}
+          />
         </View>
         <View style={dataStyles.itemContainer}>
           <Text>User Name</Text>
@@ -19,11 +27,19 @@ const UserScreen = ({route}: {route: any}) => {
         </View>
         <View style={dataStyles.itemContainer}>
           <Text>Private Key</Text>
-          <TextInput style={styles.whiteText} value={user.privateKey} />
+          <TextInput
+            style={styles.whiteText}
+            value={user.privateKey}
+            editable={false}
+          />
         </View>
         <View style={dataStyles.itemContainer}>
           <Text>Last Tagged</Text>
-          <TextInput style={styles.whiteText} value={user.lastTagged} />
+          <TextInput
+            style={styles.whiteText}
+            value={user.lastTagged}
+            editable={false}
+          />
         </View>
       </View>
       <View style={listStyles.listContainer}>
@@ -31,8 +47,8 @@ const UserScreen = ({route}: {route: any}) => {
           <Text style={styles.text}>List</Text>
         </View>
         <ScrollView style={listStyles.listScrollView}>
-          {TEMP_LISTBAR.map(index => {
-            return <ListBar index={index} />;
+          {userList.map((item, index) => {
+            return <ListBar userData={item} index={index} />;
           })}
         </ScrollView>
       </View>
