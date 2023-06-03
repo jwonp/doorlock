@@ -48,7 +48,7 @@ const UserScreen = ({route}: {route: any}) => {
         </View>
         <ScrollView style={listStyles.listScrollView}>
           {userList.map((item, index) => {
-            return <ListBar userData={item} index={index} />;
+            return <ListBar key={index} userData={item} index={index} />;
           })}
         </ScrollView>
       </View>
