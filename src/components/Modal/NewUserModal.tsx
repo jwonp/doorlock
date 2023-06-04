@@ -6,14 +6,12 @@ import {
 } from '../../redux/features/modalState';
 import {useState} from 'react';
 
-type NewUser = {
-  userId: string;
-  userName: string;
-};
+
 const NewUserModal = () => {
   const dispatch = useAppDispatch();
   const [newUserId, setNewUserId] = useState<string>('');
   const [newUserName, setNewUserName] = useState<string>('');
+  const [newUserPhone, setNewUserPhone] = useState<string>('');
   const modalVisible = useAppSelector(getNewUserModalVisible);
   return (
     <Modal
@@ -40,11 +38,18 @@ const NewUserModal = () => {
             style={styles.input}
             placeholder={'User Name'}
           />
+          <TextInput
+            onChangeText={e => {
+              setNewUserPhone(e);
+            }}
+            style={styles.input}
+            placeholder={'User Phone'}
+          />
         </View>
         <View>
           <Button
             onPress={() => {
-              console.warn(`${newUserId} and ${newUserName}`);
+              
               dispatch(setNewUserModalVisible(false));
             }}
             title={'Add User'}
