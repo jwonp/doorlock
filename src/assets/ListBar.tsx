@@ -13,9 +13,14 @@ import {useState} from 'react';
 
 import {useAppDispatch} from '../redux/hooks';
 
-const ListBar = ({userData,index}: {userData:UserDataState,index: number}) => {
+const ListBar = ({
+  userData,
+  index,
+}: {
+  userData: UserDataState;
+  index: number;
+}) => {
   const dispatch = useAppDispatch();
-
 
   return (
     <Pressable
@@ -28,7 +33,6 @@ const ListBar = ({userData,index}: {userData:UserDataState,index: number}) => {
       }}>
       <Text style={styles.text}>{`${userData.id}`}</Text>
       <Text style={styles.text}>{`${userData.name}`}</Text>
-      <Text style={styles.text}>{`${userData.privateKey}`}</Text>
       <Text style={styles.text}>{`${userData.lastTagged}`}</Text>
     </Pressable>
   );
