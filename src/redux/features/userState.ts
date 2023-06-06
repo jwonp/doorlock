@@ -5,8 +5,10 @@ import {RootState} from '../store';
 export interface UserDataState {
   id: string;
   name: string;
-  privateKey: string;
+  phone: string;
   lastTagged: string;
+  roomId: string;
+  cardId: string;
 }
 export interface UserState {
   userList: UserDataState[];
@@ -15,8 +17,10 @@ export interface UserState {
 const initSelectedUser: UserDataState = {
   id: 'EXAMPLE-ID',
   name: 'EXAMPLE-NAME',
-  privateKey: 'PRIVATE-KEY-INIT',
   lastTagged: '2016-05-31T01:02:03',
+  phone: '010-1234-5678',
+  roomId: 'EXAMPLE-ROOM-ID',
+  cardId: 'EXAMPLE-CARD-ID',
 };
 const initialState: UserState = {
   userList: [initSelectedUser],
@@ -33,8 +37,10 @@ export const user = createSlice({
     setUser: (state, action: PayloadAction<UserDataState>) => {
       state.selectedUser.id = action.payload.id;
       state.selectedUser.name = action.payload.name;
-      state.selectedUser.privateKey = action.payload.privateKey;
       state.selectedUser.lastTagged = action.payload.lastTagged;
+      state.selectedUser.phone = action.payload.phone;
+      state.selectedUser.roomId = action.payload.roomId;
+      state.selectedUser.cardId = action.payload.cardId;
     },
     setUserId: (state, action: PayloadAction<string>) => {
       state.selectedUser.id = action.payload;
@@ -42,24 +48,11 @@ export const user = createSlice({
     setUserName: (state, action: PayloadAction<string>) => {
       state.selectedUser.name = action.payload;
     },
-    setUserPrivateKey: (state, action: PayloadAction<string>) => {
-      state.selectedUser.privateKey = action.payload;
-    },
-    setUserLastTagged: (state, action: PayloadAction<string>) => {
-      state.selectedUser.lastTagged = action.payload;
-    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const {
-  addNewUser,
-  setUser,
-  setUserId,
-  setUserName,
-  setUserPrivateKey,
-  setUserLastTagged,
-} = user.actions;
+export const {addNewUser, setUser, setUserId, setUserName} = user.actions;
 export const getSelectedUser = (state: RootState) => state.user.selectedUser;
 export const getUserList = (state: RootState) => state.user.userList;
 export default user.reducer;

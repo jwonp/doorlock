@@ -5,19 +5,18 @@ import {
   UserState,
   setUser,
   setUserId,
-  setUserLastTagged,
   setUserName,
-  setUserPrivateKey,
 } from '../redux/features/userState';
 import {useState} from 'react';
 
 import {useAppDispatch} from '../redux/hooks';
+import {UserListResponse} from './models/dto/user/UserListResponse';
 
 const ListBar = ({
   userData,
   index,
 }: {
-  userData: UserDataState;
+  userData: UserListResponse;
   index: number;
 }) => {
   const dispatch = useAppDispatch();

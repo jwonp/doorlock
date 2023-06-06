@@ -1,11 +1,20 @@
-import {TextInput, View, Text, StyleSheet, Modal, Button} from 'react-native';
+import {
+  TextInput,
+  View,
+  Text,
+  StyleSheet,
+  Modal,
+  TouchableOpacity,
+} from 'react-native';
 import {useAppDispatch, useAppSelector} from '../../redux/hooks';
 import {
   getNewUserModalVisible,
   setNewUserModalVisible,
 } from '../../redux/features/modalState';
 import {useState} from 'react';
-
+import {addUser} from '../../util/request/user';
+import {UserAddRequest} from '../../assets/models/dto/user/UserAddRequest';
+import {AxiosError, AxiosResponse} from 'axios';
 
 const NewUserModal = () => {
   const dispatch = useAppDispatch();
@@ -47,13 +56,23 @@ const NewUserModal = () => {
           />
         </View>
         <View>
-          <Button
+          <TouchableOpacity
             onPress={() => {
-              
-              dispatch(setNewUserModalVisible(false));
-            }}
-            title={'Add User'}
-          />
+              const userData: UserAddRequest = {
+                id: newUserId,
+                name: newUserName,
+                phone: newUserPhone,
+              };
+              addUser(userData)
+                .then(res => {
+                  if (res.data === true) {
+                    dispatch(setNewUserModalVisible(false));
+                  }
+                })
+                .catch((err: AxiosError) => {});
+            }}>
+            <Text>Add User</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </Modal>
