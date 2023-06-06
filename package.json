@@ -24,6 +24,7 @@
     "react-redux": "^8.0.7",
     "redux": "^4.2.1",
     "swr": "^2.1.5",
+    "ts-transformer-keys": "^0.4.4",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
