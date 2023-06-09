@@ -1,11 +1,13 @@
 import React, {useState} from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import NfcManager, {NfcTech, TagEvent} from 'react-native-nfc-manager';
+import {addCard} from '../../../util/request/card';
 
 // Pre-step, call this before any NFC operations
 NfcManager.start();
 const NFCScanScreen = () => {
   const [tag, setTag] = useState<TagEvent>(null);
+  const [result, setResult] = useState<String>('');
   const readNdef = async () => {
     try {
       // register for the NFC tag with NDEF in it
@@ -13,6 +15,14 @@ const NFCScanScreen = () => {
 
       // the resolved tag object will contain `ndefMessage` property
       const tag = await NfcManager.getTag();
+
+      addCard(tag)
+        .then(res => {
+          setResult(`${res.data} is saved`);
+        })
+        .catch(err => {
+          setResult('Fail to request add card');
+        });
 
       setTag(tag);
       console.warn('Tag found', tag);
@@ -29,8 +39,9 @@ const NFCScanScreen = () => {
       <TouchableOpacity onPress={readNdef}>
         <Text style={styles.text}>Scan a Tag</Text>
       </TouchableOpacity>
+      <Text style={styles.text}>{result}</Text>
       {tag === null ? (
-        <Text>NO DATA</Text>
+        <Text style={styles.text}>NO DATA</Text>
       ) : (
         <View>
           <Text style={styles.text}>{tag.id}</Text>
