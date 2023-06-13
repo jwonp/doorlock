@@ -48,9 +48,9 @@ const NFCScanScreen = () => {
           <Text style={styles.text}>{tag.maxSize}</Text>
           <Text style={styles.text}>NDEF Message</Text>
           {tag?.ndefMessage ? (
-            tag?.ndefMessage.map(message => {
+            tag?.ndefMessage.map((message,index) => {
               return (
-                <View>
+                <View key={index}>
                   <Text style={styles.text}>{message.id}</Text>
                   <Text style={styles.text}>{message.payload}</Text>
                   <Text style={styles.text}>{message.tnf}</Text>
@@ -63,9 +63,9 @@ const NFCScanScreen = () => {
           )}
           <Text style={styles.text}>Tech Types</Text>
           {tag?.techTypes ? (
-            tag?.techTypes.map(type => {
+            tag?.techTypes.map((type,index) => {
               return (
-                <View>
+                <View key={index}>
                   <Text style={styles.text}>{type}</Text>
                 </View>
               );
