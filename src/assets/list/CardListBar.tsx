@@ -2,7 +2,7 @@ import {Text, Pressable} from 'react-native';
 
 import {useAppDispatch} from '../../redux/hooks';
 
-import {listStyles, styles} from './ListBarStlyeSheet';
+import {listStyles, styles} from './ListBarStyleSheet';
 import {CardListResponse} from '../models/dto/card/CardListResponse';
 import {setCard} from '../../redux/features/cardState';
 

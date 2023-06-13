@@ -2,7 +2,7 @@ import {Text, StyleSheet, Pressable} from 'react-native';
 import {setUser} from '../../redux/features/userState';
 import {useAppDispatch} from '../../redux/hooks';
 import {UserListResponse} from '../models/dto/user/UserListResponse';
-import {listStyles, styles} from './ListBarStlyeSheet';
+import {listStyles, styles} from './ListBarStyleSheet';
 
 const UserListBar = ({
   userData,
