@@ -1,5 +1,5 @@
 import {View, Text, StyleSheet, ScrollView} from 'react-native';
-import ListBar from '../../../assets/ListBar';
+import ListBar from '../../../assets/list/ListBar';
 import {useAppSelector} from '../../../redux/hooks';
 import {getSelectedUser} from '../../../redux/features/userState';
 
@@ -8,8 +8,11 @@ import useSWR from 'swr';
 import {UserListFetcher, UserListURL} from '../../../swr/userSWR';
 import {useEffect, useMemo} from 'react';
 import {getNewUserModalVisible} from '../../../redux/features/modalState';
-import Config from 'react-native-config';
-import UserDataView from '../../../assets/views/UserDataView';
+
+import DataView from '../../../assets/views/data/DataView';
+import {USER} from '../../../assets/static/texts/DataTypes';
+import DataViewContainer from '../../../assets/views/data/DataViewContainer';
+import ListContainer from '../../../assets/views/data/ListContainer';
 const UserScreen = ({route}: {route: any}) => {
   // const userList = useAppSelector(getUserList);
   const modalVisible = useAppSelector(getNewUserModalVisible);
@@ -20,7 +23,7 @@ const UserScreen = ({route}: {route: any}) => {
       return <Text style={styles.text}>No user list swr</Text>;
     }
     return userListSWR.data.map((item, index) => {
-      return <ListBar key={index} userData={item} index={index} />;
+      return <ListBar key={index} type={USER} data={item} index={index} />;
     });
   }, [userListSWR.data]);
   useEffect(() => {
@@ -30,24 +33,19 @@ const UserScreen = ({route}: {route: any}) => {
   return (
     <View style={styles.container}>
       <NewUserModal />
-      <View style={dataStyles.dataContainer}>
-        <UserDataView label={'User ID'} value={user.id} editable={false} />
-        <UserDataView label={'User Name'} value={user.name} editable={true} />
-        <UserDataView
+      <DataViewContainer>
+        <DataView label={'User ID'} value={user.id} editable={false} />
+        <DataView label={'User Name'} value={user.name} editable={true} />
+        <DataView
           label={'Last Tagged'}
           value={user.lastTagged}
           editable={false}
         />
-        <UserDataView label={'Phone'} value={user.phone} editable={true} />
-        <UserDataView label={'Card ID'} value={user.cardId} editable={true} />
-        <UserDataView label={'Room ID'} value={user.roomId} editable={true} />
-      </View>
-      <View style={listStyles.listContainer}>
-        <View style={listStyles.titleContainer}>
-          <Text style={styles.text}>List </Text>
-        </View>
-        <ScrollView style={listStyles.listScrollView}>{UserListBar}</ScrollView>
-      </View>
+        <DataView label={'Phone'} value={user.phone} editable={true} />
+        <DataView label={'Card ID'} value={user.cardId} editable={false} />
+        <DataView label={'Room ID'} value={user.roomId} editable={false} />
+      </DataViewContainer>
+      <ListContainer title={'List'} listBars={UserListBar}/>
     </View>
   );
 };
@@ -60,13 +58,7 @@ const styles = StyleSheet.create({
     color: '#3c3c3c',
   },
 });
-const dataStyles = StyleSheet.create({
-  dataContainer: {
-    backgroundColor: '#3c3c3c',
-    padding: '2%',
-  },
-  itemContainer: {},
-});
+
 const listStyles = StyleSheet.create({
   listContainer: {},
   titleContainer: {padding: '2%'},
