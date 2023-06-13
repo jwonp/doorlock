@@ -5,12 +5,12 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import HomeScreen from './src/components/Navigator/Screen/Home';
 import UserScreen from './src/components/Navigator/Screen/User';
 import NFCScanScreen from './src/components/Navigator/Screen/NFCScan';
-import NFCDataScreen from './src/components/Navigator/Screen/NFCData';
-import CardScreen from './src/components/Navigator/Screen/NFCCard';
+import CardScreen from './src/components/Navigator/Screen/Card';
 import {Provider} from 'react-redux';
 import {store} from './src/redux/store';
 import NewUserModalButton from './src/assets/buttons/NewUserModalButton';
 import {SWRConfig} from 'swr';
+import RoomScreen from './src/components/Navigator/Screen/Room';
 
 const Stack = createNativeStackNavigator();
 const App = (): JSX.Element => {
@@ -64,7 +64,7 @@ const App = (): JSX.Element => {
               }}
             />
             <Stack.Screen name="Card" component={CardScreen} />
-            <Stack.Screen name="Data" component={NFCDataScreen} />
+            <Stack.Screen name="Room" component={RoomScreen} />
             <Stack.Screen name="Scan" component={NFCScanScreen} />
           </Stack.Navigator>
         </NavigationContainer>
