@@ -9,7 +9,7 @@ const HomeScreen = ({navigation}: {navigation: any}) => {
       <View style={styles.buttonContainer}>
         <View style={styles.buttonBox}>
           <Button
-            title="NFC Card List"
+            title="Card"
             color="#3c3c3c"
             onPress={() => navigation.navigate('Card')}
           />
@@ -23,9 +23,9 @@ const HomeScreen = ({navigation}: {navigation: any}) => {
         </View>
         <View style={styles.buttonBox}>
           <Button
-            title="NFC Data"
+            title="Room"
             color="#3c3c3c"
-            onPress={() => navigation.navigate('Data')}
+            onPress={() => navigation.navigate('Room')}
           />
         </View>
         <View style={styles.buttonBox}>
