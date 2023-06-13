@@ -1,11 +1,13 @@
 import {configureStore} from '@reduxjs/toolkit';
 import userReducer from './features/userState';
 import modalReducer from './features/modalState';
+import cardReducer from './features/cardState';
 
 export const makeStore = () => {
   return configureStore({
     reducer: {
       user: userReducer,
+      card: cardReducer,
       modal: modalReducer,
     },
   });
