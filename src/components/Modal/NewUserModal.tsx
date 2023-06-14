@@ -25,6 +25,8 @@ const NewUserModal = () => {
   return (
     <Modal
       visible={modalVisible}
+      transparent={true}
+      animationType={'slide'}
       onRequestClose={() => {
         dispatch(setNewUserModalVisible(false));
       }}>
@@ -55,9 +57,16 @@ const NewUserModal = () => {
             placeholder={'User Phone'}
           />
         </View>
-        <View>
+        <View style={styles.submitContainer}>
           <TouchableOpacity
             onPress={() => {
+              if (
+                newUserId.length === 0 ||
+                newUserName.length === 0 ||
+                newUserPhone.length === 0
+              ) {
+                return;
+              }
               const userData: UserAddRequest = {
                 id: newUserId,
                 name: newUserName,
@@ -71,7 +80,13 @@ const NewUserModal = () => {
                 })
                 .catch((err: AxiosError) => {});
             }}>
-            <Text>Add User</Text>
+            <Text style={styles.submit}>Add User</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              dispatch(setNewUserModalVisible(false));
+            }}>
+            <Text style={styles.submit}>Cancel</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -81,7 +96,6 @@ const NewUserModal = () => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#3c3c3c',
-    height: 100,
     flex: 1,
     justifyContent: 'center',
     padding: '5%',
@@ -99,6 +113,15 @@ const styles = StyleSheet.create({
   },
   input: {
     color: '#ffffff',
+  },
+  submitContainer: {
+    justifyContent: 'space-evenly',
+    flexDirection: 'row',
+    marginTop: '2%',
+  },
+  submit: {
+    fontSize: 18,
+    textAlign: 'center',
   },
 });
 export default NewUserModal;
