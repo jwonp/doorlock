@@ -24,7 +24,9 @@ const UserListBar = ({
       }}>
       <Text style={styles.text}>{`${userData.id}`}</Text>
       <Text style={styles.text}>{`${userData.name}`}</Text>
-      <Text style={styles.text}>{`${userData.lastTagged}`}</Text>
+      <Text style={styles.text}>{`${
+        userData.lastTagged ? userData.lastTagged : 'Not Tagged'
+      }`}</Text>
     </Pressable>
   );
 };
