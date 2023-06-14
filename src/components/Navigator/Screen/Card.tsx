@@ -27,12 +27,15 @@ const CardScreen = () => {
       <DataViewContainer>
         <DataView label={'Card ID'} value={card.id} editable={false} />
         <DataView
-          label={'Card ID'}
+          label={'Max Size'}
           value={`${card.maxSize}`}
           editable={false}
         />
-        <DataView label={'Card ID'} value={card.type} editable={false} />
+        <DataView label={'Type'} value={card.type} editable={false} />
         <TechTypeDataView techType={card.techType} />
+        <DataView label={'User'} value={''} editable={false} />
+        <DataView label={'Room'} value={''} editable={false} />
+        <DataView label={'Used'} value={''} editable={false} />
       </DataViewContainer>
       <ListContainer title={'Card'} listBars={CardListBar} />
     </View>
