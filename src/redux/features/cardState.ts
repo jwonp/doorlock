@@ -10,7 +10,7 @@ export interface CardDataState {
 
   techType: TechType;
 
-  isUsed: boolean;
+  used: boolean;
 
   userId: string;
   roomId: number;
@@ -36,7 +36,7 @@ const initSelectedCard: CardDataState = {
     mifareUltralight: true,
   },
 
-  isUsed: false,
+  used: false,
 
   userId: 'EXAMPLE-USER-ID',
   roomId: 200,
