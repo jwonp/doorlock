@@ -36,16 +36,16 @@ const UserScreen = ({route}: {route: any}) => {
       <DataViewContainer>
         <DataView label={'User ID'} value={user.id} editable={false} />
         <DataView label={'User Name'} value={user.name} editable={true} />
+        <DataView label={'Phone'} value={user.phone} editable={true} />
         <DataView
           label={'Last Tagged'}
           value={user.lastTagged}
           editable={false}
         />
-        <DataView label={'Phone'} value={user.phone} editable={true} />
         <DataView label={'Card ID'} value={user.cardId} editable={false} />
         <DataView label={'Room ID'} value={user.roomId} editable={false} />
       </DataViewContainer>
-      <ListContainer title={'List'} listBars={UserListBar}/>
+      <ListContainer title={'List'} listBars={UserListBar} />
     </View>
   );
 };
