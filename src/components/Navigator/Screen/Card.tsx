@@ -1,4 +1,4 @@
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, Pressable} from 'react-native';
 import useSWR from 'swr';
 import {CardListFetcher, CardListURL} from '../../../swr/cardSWR';
 import {useMemo} from 'react';
@@ -7,11 +7,14 @@ import {CARD} from '../../../assets/static/texts/DataTypes';
 import DataViewContainer from '../../../assets/views/data/DataViewContainer';
 import DataView from '../../../assets/views/data/DataView';
 import ListContainer from '../../../assets/views/data/ListContainer';
-import {useAppSelector} from '../../../redux/hooks';
+import {useAppDispatch, useAppSelector} from '../../../redux/hooks';
 import {getSelectedCard} from '../../../redux/features/cardState';
 import TechTypeDataView from '../../../assets/views/data/card/TechTypeDataView';
+import {setSelectModalVisible} from '../../../redux/features/modalState';
+import SelectModal from '../../Modal/Card/SelectModal';
 const CardScreen = () => {
   const card = useAppSelector(getSelectedCard);
+  const dispatch = useAppDispatch();
   const cardListSWR = useSWR(CardListURL, CardListFetcher);
   const CardListBar = useMemo(() => {
     if (!cardListSWR || !cardListSWR.data) {
@@ -24,6 +27,7 @@ const CardScreen = () => {
   }, [cardListSWR.data]);
   return (
     <View style={styles.container}>
+      <SelectModal></SelectModal>
       <DataViewContainer>
         <DataView label={'Card ID'} value={card.id} editable={false} />
         <DataView
@@ -33,9 +37,31 @@ const CardScreen = () => {
         />
         <DataView label={'Type'} value={card.type} editable={false} />
         <TechTypeDataView techType={card.techType} />
-        <DataView label={'User'} value={''} editable={false} />
-        <DataView label={'Room'} value={''} editable={false} />
-        <DataView label={'Used'} value={''} editable={false} />
+        <Pressable
+          onPress={() => {
+            dispatch(setSelectModalVisible(true));
+          }}>
+          <DataView
+            label={'User'}
+            value={card.userId.length > 0 ? card.userId : 'N/A'}
+            editable={false}
+          />
+        </Pressable>
+        <Pressable
+          onPress={() => {
+            dispatch(setSelectModalVisible(true));
+          }}>
+          <DataView
+            label={'Room'}
+            value={card.roomId < 0 ? 'N/A' : card.roomId.toString()}
+            editable={false}
+          />
+        </Pressable>
+        <DataView
+          label={'Used'}
+          value={card.used ? 'Used' : 'Not Used'}
+          editable={false}
+        />
       </DataViewContainer>
       <ListContainer title={'Card'} listBars={CardListBar} />
     </View>
