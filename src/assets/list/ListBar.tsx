@@ -5,24 +5,27 @@ import UserListBar from './UserListBar';
 import CardListBar from './CardListBar';
 import RoomListBar from './RoomListBar';
 import {RoomListResponse} from '../models/dto/room/RoomListResponse';
+import { GestureResponderEvent } from 'react-native';
 
 const ListBar = ({
   data,
   type,
   index,
+  onPress
 }: {
   data: UserListResponse | CardListResponse | RoomListResponse;
   type: DataTypes;
   index: number;
+  onPress:(event: GestureResponderEvent) => any
 }) => {
   if (type === USER) {
-    return <UserListBar userData={data as UserListResponse} index={index} />;
+    return <UserListBar data={data as UserListResponse} index={index} onPress={onPress}/>;
   }
   if (type === ROOM) {
-    return <RoomListBar roomData={data as RoomListResponse} index={index} />;
+    return <RoomListBar data={data as RoomListResponse} index={index} onPress={onPress} />;
   }
   if (type === CARD) {
-    return <CardListBar cardData={data as CardListResponse} index={index} />;
+    return <CardListBar data={data as CardListResponse} index={index} onPress={onPress} />;
   }
 };
 

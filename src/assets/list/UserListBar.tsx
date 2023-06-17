@@ -3,29 +3,20 @@ import {setUser} from '../../redux/features/userState';
 import {useAppDispatch} from '../../redux/hooks';
 import {UserListResponse} from '../models/dto/user/UserListResponse';
 import {listStyles, styles} from './ListBarStyleSheet';
+import {UserListBarProps} from './ListBarProps';
 
-const UserListBar = ({
-  userData,
-  index,
-}: {
-  userData: UserListResponse;
-  index: number;
-}) => {
-  const dispatch = useAppDispatch();
-
+const UserListBar = ({data, index, onPress}: UserListBarProps) => {
   return (
     <Pressable
       style={listStyles.itemContainer}
-      onPress={() => {
-        dispatch(setUser(userData));
-      }}
+      onPress={onPress}
       onLongPress={() => {
         console.warn(`${index} is long pressed`);
       }}>
-      <Text style={styles.text}>{`${userData.id}`}</Text>
-      <Text style={styles.text}>{`${userData.name}`}</Text>
+      <Text style={styles.text}>{`${data.id}`}</Text>
+      <Text style={styles.text}>{`${data.name}`}</Text>
       <Text style={styles.text}>{`${
-        userData.lastTagged ? userData.lastTagged : 'Not Tagged'
+        data.lastTagged ? data.lastTagged : 'Not Tagged'
       }`}</Text>
     </Pressable>
   );

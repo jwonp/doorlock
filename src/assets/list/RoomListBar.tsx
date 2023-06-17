@@ -1,29 +1,19 @@
 import {Text, Pressable} from 'react-native';
-import {setUser} from '../../redux/features/userState';
 import {useAppDispatch} from '../../redux/hooks';
-import {UserListResponse} from '../models/dto/user/UserListResponse';
 import {listStyles, styles} from './ListBarStyleSheet';
-import {RoomListResponse} from '../models/dto/room/RoomListResponse';
+import {RoomListBarProps} from './ListBarProps';
 
-const RoomListBar = ({
-  roomData,
-  index,
-}: {
-  roomData: RoomListResponse;
-  index: number;
-}) => {
-  const dispatch = useAppDispatch();
-
+const RoomListBar = ({data, index, onPress}: RoomListBarProps) => {
   return (
     <Pressable
       style={listStyles.itemContainer}
-      onPress={() => {}}
+      onPress={onPress}
       onLongPress={() => {
         console.warn(`${index} is long pressed`);
       }}>
-      <Text style={styles.text}>{`${roomData.id}`}</Text>
-      <Text style={styles.text}>{`${roomData.guestId}`}</Text>
-      <Text style={styles.text}>{roomData.isUsed ? 'Reserved' : 'Free'}</Text>
+      <Text style={styles.text}>{`${data.id}`}</Text>
+      <Text style={styles.text}>{`${data.guestId}`}</Text>
+      <Text style={styles.text}>{data.isUsed ? 'Reserved' : 'Free'}</Text>
     </Pressable>
   );
 };
