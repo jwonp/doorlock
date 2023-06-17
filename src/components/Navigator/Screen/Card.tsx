@@ -1,4 +1,10 @@
-import {View, Text, StyleSheet, Pressable} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Pressable,
+  GestureResponderEvent,
+} from 'react-native';
 import useSWR from 'swr';
 import {CardListFetcher, CardListURL} from '../../../swr/cardSWR';
 import {useMemo} from 'react';
@@ -8,10 +14,12 @@ import DataViewContainer from '../../../assets/views/data/DataViewContainer';
 import DataView from '../../../assets/views/data/DataView';
 import ListContainer from '../../../assets/views/data/ListContainer';
 import {useAppDispatch, useAppSelector} from '../../../redux/hooks';
-import {getSelectedCard} from '../../../redux/features/cardState';
+import {getSelectedCard, setCard} from '../../../redux/features/cardState';
 import TechTypeDataView from '../../../assets/views/data/card/TechTypeDataView';
 import {setSelectModalVisible} from '../../../redux/features/modalState';
 import SelectModal from '../../Modal/Card/SelectModal';
+import {ModalType, setModalType} from '../../../redux/features/modalTypeState';
+
 const CardScreen = () => {
   const card = useAppSelector(getSelectedCard);
   const dispatch = useAppDispatch();
@@ -22,9 +30,20 @@ const CardScreen = () => {
     }
 
     return cardListSWR.data.map((item, index) => {
-      return <ListBar key={index} type={CARD} data={item} index={index} />;
+      return (
+        <ListBar
+          key={index}
+          type={CARD}
+          data={item}
+          index={index}
+          onPress={(event: GestureResponderEvent) => {
+            dispatch(setCard(item));
+          }}
+        />
+      );
     });
   }, [cardListSWR.data]);
+
   return (
     <View style={styles.container}>
       <SelectModal></SelectModal>
@@ -40,6 +59,7 @@ const CardScreen = () => {
         <Pressable
           onPress={() => {
             dispatch(setSelectModalVisible(true));
+            dispatch(setModalType(ModalType.user));
           }}>
           <DataView
             label={'User'}
@@ -50,6 +70,7 @@ const CardScreen = () => {
         <Pressable
           onPress={() => {
             dispatch(setSelectModalVisible(true));
+            dispatch(setModalType(ModalType.room));
           }}>
           <DataView
             label={'Room'}
@@ -63,7 +84,7 @@ const CardScreen = () => {
           editable={false}
         />
       </DataViewContainer>
-      <ListContainer title={'Card'} listBars={CardListBar} />
+      <ListContainer title={'Card'} listBars={CardListBar} height={30} />
     </View>
   );
 };

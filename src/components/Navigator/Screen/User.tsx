@@ -1,7 +1,7 @@
-import {View, Text, StyleSheet, ScrollView} from 'react-native';
+import {View, Text, StyleSheet, ScrollView, GestureResponderEvent} from 'react-native';
 import ListBar from '../../../assets/list/ListBar';
-import {useAppSelector} from '../../../redux/hooks';
-import {getSelectedUser} from '../../../redux/features/userState';
+import {useAppDispatch, useAppSelector} from '../../../redux/hooks';
+import {getSelectedUser, setUser} from '../../../redux/features/userState';
 
 import NewUserModal from '../../Modal/NewUserModal';
 import useSWR from 'swr';
@@ -14,7 +14,7 @@ import {USER} from '../../../assets/static/texts/DataTypes';
 import DataViewContainer from '../../../assets/views/data/DataViewContainer';
 import ListContainer from '../../../assets/views/data/ListContainer';
 const UserScreen = ({route}: {route: any}) => {
-  // const userList = useAppSelector(getUserList);
+  const dispatch = useAppDispatch();
   const modalVisible = useAppSelector(getNewUserModalVisible);
   const user = useAppSelector(getSelectedUser);
   const userListSWR = useSWR(UserListURL, UserListFetcher);
@@ -23,7 +23,9 @@ const UserScreen = ({route}: {route: any}) => {
       return <Text style={styles.text}>No user list swr</Text>;
     }
     return userListSWR.data.map((item, index) => {
-      return <ListBar key={index} type={USER} data={item} index={index} />;
+      return <ListBar key={index} type={USER} data={item} index={index} onPress={(event: GestureResponderEvent)=> {
+        dispatch(setUser(item));
+      } } />;
     });
   }, [userListSWR.data]);
   useEffect(() => {
@@ -45,7 +47,7 @@ const UserScreen = ({route}: {route: any}) => {
         <DataView label={'Card ID'} value={user.cardId} editable={false} />
         <DataView label={'Room ID'} value={user.roomId} editable={false} />
       </DataViewContainer>
-      <ListContainer title={'List'} listBars={UserListBar} />
+      <ListContainer title={'List'} listBars={UserListBar} height={30} />
     </View>
   );
 };
