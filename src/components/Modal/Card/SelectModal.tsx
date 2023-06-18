@@ -6,6 +6,7 @@ import {
   Text,
   Pressable,
   GestureResponderEvent,
+  Button,
 } from 'react-native';
 import {useAppDispatch, useAppSelector} from '../../../redux/hooks';
 import {
@@ -71,16 +72,22 @@ const SelectModal = () => {
         </View>
         <Pressable
           onPress={e => {
-            console.log(e.currentTarget);
+            console.warn('on pressed inner');
           }}
-          //  style={styles.container}
-        >
+          style={styles.container}>
           <ListContainer
             title={modalType}
             listBars={ModalDataList}
-            height={100}
+            height={70}
           />
         </Pressable>
+        <Button
+          onPress={() => {
+            dispatch(setSelectModalVisible(false));
+          }}
+          title={'Cancel'}
+          color={'#3c3c3c'}
+        />
       </View>
     </Modal>
   );
@@ -88,13 +95,12 @@ const SelectModal = () => {
 const styles = StyleSheet.create({
   modal: {
     backgroundColor: '#ffffff',
-
+    padding: '2%',
     marginTop: 'auto',
     height: '50%',
   },
   container: {
-    backgroundColor: '#3c3c3c',
-    height: '50%',
+    backgroundColor: '#ffffff',
   },
   text: {
     color: '#000000',
