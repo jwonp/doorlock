@@ -8,11 +8,7 @@ import {
   GestureResponderEvent,
   Button,
 } from 'react-native';
-import {
-  getSelectedCard,
-  setRoomId,
-  setUserId,
-} from '../../../redux/features/cardState';
+
 import {useAppDispatch, useAppSelector} from '../../../redux/hooks';
 import {
   getSelectModalVisible,
@@ -30,9 +26,14 @@ import {
   modifyRoomidInUser,
   modifyCardidInUser,
 } from '../../../util/request/user';
+import {
+  getSelectedUser,
+  setCardId,
+  setRoomId,
+} from '../../../redux/features/userState';
 const SelectModal = () => {
   const dispatch = useAppDispatch();
-  const card = useAppSelector(getSelectedCard);
+  const user = useAppSelector(getSelectedUser);
   const modalVisible = useAppSelector(getSelectModalVisible);
   const modalType = useAppSelector(getModalType);
   const ModalDataSWR = useSWR(CardSelectDataURL(modalType), SelectDataFetcher);
@@ -52,7 +53,7 @@ const SelectModal = () => {
           type={ROOM}
           index={index}
           onPress={(event: GestureResponderEvent) => {
-            modifyRoomidInUser(item.id, card.userId).then(res => {
+            modifyRoomidInUser(item.id, user.id).then(res => {
               if (res.data === false) {
                 return;
               }
@@ -71,13 +72,13 @@ const SelectModal = () => {
           type={CARD}
           index={index}
           onPress={(event: GestureResponderEvent) => {
-            modifyCardidInUser(card.id, item.id).then(res => {
+            modifyCardidInUser(item.id, user.id).then(res => {
               if (res.data === false) {
                 return;
               }
-              dispatch(setUserId(item.id));
+              dispatch(setCardId(item.id));
             });
-            dispatch(setUserId(item.id));
+
             dispatch(setSelectModalVisible(false));
           }}
         />
