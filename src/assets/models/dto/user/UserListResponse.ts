@@ -4,7 +4,7 @@ export interface UserListResponse {
   name: string;
   phone: string;
   lastTagged: string;
-  roomId: string;
+  roomId: number;
   cardId: string;
 }
 
