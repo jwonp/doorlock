@@ -1,10 +1,4 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  Pressable,
-  GestureResponderEvent,
-} from 'react-native';
+import {View, Text, StyleSheet, GestureResponderEvent} from 'react-native';
 import useSWR from 'swr';
 import {CardListFetcher, CardListURL} from '../../../swr/cardSWR';
 import {useMemo} from 'react';
@@ -16,9 +10,6 @@ import ListContainer from '../../../assets/views/data/ListContainer';
 import {useAppDispatch, useAppSelector} from '../../../redux/hooks';
 import {getSelectedCard, setCard} from '../../../redux/features/cardState';
 import TechTypeDataView from '../../../assets/views/data/card/TechTypeDataView';
-import {setSelectModalVisible} from '../../../redux/features/modalState';
-import SelectModal from '../../Modal/Card/SelectModal';
-import {ModalType, setModalType} from '../../../redux/features/modalTypeState';
 
 const CardScreen = () => {
   const card = useAppSelector(getSelectedCard);
@@ -46,7 +37,6 @@ const CardScreen = () => {
 
   return (
     <View style={styles.container}>
-      <SelectModal></SelectModal>
       <DataViewContainer>
         <DataView label={'Card ID'} value={card.id} editable={false} />
         <DataView
@@ -56,28 +46,19 @@ const CardScreen = () => {
         />
         <DataView label={'Type'} value={card.type} editable={false} />
         <TechTypeDataView techType={card.techType} />
-        <Pressable
-          onPress={() => {
-            dispatch(setSelectModalVisible(true));
-            dispatch(setModalType(ModalType.user));
-          }}>
-          <DataView
-            label={'User'}
-            value={card.userId.length > 0 ? card.userId : 'N/A'}
-            editable={false}
-          />
-        </Pressable>
-        <Pressable
-          onPress={() => {
-            dispatch(setSelectModalVisible(true));
-            dispatch(setModalType(ModalType.room));
-          }}>
-          <DataView
-            label={'Room'}
-            value={card.roomId < 0 ? 'N/A' : card.roomId.toString()}
-            editable={false}
-          />
-        </Pressable>
+
+        <DataView
+          label={'User'}
+          value={card.userId.length > 0 ? card.userId : 'N/A'}
+          editable={false}
+        />
+
+        <DataView
+          label={'Room'}
+          value={card.roomId < 0 ? 'N/A' : card.roomId.toString()}
+          editable={false}
+        />
+
         <DataView
           label={'Used'}
           value={card.used ? 'Used' : 'Not Used'}

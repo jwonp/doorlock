@@ -8,6 +8,11 @@ import {
   GestureResponderEvent,
   Button,
 } from 'react-native';
+import {
+  getSelectedCard,
+  setRoomId,
+  setUserId,
+} from '../../../redux/features/cardState';
 import {useAppDispatch, useAppSelector} from '../../../redux/hooks';
 import {
   getSelectModalVisible,
@@ -19,10 +24,15 @@ import {CardSelectDataURL, SelectDataFetcher} from '../../../swr/cardSWR';
 import {UserListResponse} from '../../../assets/models/dto/user/UserListResponse';
 import {RoomListResponse} from '../../../assets/models/dto/room/RoomListResponse';
 import ListBar from '../../../assets/list/ListBar';
-import {ROOM, USER} from '../../../assets/static/texts/DataTypes';
+import {CARD, ROOM} from '../../../assets/static/texts/DataTypes';
 import ListContainer from '../../../assets/views/data/ListContainer';
+import {
+  modifyRoomidInUser,
+  modifyCardidInUser,
+} from '../../../util/request/user';
 const SelectModal = () => {
   const dispatch = useAppDispatch();
+  const card = useAppSelector(getSelectedCard);
   const modalVisible = useAppSelector(getSelectModalVisible);
   const modalType = useAppSelector(getModalType);
   const ModalDataSWR = useSWR(CardSelectDataURL(modalType), SelectDataFetcher);
@@ -41,18 +51,35 @@ const SelectModal = () => {
           data={item}
           type={ROOM}
           index={index}
-          onPress={(event: GestureResponderEvent) => {}}
+          onPress={(event: GestureResponderEvent) => {
+            modifyRoomidInUser(item.id, card.userId).then(res => {
+              if (res.data === false) {
+                return;
+              }
+              dispatch(setRoomId(item.id));
+            });
+            dispatch(setSelectModalVisible(false));
+          }}
         />
       ));
     }
-    if (modalType === ModalType.user) {
+    if (modalType === ModalType.card) {
       return (ModalDataSWR.data as UserListResponse[]).map((item, index) => (
         <ListBar
           key={index}
           data={item}
-          type={USER}
+          type={CARD}
           index={index}
-          onPress={(event: GestureResponderEvent) => {}}
+          onPress={(event: GestureResponderEvent) => {
+            modifyCardidInUser(card.id, item.id).then(res => {
+              if (res.data === false) {
+                return;
+              }
+              dispatch(setUserId(item.id));
+            });
+            dispatch(setUserId(item.id));
+            dispatch(setSelectModalVisible(false));
+          }}
         />
       ));
     }
@@ -70,11 +97,7 @@ const SelectModal = () => {
         <View>
           <Text style={styles.text}>Modal</Text>
         </View>
-        <Pressable
-          onPress={e => {
-            console.warn('on pressed inner');
-          }}
-          style={styles.container}>
+        <Pressable style={styles.container}>
           <ListContainer
             title={modalType}
             listBars={ModalDataList}

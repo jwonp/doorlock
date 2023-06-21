@@ -1,4 +1,11 @@
-import {View, Text, StyleSheet, ScrollView, GestureResponderEvent} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  GestureResponderEvent,
+  Pressable,
+} from 'react-native';
 import ListBar from '../../../assets/list/ListBar';
 import {useAppDispatch, useAppSelector} from '../../../redux/hooks';
 import {getSelectedUser, setUser} from '../../../redux/features/userState';
@@ -7,12 +14,17 @@ import NewUserModal from '../../Modal/NewUserModal';
 import useSWR from 'swr';
 import {UserListFetcher, UserListURL} from '../../../swr/userSWR';
 import {useEffect, useMemo} from 'react';
-import {getNewUserModalVisible} from '../../../redux/features/modalState';
+import {
+  getNewUserModalVisible,
+  setSelectModalVisible,
+} from '../../../redux/features/modalState';
 
 import DataView from '../../../assets/views/data/DataView';
 import {USER} from '../../../assets/static/texts/DataTypes';
 import DataViewContainer from '../../../assets/views/data/DataViewContainer';
 import ListContainer from '../../../assets/views/data/ListContainer';
+import SelectModal from '../../Modal/Card/SelectModal';
+import {ModalType, setModalType} from '../../../redux/features/modalTypeState';
 const UserScreen = ({route}: {route: any}) => {
   const dispatch = useAppDispatch();
   const modalVisible = useAppSelector(getNewUserModalVisible);
@@ -23,9 +35,17 @@ const UserScreen = ({route}: {route: any}) => {
       return <Text style={styles.text}>No user list swr</Text>;
     }
     return userListSWR.data.map((item, index) => {
-      return <ListBar key={index} type={USER} data={item} index={index} onPress={(event: GestureResponderEvent)=> {
-        dispatch(setUser(item));
-      } } />;
+      return (
+        <ListBar
+          key={index}
+          type={USER}
+          data={item}
+          index={index}
+          onPress={(event: GestureResponderEvent) => {
+            dispatch(setUser(item));
+          }}
+        />
+      );
     });
   }, [userListSWR.data]);
   useEffect(() => {
@@ -35,17 +55,38 @@ const UserScreen = ({route}: {route: any}) => {
   return (
     <View style={styles.container}>
       <NewUserModal />
+      <SelectModal />
       <DataViewContainer>
         <DataView label={'User ID'} value={user.id} editable={false} />
         <DataView label={'User Name'} value={user.name} editable={true} />
         <DataView label={'Phone'} value={user.phone} editable={true} />
         <DataView
           label={'Last Tagged'}
-          value={user.lastTagged}
+          value={user.lastTagged ? user.lastTagged : 'Not Tagged'}
           editable={false}
         />
-        <DataView label={'Card ID'} value={user.cardId} editable={false} />
-        <DataView label={'Room ID'} value={user.roomId} editable={false} />
+        <Pressable
+          onPress={() => {
+            dispatch(setSelectModalVisible(true));
+            dispatch(setModalType(ModalType.card));
+          }}>
+          <DataView
+            label={'Card ID'}
+            value={user.cardId ? user.cardId : 'N/A'}
+            editable={false}
+          />
+        </Pressable>
+        <Pressable
+          onPress={() => {
+            dispatch(setSelectModalVisible(true));
+            dispatch(setModalType(ModalType.room));
+          }}>
+          <DataView
+            label={'Room'}
+            value={user.roomId ? user.roomId.toString() : 'N/A'}
+            editable={false}
+          />
+        </Pressable>
       </DataViewContainer>
       <ListContainer title={'List'} listBars={UserListBar} height={30} />
     </View>

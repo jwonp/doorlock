@@ -3,7 +3,7 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {RootState} from '../store';
 
 export const ModalType = {
-  user: 'user',
+  card: 'card',
   room: 'room',
 } as const;
 export type ModalType = (typeof ModalType)[keyof typeof ModalType];
@@ -12,7 +12,7 @@ export interface ModalState {
 }
 
 const initialState: ModalState = {
-  type: ModalType.user,
+  type: ModalType.card,
 } as const;
 
 export const modalType = createSlice({
