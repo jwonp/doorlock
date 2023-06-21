@@ -1,5 +1,5 @@
 export interface RoomListResponse {
   id: number;
-  guestId: string;
+  // guestId: string;
   isUsed: boolean;
 }
