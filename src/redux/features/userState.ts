@@ -7,7 +7,7 @@ export interface UserDataState {
   name: string;
   phone: string;
   lastTagged: string;
-  roomId: string;
+  roomId: number;
   cardId: string;
 }
 export interface UserState {
@@ -19,7 +19,7 @@ const initSelectedUser: UserDataState = {
   name: 'EXAMPLE-NAME',
   lastTagged: '2016-05-31T01:02:03',
   phone: '010-1234-5678',
-  roomId: 'EXAMPLE-ROOM-ID',
+  roomId: 110,
   cardId: 'EXAMPLE-CARD-ID',
 };
 const initialState: UserState = {
@@ -48,11 +48,17 @@ export const user = createSlice({
     setUserName: (state, action: PayloadAction<string>) => {
       state.selectedUser.name = action.payload;
     },
+    setCardId: (state, action: PayloadAction<string>) => {
+      state.selectedUser.cardId = action.payload;
+    },
+    setRoomId: (state, action: PayloadAction<number>) => {
+      state.selectedUser.roomId = action.payload;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const {addNewUser, setUser, setUserId, setUserName} = user.actions;
+export const {addNewUser, setUser, setUserId, setUserName,setCardId, setRoomId} = user.actions;
 export const getSelectedUser = (state: RootState) => state.user.selectedUser;
 export const getUserList = (state: RootState) => state.user.userList;
 export default user.reducer;
