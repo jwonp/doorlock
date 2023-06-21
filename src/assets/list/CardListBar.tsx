@@ -1,10 +1,9 @@
-import {Text, Pressable, GestureResponderEvent} from 'react-native';
+import {Text, Pressable} from 'react-native';
 
-import {useAppDispatch} from '../../redux/hooks';
 
-import {listStyles, styles} from './ListBarStyleSheet';
+import {listStyles, styles,cardBarWidthStyles} from './ListBarStyleSheet';
 
-import {useEffect} from 'react';
+
 import {CardListBarProps} from './ListBarProps';
 
 const CardListBar = ({data, index, onPress}: CardListBarProps) => {
@@ -15,14 +14,14 @@ const CardListBar = ({data, index, onPress}: CardListBarProps) => {
       onLongPress={() => {
         console.warn(`${index} is long pressed`);
       }}>
-      <Text style={styles.text}>{`${data.id}`}</Text>
-      <Text style={styles.text}>{`${
+      <Text style={{...styles.text, ...cardBarWidthStyles.id}}>{`${data.id}`}</Text>
+      <Text style={{...styles.text, ...cardBarWidthStyles.userId}}>{`${
         data.userId.length === 0 ? 'No User' : data.userId
       }`}</Text>
-      <Text style={styles.text}>{`${
+      <Text style={{...styles.text, ...cardBarWidthStyles.roomId}}>{`${
         data.roomId < 0 ? 'No Room' : data.roomId
       }`}</Text>
-      <Text style={styles.text}>{data.used ? 'Used' : 'Free'}</Text>
+      <Text style={{...styles.text, ...cardBarWidthStyles.used}}>{data.used ? 'Used' : 'Free'}</Text>
     </Pressable>
   );
 };

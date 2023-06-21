@@ -1,8 +1,6 @@
-import {Text, StyleSheet, Pressable} from 'react-native';
-import {setUser} from '../../redux/features/userState';
-import {useAppDispatch} from '../../redux/hooks';
-import {UserListResponse} from '../models/dto/user/UserListResponse';
-import {listStyles, styles} from './ListBarStyleSheet';
+import {Text, Pressable} from 'react-native';
+
+import {listStyles, styles, userBarWidthStyles} from './ListBarStyleSheet';
 import {UserListBarProps} from './ListBarProps';
 
 const UserListBar = ({data, index, onPress}: UserListBarProps) => {
@@ -13,9 +11,11 @@ const UserListBar = ({data, index, onPress}: UserListBarProps) => {
       onLongPress={() => {
         console.warn(`${index} is long pressed`);
       }}>
-      <Text style={styles.text}>{`${data.id}`}</Text>
-      <Text style={styles.text}>{`${data.name}`}</Text>
-      <Text style={styles.text}>{`${
+      <Text
+        style={{...styles.text, ...userBarWidthStyles.id}}>{`${data.id}`}</Text>
+      <Text
+        style={{...styles.text, ...userBarWidthStyles.name}}>{`${data.name}`}</Text>
+      <Text style={{...styles.text, ...userBarWidthStyles.lastTagged}}>{`${
         data.lastTagged ? data.lastTagged : 'Not Tagged'
       }`}</Text>
     </Pressable>
