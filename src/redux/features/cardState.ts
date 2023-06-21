@@ -11,9 +11,6 @@ export interface CardDataState {
   techType: TechType;
 
   used: boolean;
-
-  userId: string;
-  roomId: number;
 }
 export interface CardState {
   cardList: CardDataState[];
@@ -38,8 +35,6 @@ const initSelectedCard: CardDataState = {
 
   used: false,
 
-  userId: 'EXAMPLE-USER-ID',
-  roomId: 200,
 };
 const initialState: CardState = {
   cardList: [initSelectedCard],
@@ -59,11 +54,13 @@ export const card = createSlice({
     setCardId: (state, action: PayloadAction<string>) => {
       state.selectedCard.id = action.payload;
     },
+
   },
 });
 
 // Action creators are generated for each case reducer function
-export const {addNewCard, setCard, setCardId} = card.actions;
+export const {addNewCard, setCard, setCardId, } =
+  card.actions;
 export const getSelectedCard = (state: RootState) => state.card.selectedCard;
 export const getCardList = (state: RootState) => state.card.cardList;
 export default card.reducer;
