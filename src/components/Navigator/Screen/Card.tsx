@@ -47,18 +47,7 @@ const CardScreen = () => {
         <DataView label={'Type'} value={card.type} editable={false} />
         <TechTypeDataView techType={card.techType} />
 
-        <DataView
-          label={'User'}
-          value={card.userId.length > 0 ? card.userId : 'N/A'}
-          editable={false}
-        />
-
-        <DataView
-          label={'Room'}
-          value={card.roomId < 0 ? 'N/A' : card.roomId.toString()}
-          editable={false}
-        />
-
+  
         <DataView
           label={'Used'}
           value={card.used ? 'Used' : 'Not Used'}
