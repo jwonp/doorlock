@@ -2,21 +2,20 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
 import {RootState} from '../store';
 import {TechType} from '../../assets/models/types/TechType';
+import {CardWithReservationResponse} from '../../assets/models/dto/card/CardWithReservationResponse';
 
 export interface CardDataState {
   id: string;
   maxSize: number;
   type: string;
-
   techType: TechType;
-
-  used: boolean;
 }
+interface CardWithReservation extends CardWithReservationResponse {}
 export interface CardState {
   cardList: CardDataState[];
-  selectedCard: CardDataState;
+  selectedCard: CardWithReservation;
 }
-const initSelectedCard: CardDataState = {
+const initCard: CardDataState = {
   id: 'EXAMPLE-ID',
   maxSize: 1000,
   type: 'EXAMPLE-TYPE',
@@ -32,12 +31,16 @@ const initSelectedCard: CardDataState = {
     mifareClassic: false,
     mifareUltralight: true,
   },
+};
 
-  used: false,
-
+const initSelectedCard: CardWithReservation = {
+  ...initCard,
+  reservationId: 0,
+  roomId: 0,
+  userId: 'EXAMPLE-USER-ID',
 };
 const initialState: CardState = {
-  cardList: [initSelectedCard],
+  cardList: [initCard],
   selectedCard: initSelectedCard,
 };
 
@@ -48,19 +51,17 @@ export const card = createSlice({
     addNewCard: (state, action: PayloadAction<CardDataState>) => {
       state.cardList = [...state.cardList, action.payload];
     },
-    setCard: (state, action: PayloadAction<CardDataState>) => {
+    setSelectedCard: (state, action: PayloadAction<CardWithReservation>) => {
       state.selectedCard = action.payload;
     },
     setCardId: (state, action: PayloadAction<string>) => {
       state.selectedCard.id = action.payload;
     },
-
   },
 });
 
 // Action creators are generated for each case reducer function
-export const {addNewCard, setCard, setCardId, } =
-  card.actions;
+export const {addNewCard, setSelectedCard, setCardId} = card.actions;
 export const getSelectedCard = (state: RootState) => state.card.selectedCard;
 export const getCardList = (state: RootState) => state.card.cardList;
 export default card.reducer;
