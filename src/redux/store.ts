@@ -2,6 +2,7 @@ import {configureStore} from '@reduxjs/toolkit';
 import userReducer from './features/userState';
 import modalReducer from './features/modalState';
 import cardReducer from './features/cardState';
+import roomReducer from './features/roomState';
 import modalTypeReducer from './features/modalTypeState';
 
 export const makeStore = () => {
@@ -9,6 +10,7 @@ export const makeStore = () => {
     reducer: {
       user: userReducer,
       card: cardReducer,
+      room: roomReducer,
       modal: modalReducer,
       modalType: modalTypeReducer,
     },
