@@ -1,11 +1,12 @@
-import {CardListResponse} from '../models/dto/card/CardListResponse';
+import {CardWithReservationResponse} from '../models/dto/card/CardWithReservationResponse';
 import {RoomListResponse} from '../models/dto/room/RoomListResponse';
 import {UserListResponse} from '../models/dto/user/UserListResponse';
 import {GestureResponderEvent} from 'react-native';
 type ListBar = {
-  data: CardListResponse | RoomListResponse | UserListResponse;
-  index: number;
-  onPress: (event: GestureResponderEvent) => any;
+  data: CardWithReservationResponse | RoomListResponse | UserListResponse;
+  index?: number;
+  onPress?: (event: GestureResponderEvent) => any;
+  onLongPress?:(event: GestureResponderEvent) => any;
 };
 
 export interface UserListBarProps extends ListBar {
@@ -13,7 +14,7 @@ export interface UserListBarProps extends ListBar {
 }
 
 export interface CardListBarProps extends ListBar {
-  data: CardListResponse;
+  data: CardWithReservationResponse;
 }
 
 export interface RoomListBarProps extends ListBar {
