@@ -30,14 +30,12 @@ export const cardBarWidthStyles = StyleSheet.create({
   id: {
     width: '40%',
   },
-  userId: {
+  reservationId: {
     width: '20%',
   },
-  roomId: {
-    width: '20%',
-  },
+
   used: {
-    width: '10%',
+    width: '15%',
   },
 });
 export const listStyles = StyleSheet.create({
