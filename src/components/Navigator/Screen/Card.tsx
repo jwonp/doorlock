@@ -8,7 +8,10 @@ import DataViewContainer from '../../../assets/views/data/DataViewContainer';
 import DataView from '../../../assets/views/data/DataView';
 import ListContainer from '../../../assets/views/data/ListContainer';
 import {useAppDispatch, useAppSelector} from '../../../redux/hooks';
-import {getSelectedCard, setCard} from '../../../redux/features/cardState';
+import {
+  getSelectedCard,
+  setSelectedCard,
+} from '../../../redux/features/cardState';
 import TechTypeDataView from '../../../assets/views/data/card/TechTypeDataView';
 
 const CardScreen = () => {
@@ -28,7 +31,7 @@ const CardScreen = () => {
           data={item}
           index={index}
           onPress={(event: GestureResponderEvent) => {
-            dispatch(setCard(item));
+            dispatch(setSelectedCard(item));
           }}
         />
       );
@@ -47,14 +50,13 @@ const CardScreen = () => {
         <DataView label={'Type'} value={card.type} editable={false} />
         <TechTypeDataView techType={card.techType} />
 
-  
         <DataView
-          label={'Used'}
-          value={card.used ? 'Used' : 'Not Used'}
+          label={'Reservation Id'}
+          value={`${card.reservationId}`}
           editable={false}
         />
       </DataViewContainer>
-      <ListContainer title={'Card'} listBars={CardListBar} height={30} />
+      <ListContainer title={'Card'} listBars={CardListBar} height={55} />
     </View>
   );
 };
