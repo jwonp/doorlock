@@ -5,6 +5,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import HomeScreen from './src/components/Navigator/Screen/Home';
 import UserScreen from './src/components/Navigator/Screen/User';
 import NFCScanScreen from './src/components/Navigator/Screen/NFCScan';
+import ReservationScreen from './src/components/Navigator/Screen/Reservation';
 import CardScreen from './src/components/Navigator/Screen/Card';
 import {Provider} from 'react-redux';
 import {store} from './src/redux/store';
@@ -65,6 +66,7 @@ const App = (): JSX.Element => {
             />
             <Stack.Screen name="Card" component={CardScreen} />
             <Stack.Screen name="Room" component={RoomScreen} />
+            <Stack.Screen name="Reservation" component={ReservationScreen} />
             <Stack.Screen name="Scan" component={NFCScanScreen} />
           </Stack.Navigator>
         </NavigationContainer>
