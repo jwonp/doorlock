@@ -4,19 +4,20 @@ import {listStyles, styles, cardBarWidthStyles} from './ListBarStyleSheet';
 
 import {CardListBarProps} from './ListBarProps';
 
-const CardListBar = ({data, index, onPress}: CardListBarProps) => {
+const CardListBar = ({data, onPress, onLongPress}: CardListBarProps) => {
   return (
     <Pressable
       style={listStyles.itemContainer}
       onPress={onPress}
-      onLongPress={() => {
-        console.warn(`${index} is long pressed`);
-      }}>
+      onLongPress={onLongPress}>
       <Text
         style={{...styles.text, ...cardBarWidthStyles.id}}>{`${data.id}`}</Text>
 
+      <Text style={{...styles.text, ...cardBarWidthStyles.reservationId}}>
+        {data.reservationId ? data.reservationId : ''}
+      </Text>
       <Text style={{...styles.text, ...cardBarWidthStyles.used}}>
-        {data.used ? 'Used' : 'Free'}
+        {data.reservationId ? 'Used' : 'Free'}
       </Text>
     </Pressable>
   );
