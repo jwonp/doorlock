@@ -30,6 +30,13 @@ const HomeScreen = ({navigation}: {navigation: any}) => {
         </View>
         <View style={styles.buttonBox}>
           <Button
+            title="Reservation"
+            color="#3c3c3c"
+            onPress={() => navigation.navigate('Reservation')}
+          />
+        </View>
+        <View style={styles.buttonBox}>
+          <Button
             title="NFC Scan"
             color="#3c3c3c"
             onPress={() => navigation.navigate('Scan')}
