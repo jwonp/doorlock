@@ -18,14 +18,14 @@ const NFCScanScreen = () => {
 
       addCard(tag)
         .then(res => {
-          setResult(`${res.data} is saved`);
+          setResult(`${res.data.id} is saved`);
         })
         .catch(err => {
           setResult('Fail to request add card');
         });
 
       setTag(tag);
-      console.warn('Tag found', tag);
+      
     } catch (ex) {
       console.warn('Oops!', ex);
     } finally {
