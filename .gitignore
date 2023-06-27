@@ -63,3 +63,4 @@ yarn-error.log
 .metro-health-check*
 deprecated
 __tests__/testRequest.test.ts
+.env
