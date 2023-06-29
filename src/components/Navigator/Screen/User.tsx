@@ -24,6 +24,7 @@ import DataViewContainer from '../../../assets/views/data/DataViewContainer';
 import ListContainer from '../../../assets/views/data/ListContainer';
 import SelectModal from '../../Modal/Card/SelectModal';
 import {ModalType, setModalType} from '../../../redux/features/modalTypeState';
+import ListBarColumn from '../../../assets/list/ListBarColumn';
 const UserScreen = ({route}: {route: any}) => {
   const dispatch = useAppDispatch();
   const modalVisible = useAppSelector(getNewUserModalVisible);
@@ -84,7 +85,7 @@ const UserScreen = ({route}: {route: any}) => {
           />
         </Pressable>
       </DataViewContainer>
-      <ListContainer title={'List'} height={39}>
+      <ListContainer title={USER} height={39}>
         {UserListBar}
       </ListContainer>
     </View>

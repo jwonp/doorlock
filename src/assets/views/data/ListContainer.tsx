@@ -1,18 +1,20 @@
 import {View, StyleSheet, Text, ScrollView} from 'react-native';
+import ListBarColumn from '../../list/ListBarColumn';
+import {CARD, DataTypes} from '../../static/texts/DataTypes';
 
 const ListContainer = ({
   title,
   children,
   height,
 }: {
-  title: string;
+  title: DataTypes;
   children: React.ReactNode;
   height: number;
 }) => {
   return (
     <View>
       <View style={listStyles.titleContainer}>
-        <Text style={styles.text}>{title}</Text>
+        <ListBarColumn type={title} />
       </View>
       <ScrollView style={{...listStyles.listScrollView, height: `${height}%`}}>
         {children}
@@ -26,7 +28,13 @@ const styles = StyleSheet.create({
   },
 });
 const listStyles = StyleSheet.create({
-  titleContainer: {padding: '2%'},
+  titleContainer: {
+    padding: '2%',
+    backgroundColor: '#3c3c3c',
+    borderTopWidth: 1,
+    borderBottomWidth: 2,
+    borderColor: '#ffffff',
+  },
   itemContainer: {
     padding: '4%',
     flexDirection: 'row',

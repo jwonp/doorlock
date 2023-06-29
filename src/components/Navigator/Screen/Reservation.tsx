@@ -53,7 +53,7 @@ const ReservationScreen = () => {
           text={reservation.isCheckedIn ? 'Checked In' : 'Not Checked In'}
         />
       </DataViewContainer>
-      <ListContainer title={'Reservation'} height={47}>
+      <ListContainer title={RESERVATION} height={48}>
         {ReservationList}
       </ListContainer>
     </View>

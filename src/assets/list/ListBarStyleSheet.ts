@@ -1,4 +1,11 @@
 import {StyleSheet} from 'react-native';
+import {
+  CARD,
+  DataTypes,
+  RESERVATION,
+  ROOM,
+  USER,
+} from '../static/texts/DataTypes';
 export const styles = StyleSheet.create({
   text: {
     color: '#ffffff',
@@ -20,27 +27,30 @@ export const userBarWidthStyles = StyleSheet.create({
 });
 export const roomBarWidthStyles = StyleSheet.create({
   id: {
-    width: '20%',
+    width: '40%',
   },
   address: {
-    width: '80%',
+    width: '60%',
   },
 });
 export const cardBarWidthStyles = StyleSheet.create({
   id: {
-    width: '40%',
+    width: '45%',
   },
   reservationId: {
-    width: '20%',
+    width: '35%',
   },
 
   used: {
-    width: '15%',
+    width: '20%',
   },
 });
 
 export const reservationWithStyles = StyleSheet.create({
   id: {
+    width: '50%',
+  },
+  isCheckedIn: {
     width: '50%',
   },
   userId: {
@@ -51,9 +61,6 @@ export const reservationWithStyles = StyleSheet.create({
   },
   cardId: {
     width: '20%',
-  },
-  ischeckedIn: {
-    width: '50%',
   },
 });
 export const listStyles = StyleSheet.create({
@@ -67,3 +74,18 @@ export const listStyles = StyleSheet.create({
     justifyContent: 'space-between',
   },
 });
+
+export const getBarStyles = (type: DataTypes) => {
+  if (type === CARD) {
+    return cardBarWidthStyles;
+  }
+  if (type === USER) {
+    return userBarWidthStyles;
+  }
+  if (type === ROOM) {
+    return roomBarWidthStyles;
+  }
+  if (type === RESERVATION) {
+    return reservationWithStyles;
+  }
+};

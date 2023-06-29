@@ -14,6 +14,7 @@ import {ROOM} from '../../../assets/static/texts/DataTypes';
 import ListBar from '../../../assets/list/ListBar';
 import {screenStyles} from '../../../assets/screen/ScreenStylyeSheet';
 import ReservationsView from '../../../assets/views/data/room/ReservationsView';
+import ListBarColumn from '../../../assets/list/ListBarColumn';
 const RoomScreen = ({navigation}: {navigation: any}) => {
   const room = useAppSelector(getSelectedRoom);
   const dispatch = useAppDispatch();
@@ -47,7 +48,7 @@ const RoomScreen = ({navigation}: {navigation: any}) => {
           <ReservationsView reservations={room.reservations} />
         </DataView>
       </DataViewContainer>
-      <ListContainer title={'Room'} height={63}>
+      <ListContainer title={ROOM} height={64}>
         {RoomListBar}
       </ListContainer>
     </View>

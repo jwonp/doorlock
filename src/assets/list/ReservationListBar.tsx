@@ -21,7 +21,7 @@ const ReservationListBar = ({
         style={{
           ...styles.text,
           ...styles.right,
-          ...reservationWithStyles.ischeckedIn,
+          ...reservationWithStyles.isCheckedIn,
         }}>
         {`${data.isCheckedIn ? 'Checked In' : 'Not Checked In'}`}
       </Text>
