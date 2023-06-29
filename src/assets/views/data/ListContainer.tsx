@@ -2,11 +2,11 @@ import {View, StyleSheet, Text, ScrollView} from 'react-native';
 
 const ListContainer = ({
   title,
-  listBars,
+  children,
   height,
 }: {
   title: string;
-  listBars: React.ReactNode;
+  children: React.ReactNode;
   height: number;
 }) => {
   return (
@@ -15,7 +15,7 @@ const ListContainer = ({
         <Text style={styles.text}>{title}</Text>
       </View>
       <ScrollView style={{...listStyles.listScrollView, height: `${height}%`}}>
-        {listBars}
+        {children}
       </ScrollView>
     </View>
   );
@@ -33,6 +33,7 @@ const listStyles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   listScrollView: {
+    backgroundColor: '#3c3c3c',
     flexDirection: 'column',
   },
 });

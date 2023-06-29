@@ -19,9 +19,6 @@ const TechTypeDataView = ({techType}: {techType: TechType}) => {
   });
   return (
     <View>
-      <View>
-        <Text>TechType</Text>
-      </View>
       <View style={styles.container}>{techTypeList}</View>
     </View>
   );

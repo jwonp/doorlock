@@ -3,6 +3,9 @@ export const styles = StyleSheet.create({
   text: {
     color: '#ffffff',
   },
+  right: {
+    textAlign: 'right',
+  },
 });
 export const userBarWidthStyles = StyleSheet.create({
   id: {
@@ -17,13 +20,10 @@ export const userBarWidthStyles = StyleSheet.create({
 });
 export const roomBarWidthStyles = StyleSheet.create({
   id: {
-    width: '35%',
+    width: '20%',
   },
-  guestId: {
-    width: '35%',
-  },
-  used: {
-    width: '30%',
+  address: {
+    width: '80%',
   },
 });
 export const cardBarWidthStyles = StyleSheet.create({
@@ -36,6 +36,24 @@ export const cardBarWidthStyles = StyleSheet.create({
 
   used: {
     width: '15%',
+  },
+});
+
+export const reservationWithStyles = StyleSheet.create({
+  id: {
+    width: '50%',
+  },
+  userId: {
+    width: '20%',
+  },
+  roomId: {
+    width: '20%',
+  },
+  cardId: {
+    width: '20%',
+  },
+  ischeckedIn: {
+    width: '50%',
   },
 });
 export const listStyles = StyleSheet.create({
