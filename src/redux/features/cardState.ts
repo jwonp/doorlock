@@ -12,7 +12,6 @@ export interface CardDataState {
 }
 interface CardWithReservation extends CardWithReservationResponse {}
 export interface CardState {
-  cardList: CardDataState[];
   selectedCard: CardWithReservation;
 }
 const initCard: CardDataState = {
@@ -40,7 +39,6 @@ const initSelectedCard: CardWithReservation = {
   userId: 'EXAMPLE-USER-ID',
 };
 const initialState: CardState = {
-  cardList: [initCard],
   selectedCard: initSelectedCard,
 };
 
@@ -48,20 +46,14 @@ export const card = createSlice({
   name: 'card',
   initialState,
   reducers: {
-    addNewCard: (state, action: PayloadAction<CardDataState>) => {
-      state.cardList = [...state.cardList, action.payload];
-    },
     setSelectedCard: (state, action: PayloadAction<CardWithReservation>) => {
       state.selectedCard = action.payload;
-    },
-    setCardId: (state, action: PayloadAction<string>) => {
-      state.selectedCard.id = action.payload;
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const {addNewCard, setSelectedCard, setCardId} = card.actions;
+export const {setSelectedCard} = card.actions;
 export const getSelectedCard = (state: RootState) => state.card.selectedCard;
-export const getCardList = (state: RootState) => state.card.cardList;
+
 export default card.reducer;
