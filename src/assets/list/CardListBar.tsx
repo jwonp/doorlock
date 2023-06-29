@@ -24,9 +24,3 @@ const CardListBar = ({data, onPress, onLongPress}: CardListBarProps) => {
 };
 
 export default CardListBar;
-
-/**
- * user roomid cardid
- * card id
- * room
- */
