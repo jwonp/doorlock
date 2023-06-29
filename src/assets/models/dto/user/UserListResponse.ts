@@ -1,11 +1,5 @@
 import {keys} from 'ts-transformer-keys';
-export interface UserListResponse {
-  id: string;
-  name: string;
-  phone: string;
-  lastTagged: string;
-  roomId: number;
-  cardId: string;
-}
+import {UserDataState} from '../../../../redux/features/userState';
+export interface UserListResponse extends UserDataState {}
 
 export const UserListResponseKeys = keys<UserListResponse>();
