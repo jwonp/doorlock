@@ -1,8 +1,10 @@
 import {TagEvent} from 'react-native-nfc-manager';
 import {CardAddRequest} from '../../assets/models/dto/card/CardAddRequest';
 import {request} from './controller/ApiController';
+import {CardAddResponse} from '../../assets/models/dto/card/CardAddResponse';
+import { AxiosResponse } from 'axios';
 
-export const addCard = async (tag: TagEvent) => {
+export const addCard = async (tag: TagEvent): Promise<AxiosResponse<CardAddResponse,any>> => {
   if (!tag.id || !tag.maxSize || !tag.techTypes || !tag.type) {
     return;
   }
