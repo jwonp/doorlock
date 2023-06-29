@@ -13,6 +13,8 @@ import {
   setSelectedCard,
 } from '../../../redux/features/cardState';
 import TechTypeDataView from '../../../assets/views/data/card/TechTypeDataView';
+import {screenStyles} from '../../../assets/screen/ScreenStylyeSheet';
+import {styles} from '../../../assets/list/ListBarStyleSheet';
 
 const CardScreen = () => {
   const card = useAppSelector(getSelectedCard);
@@ -20,7 +22,7 @@ const CardScreen = () => {
   const cardListSWR = useSWR(CardListURL, CardListFetcher);
   const CardListBar = useMemo(() => {
     if (!cardListSWR || !cardListSWR.data) {
-      return <Text style={styles.text}>No user list swr</Text>;
+      return <Text style={styles.text}>No user list</Text>;
     }
 
     return cardListSWR.data.map((item, index) => {
@@ -39,34 +41,22 @@ const CardScreen = () => {
   }, [cardListSWR.data]);
 
   return (
-    <View style={styles.container}>
+    <View style={screenStyles.container}>
       <DataViewContainer>
-        <DataView label={'Card ID'} value={card.id} editable={false} />
-        <DataView
-          label={'Max Size'}
-          value={`${card.maxSize}`}
-          editable={false}
-        />
-        <DataView label={'Type'} value={card.type} editable={false} />
-        <TechTypeDataView techType={card.techType} />
+        <DataView label={'Card ID'} text={card.id} />
+        <DataView label={'Max Size'} text={`${card.maxSize}`} />
+        <DataView label={'Type'} text={card.type} />
+        <DataView label={'Tech Type'}>
+          <TechTypeDataView techType={card.techType} />
+        </DataView>
 
-        <DataView
-          label={'Reservation Id'}
-          value={`${card.reservationId}`}
-          editable={false}
-        />
+        <DataView label={'Reservation Id'} text={`${card.reservationId}`} />
       </DataViewContainer>
-      <ListContainer title={'Card'} listBars={CardListBar} height={55} />
+      <ListContainer title={'Card'} height={46}>
+        {CardListBar}
+      </ListContainer>
     </View>
   );
 };
-const styles = StyleSheet.create({
-  container: {padding: '3%'},
-  whiteText: {
-    color: '#ffffff',
-  },
-  text: {
-    color: '#3c3c3c',
-  },
-});
+
 export default CardScreen;

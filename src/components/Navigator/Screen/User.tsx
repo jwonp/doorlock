@@ -2,7 +2,6 @@ import {
   View,
   Text,
   StyleSheet,
-  ScrollView,
   GestureResponderEvent,
   Pressable,
 } from 'react-native';
@@ -55,15 +54,14 @@ const UserScreen = ({route}: {route: any}) => {
   return (
     <View style={styles.container}>
       <NewUserModal />
-      <SelectModal />
+      {/* <SelectModal userListSWR={userListSWR} /> */}
       <DataViewContainer>
-        <DataView label={'User ID'} value={user.id} editable={false} />
-        <DataView label={'User Name'} value={user.name} editable={true} />
-        <DataView label={'Phone'} value={user.phone} editable={true} />
+        <DataView label={'User ID'} text={user.id} />
+        <DataView label={'User Name'} text={user.name} />
+        <DataView label={'Phone'} text={user.phone} />
         <DataView
           label={'Last Tagged'}
-          value={user.lastTagged ? user.lastTagged : 'Not Tagged'}
-          editable={false}
+          text={user.lastTagged ? user.lastTagged : 'Not Tagged'}
         />
         <Pressable
           onPress={() => {
@@ -72,8 +70,7 @@ const UserScreen = ({route}: {route: any}) => {
           }}>
           <DataView
             label={'Card ID'}
-            value={user.cardId ? user.cardId : 'N/A'}
-            editable={false}
+            text={user.cardId ? user.cardId : 'N/A'}
           />
         </Pressable>
         <Pressable
@@ -83,12 +80,13 @@ const UserScreen = ({route}: {route: any}) => {
           }}>
           <DataView
             label={'Room'}
-            value={user.roomId ? user.roomId.toString() : 'N/A'}
-            editable={false}
+            text={user.roomId ? user.roomId.toString() : 'N/A'}
           />
         </Pressable>
       </DataViewContainer>
-      <ListContainer title={'List'} listBars={UserListBar} height={30} />
+      <ListContainer title={'List'} height={39}>
+        {UserListBar}
+      </ListContainer>
     </View>
   );
 };
