@@ -9,9 +9,12 @@ const RoomListBar = ({data, onPress, onLongPress}: RoomListBarProps) => {
       style={listStyles.itemContainer}
       onPress={onPress}
       onLongPress={onLongPress}>
-      <Text
-        style={{...styles.text, ...roomBarWidthStyles.id}}>{`${data.id}`}</Text>
-
+      <Text style={{...styles.text, ...roomBarWidthStyles.id}}>
+        {`${data.id}`}
+      </Text>
+      <Text style={{...styles.text, ...roomBarWidthStyles.address}}>
+        {`${data.address}`}
+      </Text>
     </Pressable>
   );
 };
