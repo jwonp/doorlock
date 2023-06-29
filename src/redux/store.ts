@@ -3,6 +3,7 @@ import userReducer from './features/userState';
 import modalReducer from './features/modalState';
 import cardReducer from './features/cardState';
 import roomReducer from './features/roomState';
+import reservationReducer from './features/reservationState';
 import modalTypeReducer from './features/modalTypeState';
 
 export const makeStore = () => {
@@ -11,6 +12,7 @@ export const makeStore = () => {
       user: userReducer,
       card: cardReducer,
       room: roomReducer,
+      reservation: reservationReducer,
       modal: modalReducer,
       modalType: modalTypeReducer,
     },
