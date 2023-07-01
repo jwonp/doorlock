@@ -9,7 +9,7 @@ import ListBar from '../../../assets/list/ListBar';
 import {useAppDispatch, useAppSelector} from '../../../redux/hooks';
 import {getSelectedUser, setUser} from '../../../redux/features/userState';
 
-import NewUserModal from '../../Modal/NewUserModal';
+import NewUserModal from '../../Modal/User/NewUserModal';
 import useSWR from 'swr';
 import {UserListFetcher, UserListURL} from '../../../swr/userSWR';
 import {useEffect, useMemo} from 'react';
