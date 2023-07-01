@@ -12,6 +12,7 @@ import {store} from './src/redux/store';
 import NewUserModalButton from './src/assets/buttons/NewUserModalButton';
 import {SWRConfig} from 'swr';
 import RoomScreen from './src/components/Navigator/Screen/Room';
+import ReservationEditButton from './src/assets/buttons/ReservationEditButton';
 
 const Stack = createNativeStackNavigator();
 const App = (): JSX.Element => {
@@ -61,12 +62,18 @@ const App = (): JSX.Element => {
               name="User"
               component={UserScreen}
               options={{
-                headerRight: () => <NewUserModalButton />,
+                headerRight: NewUserModalButton,
               }}
             />
             <Stack.Screen name="Card" component={CardScreen} />
             <Stack.Screen name="Room" component={RoomScreen} />
-            <Stack.Screen name="Reservation" component={ReservationScreen} />
+            <Stack.Screen
+              name="Reservation"
+              component={ReservationScreen}
+              options={{
+                headerRight: ReservationEditButton,
+              }}
+            />
             <Stack.Screen name="Scan" component={NFCScanScreen} />
           </Stack.Navigator>
         </NavigationContainer>
