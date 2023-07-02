@@ -15,12 +15,12 @@ export interface UserState {
   selectedUser: UserDataState;
 }
 const initSelectedUser: UserDataState = {
-  id: 'EXAMPLE-ID',
-  name: 'EXAMPLE-NAME',
-  lastTagged: '2016-05-31T01:02:03',
-  phone: '010-1234-5678',
-  roomId: 110,
-  cardId: 'EXAMPLE-CARD-ID',
+  id: '',
+  name: '',
+  lastTagged: '',
+  phone: '',
+  roomId: 0,
+  cardId: '',
 };
 const initialState: UserState = {
   userList: [initSelectedUser],
@@ -58,7 +58,14 @@ export const user = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const {addNewUser, setUser, setUserId, setUserName,setCardId, setRoomId} = user.actions;
+export const {
+  addNewUser,
+  setUser,
+  setUserId,
+  setUserName,
+  setCardId,
+  setRoomId,
+} = user.actions;
 export const getSelectedUser = (state: RootState) => state.user.selectedUser;
 export const getUserList = (state: RootState) => state.user.userList;
 export default user.reducer;

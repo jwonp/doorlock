@@ -15,9 +15,9 @@ export interface CardState {
   selectedCard: CardWithReservation;
 }
 const initCard: CardDataState = {
-  id: 'EXAMPLE-ID',
-  maxSize: 1000,
-  type: 'EXAMPLE-TYPE',
+  id: '',
+  maxSize: 0,
+  type: '',
 
   techType: {
     isoDep: false,
@@ -36,7 +36,7 @@ const initSelectedCard: CardWithReservation = {
   ...initCard,
   reservationId: 0,
   roomId: 0,
-  userId: 'EXAMPLE-USER-ID',
+  userId: '',
 };
 const initialState: CardState = {
   selectedCard: initSelectedCard,

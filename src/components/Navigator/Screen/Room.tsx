@@ -8,13 +8,13 @@ import {
   getSelectedRoom,
   setSelectedRoom,
 } from '../../../redux/features/roomState';
-import {useMemo} from 'react';
+import {useEffect, useMemo} from 'react';
 import ListContainer from '../../../assets/views/data/ListContainer';
 import {ROOM} from '../../../assets/static/texts/DataTypes';
 import ListBar from '../../../assets/list/ListBar';
 import {screenStyles} from '../../../assets/screen/ScreenStylyeSheet';
 import ReservationsView from '../../../assets/views/data/room/ReservationsView';
-import ListBarColumn from '../../../assets/list/ListBarColumn';
+
 const RoomScreen = ({navigation}: {navigation: any}) => {
   const room = useAppSelector(getSelectedRoom);
   const dispatch = useAppDispatch();
@@ -39,10 +39,11 @@ const RoomScreen = ({navigation}: {navigation: any}) => {
       );
     });
   }, [roomListSWR.data]);
+
   return (
     <View style={screenStyles.container}>
       <DataViewContainer>
-        <DataView label={'Room ID'} text={`${room.id}`} />
+        <DataView label={'Room ID'} text={room.id} />
         <DataView label={'Address'} text={room.address} />
         <DataView label={'Reservations'}>
           <ReservationsView reservations={room.reservations} />

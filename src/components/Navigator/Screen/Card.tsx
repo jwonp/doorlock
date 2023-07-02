@@ -45,15 +45,15 @@ const CardScreen = () => {
     <View style={screenStyles.container}>
       <DataViewContainer>
         <DataView label={'Card ID'} text={card.id} />
-        <DataView label={'Max Size'} text={`${card.maxSize}`} />
+        <DataView label={'Max Size'} text={card.maxSize} />
         <DataView label={'Type'} text={card.type} />
         <DataView label={'Tech Type'}>
           <TechTypeDataView techType={card.techType} />
         </DataView>
 
-        <DataView label={'Reservation Id'} text={`${card.reservationId}`} />
+        <DataView label={'Reservation Id'} text={card.reservationId} />
       </DataViewContainer>
-      <ListContainer title={CARD} height={46}>
+      <ListContainer title={CARD} height={45}>
         {CardListBar}
       </ListContainer>
     </View>

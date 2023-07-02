@@ -11,14 +11,14 @@ const TechTypeDataView = ({techType}: {techType: TechType}) => {
     }
     return (
       <View key={index} style={styles.item}>
-        <Text style={textStyle.text}>
+        <Text style={styles.text}>
           {convertFirstTextUpperCase(techTypeKeys[index])}
         </Text>
       </View>
     );
   });
   return (
-    <View>
+    <View style={styles.card}>
       <View style={styles.container}>{techTypeList}</View>
     </View>
   );
@@ -26,10 +26,18 @@ const TechTypeDataView = ({techType}: {techType: TechType}) => {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    padding: '2%',
+    padding: '1%',
+  },
+  card: {
+    paddingLeft: '2%',
+    backgroundColor: '#ffffff',
+    borderRadius: 16,
   },
   item: {
     marginRight: '2%',
+  },
+  text: {
+    color: '#3c3c3c',
   },
 });
 export default TechTypeDataView;

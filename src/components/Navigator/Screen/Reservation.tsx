@@ -16,6 +16,7 @@ import {RESERVATION} from '../../../assets/static/texts/DataTypes';
 import ListContainer from '../../../assets/views/data/ListContainer';
 import DataViewContainer from '../../../assets/views/data/DataViewContainer';
 import DataView from '../../../assets/views/data/DataView';
+import ReservationEditModal from '../../Modal/Reservation/ReservationEditModal';
 const ReservationScreen = () => {
   const reservation = useAppSelector(getSelectedReservation);
   const dispatch = useAppDispatch();
@@ -41,10 +42,9 @@ const ReservationScreen = () => {
 
   return (
     <View style={screenStyles.container}>
+      <ReservationEditModal />
       <DataViewContainer>
-        <DataView
-          label={'Reservation ID'}
-          text={`${reservation.id}`}></DataView>
+        <DataView label={'Reservation ID'} text={reservation.id}></DataView>
         <DataView label={'User ID'} text={reservation.userId} />
         <DataView label={'Card ID'} text={reservation.cardId} />
         <DataView label={'Room ID'} text={`${reservation.roomId}`} />
@@ -53,7 +53,7 @@ const ReservationScreen = () => {
           text={reservation.isCheckedIn ? 'Checked In' : 'Not Checked In'}
         />
       </DataViewContainer>
-      <ListContainer title={RESERVATION} height={48}>
+      <ListContainer title={RESERVATION} height={46}>
         {ReservationList}
       </ListContainer>
     </View>

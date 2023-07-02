@@ -1,16 +1,25 @@
-import {Children, ReactNode, ReactPropTypes} from 'react';
-import {View, TextInput, StyleSheet, Text} from 'react-native';
+import {ReactNode} from 'react';
+import {View, StyleSheet, Text} from 'react-native';
+import {getDisplayText} from '../../../util/convertDisplayText';
 type DataView = {
   label: string;
-  text?: string;
+  text?: string | number;
   children?: ReactNode;
 };
 const DataView = ({label, text, children}: DataView) => {
+  const displayText = getDisplayText(text);
+
   return (
     <View style={styles.dataContainer}>
       <Text style={styles.title}>{label}</Text>
-      {text ? <Text style={styles.whiteText}>{text}</Text> : <></>}
-      {children ? <View>{children}</View> : <></>}
+
+      {children ? (
+        children
+      ) : (
+        <View style={styles.card}>
+          <Text style={styles.text}>{displayText}</Text>
+        </View>
+      )}
     </View>
   );
 };
@@ -19,14 +28,21 @@ const styles = StyleSheet.create({
     backgroundColor: '#3c3c3c',
     padding: '2%',
   },
+
   title: {
     color: '#ffffff',
     fontSize: 16,
     marginBottom: '1%',
   },
-  whiteText: {
-    paddingLeft: '3%',
-    color: '#ffffff',
+  card: {
+    paddingLeft: '2%',
+    paddingBottom: '1%',
+    backgroundColor: '#ffffff',
+    borderRadius: 16,
+  },
+  text: {
+    paddingLeft: '1%',
+    color: '#3c3c3c',
   },
 });
 export default DataView;

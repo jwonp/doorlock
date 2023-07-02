@@ -2,9 +2,7 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
 import {RootState} from '../store';
 import {RoomWithReservationResponse} from '../../assets/models/dto/room/RoomWithReservationResponse';
-import { Room } from '../../assets/models/entity/Room';
-
-
+import {Room} from '../../assets/models/entity/Room';
 
 export interface RoomState {
   selectedRoom: RoomWithReservation;
@@ -12,12 +10,11 @@ export interface RoomState {
 interface RoomWithReservation extends RoomWithReservationResponse {}
 const initRoom: Room = {
   id: 0,
-  address: 'EXAMPLE-ADDRESS',
+  address: '',
 };
 const initSelectedRoom: RoomWithReservation = {
   ...initRoom,
   reservations: [],
-
 };
 
 const initialState: RoomState = {
