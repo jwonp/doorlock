@@ -9,10 +9,14 @@ const ReservationsView = ({
 }) => {
   const ReservationList = useMemo(() => {
     if (reservations === undefined || reservations.length === 0) {
-      return <Text style={styles.whiteText}>No Reservation</Text>;
+      return (
+        <View style={styles.exceptionCard}>
+          <Text style={styles.exceptionText}>No Reservation</Text>
+        </View>
+      );
     }
     return reservations.map((reservation, index) => (
-      <View key={index} style={styles.listContainer}>
+      <View key={index} style={styles.card}>
         <Text style={styles.text}>{reservation.id}</Text>
       </View>
     ));
@@ -21,24 +25,30 @@ const ReservationsView = ({
 };
 const styles = StyleSheet.create({
   container: {
-    marginRight: '2%',
     flexDirection: 'row',
-    padding: '1%',
   },
-  listContainer: {
+  exceptionCard: {
+    width: '100%',
+    paddingLeft: '3.5%',
+    paddingBottom: '1%',
+    marginRight: '5%',
+    backgroundColor: '#ffffff',
+    borderRadius: 16,
+  },
+  exceptionText: {
+    color: '#3c3c3c',
+  },
+  card: {
     width: '15%',
-    paddingTop: '2%',
-    paddingBottom: '2%',
-    marginRight: '2%',
-    borderColor: '#ffffff',
-    borderRadius: 11,
-    overflow: 'hidden',
+    paddingBottom: '1%',
+    marginRight: '5%',
+    backgroundColor: '#ffffff',
+    borderRadius: 16,
   },
   whiteText: {
     color: '#ffffff',
   },
   text: {
-    backgroundColor: '#ffffff',
     textAlign: 'center',
     color: '#3c3c3c',
   },
