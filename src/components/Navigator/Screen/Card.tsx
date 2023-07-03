@@ -2,7 +2,7 @@ import {View, Text, StyleSheet, GestureResponderEvent} from 'react-native';
 import useSWR from 'swr';
 import {CardListFetcher, CardListURL} from '../../../swr/cardSWR';
 import {useMemo} from 'react';
-import ListBar from '../../../assets/list/ListBar';
+import ListBar from '../../../assets/list/data/ListBar';
 import {CARD} from '../../../assets/static/texts/DataTypes';
 import DataViewContainer from '../../../assets/views/data/DataViewContainer';
 import DataView from '../../../assets/views/data/DataView';
@@ -14,8 +14,7 @@ import {
 } from '../../../redux/features/cardState';
 import TechTypeDataView from '../../../assets/views/data/card/TechTypeDataView';
 import {screenStyles} from '../../../assets/screen/ScreenStylyeSheet';
-import {styles} from '../../../assets/list/ListBarStyleSheet';
-import ListBarColumn from '../../../assets/list/ListBarColumn';
+import {styles} from '../../../assets/list/data/ListBarStyleSheet';
 import {getCardReservationId} from '../../../util/convertDisplayText';
 
 const CardScreen = () => {

@@ -5,7 +5,7 @@ import {
   GestureResponderEvent,
   Pressable,
 } from 'react-native';
-import ListBar from '../../../assets/list/ListBar';
+import ListBar from '../../../assets/list/data/ListBar';
 import {useAppDispatch, useAppSelector} from '../../../redux/hooks';
 import {getSelectedUser, setUser} from '../../../redux/features/userState';
 

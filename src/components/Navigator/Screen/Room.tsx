@@ -11,7 +11,7 @@ import {
 import {useEffect, useMemo} from 'react';
 import ListContainer from '../../../assets/views/data/ListContainer';
 import {ROOM} from '../../../assets/static/texts/DataTypes';
-import ListBar from '../../../assets/list/ListBar';
+import ListBar from '../../../assets/list/data/ListBar';
 import {screenStyles} from '../../../assets/screen/ScreenStylyeSheet';
 import ReservationsView from '../../../assets/views/data/room/ReservationsView';
 
@@ -46,7 +46,7 @@ const RoomScreen = ({navigation}: {navigation: any}) => {
         <DataView label={'Room ID'} text={room.id} />
         <DataView label={'Address'} text={room.address} />
         <DataView label={'Reservations'}>
-          <ReservationsView roomId={room.id}reservations={room.reservations} />
+          <ReservationsView roomId={room.id} reservations={room.reservations} />
         </DataView>
       </DataViewContainer>
       <ListContainer title={ROOM} height={64}>

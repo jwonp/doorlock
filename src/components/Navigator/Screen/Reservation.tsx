@@ -11,7 +11,7 @@ import {
 } from '../../../swr/reservationSWR';
 import {screenStyles} from '../../../assets/screen/ScreenStylyeSheet';
 import {useMemo} from 'react';
-import ListBar from '../../../assets/list/ListBar';
+import ListBar from '../../../assets/list/data/ListBar';
 import {RESERVATION} from '../../../assets/static/texts/DataTypes';
 import ListContainer from '../../../assets/views/data/ListContainer';
 import DataViewContainer from '../../../assets/views/data/DataViewContainer';
