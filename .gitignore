@@ -64,3 +64,4 @@ yarn-error.log
 deprecated
 __tests__/testRequest.test.ts
 .env
+OnDevelop.txt
