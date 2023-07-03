@@ -1,6 +1,6 @@
 import Config from 'react-native-config';
-import {CardWithReservationResponse} from '../assets/models/dto/card/CardWithReservationResponse';
-import {request} from '../util/request/controller/ApiController';
+import {CardWithReservationResponse} from '@/assets/models/dto/card/CardWithReservationResponse';
+import {request} from '@/util/request/controller/ApiController';
 export const CardListFetcher = (
   url: string,
 ): Promise<CardWithReservationResponse[]> =>

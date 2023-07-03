@@ -5,26 +5,25 @@ import {
   GestureResponderEvent,
   Pressable,
 } from 'react-native';
-import ListBar from '../../../assets/list/data/ListBar';
-import {useAppDispatch, useAppSelector} from '../../../redux/hooks';
-import {getSelectedUser, setUser} from '../../../redux/features/userState';
+import ListBar from '@/assets/list/data/ListBar';
+import {useAppDispatch, useAppSelector} from '@/redux/hooks';
+import {getSelectedUser, setUser} from '@/redux/features/userState';
 
-import NewUserModal from '../../Modal/User/NewUserModal';
+import NewUserModal from '@/components/Modal/User/NewUserModal';
 import useSWR from 'swr';
-import {UserListFetcher, UserListURL} from '../../../swr/userSWR';
+import {UserListFetcher, UserListURL} from '@/swr/userSWR';
 import {useEffect, useMemo} from 'react';
 import {
   getNewUserModalVisible,
   setSelectModalVisible,
-} from '../../../redux/features/modalState';
+} from '@/redux/features/modalState';
 
-import DataView from '../../../assets/views/data/DataView';
-import {USER} from '../../../assets/static/texts/DataTypes';
-import DataViewContainer from '../../../assets/views/data/DataViewContainer';
-import ListContainer from '../../../assets/views/data/ListContainer';
+import DataView from '@/assets/views/data/DataView';
+import {USER} from '@/assets/static/texts/DataTypes';
+import DataViewContainer from '@/assets/views/data/DataViewContainer';
+import ListContainer from '@/assets/views/data/ListContainer';
 
-import {ModalType, setModalType} from '../../../redux/features/modalTypeState';
-import {getLastTaggedDisplayText} from '../../../util/convertDisplayText';
+import {getLastTaggedDisplayText} from '@/util/convertDisplayText';
 
 const UserScreen = ({route}: {route: any}) => {
   const dispatch = useAppDispatch();

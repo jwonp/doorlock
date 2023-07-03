@@ -1,91 +1,27 @@
-import {useMemo} from 'react';
-import {
-  Modal,
-  StyleSheet,
-  View,
-  Text,
-  Pressable,
-  GestureResponderEvent,
-  Button,
-} from 'react-native';
+import {Modal, StyleSheet, View, Text, Pressable, Button} from 'react-native';
 
-import {useAppDispatch, useAppSelector} from '../../../redux/hooks';
+import {useAppDispatch, useAppSelector} from '@/redux/hooks';
 import {
   getSelectModalVisible,
   setSelectModalVisible,
-} from '../../../redux/features/modalState';
-import {ModalType, getModalType} from '../../../redux/features/modalTypeState';
-import useSWR from 'swr';
-import {CardSelectDataURL, SelectDataFetcher} from '../../../swr/cardSWR';
-import {UserListResponse} from '../../../assets/models/dto/user/UserListResponse';
-import {RoomListResponse} from '../../../assets/models/dto/room/RoomListResponse';
-import ListBar from '../../../assets/list/ListBar';
-import {CARD, ROOM} from '../../../assets/static/texts/DataTypes';
-import ListContainer from '../../../assets/views/data/ListContainer';
-import {
-  modifyRoomidInUser,
-  modifyCardidInUser,
-} from '../../../util/request/user';
-import {
-  getSelectedUser,
-  setCardId,
-  setRoomId,
-} from '../../../redux/features/userState';
-const SelectModal = () => {
+} from '@/redux/features/modalState';
+import {getModalType} from '@/redux/features/modalTypeState';
+import {SWRResponse} from 'swr';
+
+import {UserListResponse} from '@/assets/models/dto/user/UserListResponse';
+
+import ListContainer from '@/assets/views/data/ListContainer';
+
+import {getSelectedUser} from '@/redux/features/userState';
+type SelectModalProps = {
+  userListSWR: SWRResponse<UserListResponse[], any, any>;
+};
+const SelectModal = ({userListSWR}: SelectModalProps) => {
   const dispatch = useAppDispatch();
   const user = useAppSelector(getSelectedUser);
   const modalVisible = useAppSelector(getSelectModalVisible);
   const modalType = useAppSelector(getModalType);
-  const ModalDataSWR = useSWR(CardSelectDataURL(modalType), SelectDataFetcher);
-  const ModalDataList = useMemo(() => {
-    if (!ModalDataSWR || !ModalDataSWR.data)
-      return (
-        <View>
-          <Text>No Data</Text>
-        </View>
-      );
 
-    if (modalType === ModalType.room) {
-      return (ModalDataSWR.data as RoomListResponse[]).map((item, index) => (
-        <ListBar
-          key={index}
-          data={item}
-          type={ROOM}
-          index={index}
-          onPress={(event: GestureResponderEvent) => {
-            modifyRoomidInUser(item.id, user.id).then(res => {
-              if (res.data === false) {
-                return;
-              }
-              dispatch(setRoomId(item.id));
-            });
-            dispatch(setSelectModalVisible(false));
-          }}
-        />
-      ));
-    }
-    if (modalType === ModalType.card) {
-      return (ModalDataSWR.data as UserListResponse[]).map((item, index) => (
-        <ListBar
-          key={index}
-          data={item}
-          type={CARD}
-          index={index}
-          onPress={(event: GestureResponderEvent) => {
-            modifyCardidInUser(item.id, user.id).then(res => {
-              if (res.data === false) {
-                return;
-              }
-              dispatch(setCardId(item.id));
-            });
-
-            dispatch(setSelectModalVisible(false));
-          }}
-        />
-      ));
-    }
-    return;
-  }, [ModalDataSWR]);
   return (
     <Modal
       onRequestClose={() => {
@@ -99,11 +35,9 @@ const SelectModal = () => {
           <Text style={styles.text}>Modal</Text>
         </View>
         <Pressable style={styles.container}>
-          <ListContainer
-            title={modalType}
-            listBars={ModalDataList}
-            height={70}
-          />
+          <ListContainer title={modalType} height={70}>
+            <></>
+          </ListContainer>
         </Pressable>
         <Button
           onPress={() => {

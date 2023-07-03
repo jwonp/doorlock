@@ -1,6 +1,6 @@
 import {View, StyleSheet, Text, ScrollView} from 'react-native';
-import ListBarColumn from '../../list/ListBarColumn';
-import {CARD, DataTypes} from '../../static/texts/DataTypes';
+import ListBarColumn from '@/assets/list/data/ListBarColumn';
+import {CARD, DataTypes} from '@/assets/static/texts/DataTypes';
 
 const ListContainer = ({
   title,

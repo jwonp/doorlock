@@ -1,7 +1,7 @@
 import {Button, View} from 'react-native';
-import {useAppDispatch, useAppSelector} from '../../redux/hooks';
-import {setReservationEditModalVisible} from '../../redux/features/modalState';
-import {getSelectedReservation} from '../../redux/features/reservationState';
+import {useAppDispatch, useAppSelector} from '@/redux/hooks';
+import {setReservationEditModalVisible} from '@/redux/features/modalState';
+import {getSelectedReservation} from '@/redux/features/reservationState';
 import {useMemo} from 'react';
 
 const ReservationEditButton = () => {

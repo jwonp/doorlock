@@ -1,8 +1,8 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
-import {RootState} from '../store';
-import {TechType} from '../../assets/models/types/TechType';
-import {CardWithReservationResponse} from '../../assets/models/dto/card/CardWithReservationResponse';
+import {RootState} from '@/redux/store';
+import {TechType} from '@/assets/models/types/TechType';
+import {CardWithReservationResponse} from '@/assets/models/dto/card/CardWithReservationResponse';
 
 export interface CardDataState {
   id: string;

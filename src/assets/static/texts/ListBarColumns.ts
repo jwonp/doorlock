@@ -1,4 +1,10 @@
-import {CARD, DataTypes, RESERVATION, ROOM, USER} from './DataTypes';
+import {
+  CARD,
+  DataTypes,
+  RESERVATION,
+  ROOM,
+  USER,
+} from '@/assets/static/texts/DataTypes';
 interface Column {
   id: string;
 }

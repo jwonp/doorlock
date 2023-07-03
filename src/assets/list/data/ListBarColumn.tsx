@@ -1,7 +1,10 @@
 import {View, Text, StyleSheet} from 'react-native';
-import {DataTypes} from '../static/texts/DataTypes';
-import {getListBarColumn} from '../static/texts/ListBarColumns';
-import {getBarStyles, roomBarWidthStyles} from './ListBarStyleSheet';
+import {DataTypes} from '@/assets/static/texts/DataTypes';
+import {getListBarColumn} from '@/assets/static/texts/ListBarColumns';
+import {
+  getBarStyles,
+  roomBarWidthStyles,
+} from '@/assets/list/data/ListBarStyleSheet';
 type ListBarColumnProps = {
   type: DataTypes;
 };

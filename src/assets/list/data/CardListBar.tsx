@@ -1,8 +1,8 @@
 import {Text, Pressable} from 'react-native';
 
-import {listStyles, styles, cardBarWidthStyles} from './ListBarStyleSheet';
+import {listStyles, styles, cardBarWidthStyles} from '@/assets/list/data/ListBarStyleSheet';
 
-import {CardListBarProps} from './ListBarProps';
+import {CardListBarProps} from '@/assets/list/data/ListBarProps';
 
 const CardListBar = ({data, onPress, onLongPress}: CardListBarProps) => {
   return (

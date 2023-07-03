@@ -6,14 +6,14 @@ import {
   Modal,
   TouchableOpacity,
 } from 'react-native';
-import {useAppDispatch, useAppSelector} from '../../../redux/hooks';
+import {useAppDispatch, useAppSelector} from '@/redux/hooks';
 import {
   getNewUserModalVisible,
   setNewUserModalVisible,
-} from '../../../redux/features/modalState';
+} from '@/redux/features/modalState';
 import {useState} from 'react';
-import {addUser} from '../../../util/request/user';
-import {UserAddRequest} from '../../../assets/models/dto/user/UserAddRequest';
+import {addUser} from '@/util/request/user';
+import {UserAddRequest} from '@/assets/models/dto/user/UserAddRequest';
 import {AxiosError} from 'axios';
 
 const NewUserModal = () => {

@@ -1,8 +1,8 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
-import {RootState} from '../store';
-import {RoomWithReservationResponse} from '../../assets/models/dto/room/RoomWithReservationResponse';
-import {Reservation} from '../../assets/models/entity/Reservation';
+import {RootState} from '@/redux/store';
+
+import {Reservation} from '@/assets/models/entity/Reservation';
 
 export interface ReservationState {
   selectedReservation: Reservation;

@@ -1,7 +1,11 @@
 import {Text, Pressable} from 'react-native';
 
-import {listStyles, styles, roomBarWidthStyles} from './ListBarStyleSheet';
-import {RoomListBarProps} from './ListBarProps';
+import {
+  listStyles,
+  styles,
+  roomBarWidthStyles,
+} from '@/assets/list/data/ListBarStyleSheet';
+import {RoomListBarProps} from '@/assets/list/data/ListBarProps';
 
 const RoomListBar = ({data, onPress, onLongPress}: RoomListBarProps) => {
   return (

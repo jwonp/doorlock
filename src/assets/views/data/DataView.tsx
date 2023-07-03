@@ -1,6 +1,6 @@
 import {ReactNode} from 'react';
 import {View, StyleSheet, Text} from 'react-native';
-import {getDisplayText} from '../../../util/convertDisplayText';
+import {getDisplayText} from '@/util/convertDisplayText';
 type DataView = {
   label: string;
   text?: string | number;

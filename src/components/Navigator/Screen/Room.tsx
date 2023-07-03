@@ -1,19 +1,19 @@
 import {View, Text, GestureResponderEvent} from 'react-native';
 import useSWR, {SWRConfig, useSWRConfig} from 'swr';
-import {RoomListFetecher, RoomListURL} from '../../../swr/roomSWR';
-import DataViewContainer from '../../../assets/views/data/DataViewContainer';
-import DataView from '../../../assets/views/data/DataView';
-import {useAppDispatch, useAppSelector} from '../../../redux/hooks';
+import {RoomListFetecher, RoomListURL} from '@/swr/roomSWR';
+import DataViewContainer from '@/assets/views/data/DataViewContainer';
+import DataView from '@/assets/views/data/DataView';
+import {useAppDispatch, useAppSelector} from '@/redux/hooks';
 import {
   getSelectedRoom,
   setSelectedRoom,
-} from '../../../redux/features/roomState';
-import {useEffect, useMemo} from 'react';
-import ListContainer from '../../../assets/views/data/ListContainer';
-import {ROOM} from '../../../assets/static/texts/DataTypes';
-import ListBar from '../../../assets/list/data/ListBar';
-import {screenStyles} from '../../../assets/screen/ScreenStylyeSheet';
-import ReservationsView from '../../../assets/views/data/room/ReservationsView';
+} from '@/redux/features/roomState';
+import { useMemo} from 'react';
+import ListContainer from '@/assets/views/data/ListContainer';
+import {ROOM} from '@/assets/static/texts/DataTypes';
+import ListBar from '@/assets/list/data/ListBar';
+import {screenStyles} from '@/assets/screen/ScreenStylyeSheet';
+import ReservationsView from '@/assets/views/data/room/ReservationsView';
 
 const RoomScreen = ({navigation}: {navigation: any}) => {
   const room = useAppSelector(getSelectedRoom);

@@ -1,21 +1,21 @@
 import {View, Text, StyleSheet, GestureResponderEvent} from 'react-native';
 import useSWR from 'swr';
-import {CardListFetcher, CardListURL} from '../../../swr/cardSWR';
+import {CardListFetcher, CardListURL} from '@/swr/cardSWR';
 import {useMemo} from 'react';
-import ListBar from '../../../assets/list/data/ListBar';
-import {CARD} from '../../../assets/static/texts/DataTypes';
-import DataViewContainer from '../../../assets/views/data/DataViewContainer';
-import DataView from '../../../assets/views/data/DataView';
-import ListContainer from '../../../assets/views/data/ListContainer';
-import {useAppDispatch, useAppSelector} from '../../../redux/hooks';
+import ListBar from '@/assets/list/data/ListBar';
+import {CARD} from '@/assets/static/texts/DataTypes';
+import DataViewContainer from '@/assets/views/data/DataViewContainer';
+import DataView from '@/assets/views/data/DataView';
+import ListContainer from '@/assets/views/data/ListContainer';
+import {useAppDispatch, useAppSelector} from '@/redux/hooks';
 import {
   getSelectedCard,
   setSelectedCard,
-} from '../../../redux/features/cardState';
-import TechTypeDataView from '../../../assets/views/data/card/TechTypeDataView';
-import {screenStyles} from '../../../assets/screen/ScreenStylyeSheet';
-import {styles} from '../../../assets/list/data/ListBarStyleSheet';
-import {getCardReservationId} from '../../../util/convertDisplayText';
+} from '@/redux/features/cardState';
+import TechTypeDataView from '@/assets/views/data/card/TechTypeDataView';
+import {screenStyles} from '@/assets/screen/ScreenStylyeSheet';
+import {styles} from '@/assets/list/data/ListBarStyleSheet';
+import {getCardReservationId} from '@/util/convertDisplayText';
 
 const CardScreen = () => {
   const card = useAppSelector(getSelectedCard);

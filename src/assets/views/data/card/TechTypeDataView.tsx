@@ -1,6 +1,6 @@
 import {View, Text, StyleSheet} from 'react-native';
-import {TechType} from '../../../models/types/TechType';
-import {convertFirstTextUpperCase} from '../../../../util/convertFirstTextUpperCase';
+import {TechType} from '@/assets/models/types/TechType';
+import {convertFirstTextUpperCase} from '@/util/convertFirstTextUpperCase';
 const TechTypeDataView = ({techType}: {techType: TechType}) => {
   const techTypeKeys = Object.keys(techType);
   const techTypesValues = Object.values(techType);

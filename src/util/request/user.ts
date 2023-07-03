@@ -1,11 +1,11 @@
-import axios, {AxiosResponse} from 'axios';
-import {UserAddRequest} from '../../assets/models/dto/user/UserAddRequest';
-import {request} from './controller/ApiController';
+import {AxiosResponse} from 'axios';
+import {UserAddRequest} from '@/assets/models/dto/user/UserAddRequest';
+import {request} from '@/util/request/controller/ApiController';
 import Config from 'react-native-config';
 import {
   UserModifyRoomRequest,
   UserModifyCardRequest,
-} from '../../assets/models/dto/user/UserModifyRequest';
+} from '@/assets/models/dto/user/UserModifyRequest';
 
 export const addUser = async (user: UserAddRequest) => {
   return await request.post(`${Config.BACKEND_ENDPOINT}/user`, user);

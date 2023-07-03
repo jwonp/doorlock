@@ -1,6 +1,6 @@
 import {Button} from 'react-native';
-import {setNewUserModalVisible} from '../../redux/features/modalState';
-import {useAppDispatch} from '../../redux/hooks';
+import {setNewUserModalVisible} from '@/redux/features/modalState';
+import {useAppDispatch} from '@/redux/hooks';
 const NewUserModalButton = () => {
   const dispatach = useAppDispatch();
   return (

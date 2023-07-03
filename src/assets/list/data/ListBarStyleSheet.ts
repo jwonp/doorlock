@@ -5,7 +5,7 @@ import {
   RESERVATION,
   ROOM,
   USER,
-} from '../static/texts/DataTypes';
+} from '@/assets/static/texts/DataTypes';
 export const styles = StyleSheet.create({
   text: {
     color: '#ffffff',

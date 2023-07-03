@@ -1,7 +1,7 @@
 import Config from 'react-native-config';
-import {request} from '../util/request/controller/ApiController';
+import {request} from '@/util/request/controller/ApiController';
 
-import {RoomWithReservationResponse} from '../assets/models/dto/room/RoomWithReservationResponse';
+import {RoomWithReservationResponse} from '@/assets/models/dto/room/RoomWithReservationResponse';
 
 export const RoomListFetecher = (
   url: string,

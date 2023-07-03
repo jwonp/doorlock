@@ -17,7 +17,7 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
-import Section from './components/Section';
+import Section from '@/components/Section';
 
 const Index = (): JSX.Element => {
   const isDarkMode = useColorScheme() === 'dark';

@@ -1,19 +1,19 @@
-import {UserListResponse} from '../models/dto/user/UserListResponse';
-import {CardWithReservationResponse} from '../models/dto/card/CardWithReservationResponse';
+import {UserListResponse} from '@/assets/models/dto/user/UserListResponse';
+import {CardWithReservationResponse} from '@/assets/models/dto/card/CardWithReservationResponse';
 import {
   CARD,
   DataTypes,
   RESERVATION,
   ROOM,
   USER,
-} from '../static/texts/DataTypes';
+} from '@/assets/static/texts/DataTypes';
 import UserListBar from './UserListBar';
 import CardListBar from './CardListBar';
 import RoomListBar from './RoomListBar';
-import {RoomWithReservationResponse} from '../models/dto/room/RoomWithReservationResponse';
+import {RoomWithReservationResponse} from '@/assets/models/dto/room/RoomWithReservationResponse';
 import {GestureResponderEvent} from 'react-native';
-import {Reservation} from '../models/entity/Reservation';
-import ReservationListBar from './ReservationListBar';
+import {Reservation} from '@/assets/models/entity/Reservation';
+import ReservationListBar from '@/assets/list/data/ReservationListBar';
 
 const ListBar = ({
   data,

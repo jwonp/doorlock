@@ -1,18 +1,25 @@
-import {Modal, View, Text, StyleSheet, TouchableOpacity} from 'react-native';
-import {useAppDispatch, useAppSelector} from '../../../redux/hooks';
+import {
+  Modal,
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Button,
+} from 'react-native';
+import {useAppDispatch, useAppSelector} from '@/redux/hooks';
 import {
   getReservationEditModalVisible,
   setReservationEditModalVisible,
-} from '../../../redux/features/modalState';
-import {SLIDE} from '../../../assets/static/texts/ModalText';
-import {CARD, ROOM, USER} from '../../../assets/static/texts/DataTypes';
-import {getSelectedReservation} from '../../../redux/features/reservationState';
+} from '@/redux/features/modalState';
+import {SLIDE} from '@/assets/static/texts/ModalText';
+import {CARD, ROOM, USER} from '@/assets/static/texts/DataTypes';
+import {getSelectedReservation} from '@/redux/features/reservationState';
 import useSWR from 'swr';
 import {
   ReservationDetailFetcher,
   ReservationDetailURL,
-} from '../../../swr/reservationSWR';
-import {ReservationFullResponse} from '../../../assets/models/dto/reservation/ReservationFullResponse';
+} from '@/swr/reservationSWR';
+import {ReservationFullResponse} from '@/assets/models/dto/reservation/ReservationFullResponse';
 import {useMemo} from 'react';
 const ReservationEditModal = () => {
   const modalVisible = useAppSelector(getReservationEditModalVisible);
@@ -51,7 +58,7 @@ const ReservationEditModal = () => {
         <View style={buttonStyles.container}>
           <View style={buttonStyles.title_card}>
             <View>
-              <Text style={buttonStyles.title}>Select Reservation Data</Text>
+              <Text style={buttonStyles.title}>To Modify Reservation Data</Text>
             </View>
           </View>
           <View style={buttonStyles.button_card}>
@@ -140,6 +147,16 @@ const ReservationEditModal = () => {
             </View>
           </View>
         </View>
+        <View style={cancelStyles.container}>
+          <TouchableOpacity
+            onPress={() => {
+              dispatch(setReservationEditModalVisible(false));
+            }}>
+            <View style={cancelStyles.card}>
+              <Text style={cancelStyles.text}>Cancel</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
       </View>
     </Modal>
   );
@@ -149,12 +166,10 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#3c3c3c',
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'space-around',
     padding: '5%',
   },
 
-  detail_container: {},
-  detail_card: {},
   text: {
     color: '#3c3c3c',
     textAlign: 'center',
@@ -163,7 +178,6 @@ const styles = StyleSheet.create({
 });
 const buttonStyles = StyleSheet.create({
   container: {
-    backgroundColor: '#123456',
     padding: '5%',
   },
   title_card: {marginBottom: '5%'},
@@ -189,8 +203,6 @@ const buttonStyles = StyleSheet.create({
 });
 const detailStyles = StyleSheet.create({
   container: {
-    borderWidth: 1,
-    borderColor: '#ffffff',
     padding: '2%',
   },
   title_card: {paddingBottom: '1%'},
@@ -206,4 +218,21 @@ const detailStyles = StyleSheet.create({
     color: '#3c3c3c',
   },
 });
+const cancelStyles = StyleSheet.create({
+  container: {
+    marginTop: '2%',
+    padding: '3%',
+  },
+  card: {
+    padding: '0.5%',
+    backgroundColor: '#ffffff',
+    borderRadius: 20,
+  },
+  text: {
+    color: '#3c3c3c',
+    textAlign: 'center',
+    fontSize: 20,
+  },
+});
+
 export default ReservationEditModal;

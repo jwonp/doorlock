@@ -1,7 +1,11 @@
 import {Text, Pressable} from 'react-native';
 
-import {listStyles, styles, reservationWithStyles} from './ListBarStyleSheet';
-import {ReservationListBarProps} from './ListBarProps';
+import {
+  listStyles,
+  styles,
+  reservationWithStyles,
+} from '@/assets/list/data/ListBarStyleSheet';
+import {ReservationListBarProps} from '@/assets/list/data/ListBarProps';
 
 const ReservationListBar = ({
   data,

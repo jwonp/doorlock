@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import NfcManager, {NfcTech, TagEvent} from 'react-native-nfc-manager';
-import {addCard} from '../../../util/request/card';
+import {addCard} from '@/util/request/card';
 
 // Pre-step, call this before any NFC operations
 NfcManager.start();

@@ -1,7 +1,7 @@
 import {Text, Pressable} from 'react-native';
 
-import {listStyles, styles, userBarWidthStyles} from './ListBarStyleSheet';
-import {UserListBarProps} from './ListBarProps';
+import {listStyles, styles, userBarWidthStyles} from '@/assets/list/data/ListBarStyleSheet';
+import {UserListBarProps} from '@/assets/list/data/ListBarProps';
 
 const UserListBar = ({data, onPress, onLongPress}: UserListBarProps) => {
   return (

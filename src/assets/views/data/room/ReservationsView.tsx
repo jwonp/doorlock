@@ -1,5 +1,5 @@
 import {View, Text, StyleSheet} from 'react-native';
-import {ReservationWithoutRoomId} from '../../../models/types/RerservationWithoutRoomId';
+import {ReservationWithoutRoomId} from '@/assets/models/types/RerservationWithoutRoomId';
 import {useMemo} from 'react';
 
 const ReservationsView = ({

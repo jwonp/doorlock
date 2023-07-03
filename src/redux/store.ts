@@ -1,10 +1,10 @@
 import {configureStore} from '@reduxjs/toolkit';
-import userReducer from './features/userState';
-import modalReducer from './features/modalState';
-import cardReducer from './features/cardState';
-import roomReducer from './features/roomState';
-import reservationReducer from './features/reservationState';
-import modalTypeReducer from './features/modalTypeState';
+import userReducer from '@/redux/features/userState';
+import modalReducer from '@/redux/features/modalState';
+import cardReducer from '@/redux/features/cardState';
+import roomReducer from '@/redux/features/roomState';
+import reservationReducer from '@/redux/features/reservationState';
+import modalTypeReducer from '@/redux/features/modalTypeState';
 
 export const makeStore = () => {
   return configureStore({
