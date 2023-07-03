@@ -20,5 +20,7 @@
       "@/*": ["./src/*"]
     }
   },
+  "include": ["src/**/*", "**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules"],
   "extends": "@tsconfig/react-native/tsconfig.json"
 }
