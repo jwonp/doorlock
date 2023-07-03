@@ -24,6 +24,7 @@ import DataViewContainer from '../../../assets/views/data/DataViewContainer';
 import ListContainer from '../../../assets/views/data/ListContainer';
 
 import {ModalType, setModalType} from '../../../redux/features/modalTypeState';
+import {getLastTaggedDisplayText} from '../../../util/convertDisplayText';
 
 const UserScreen = ({route}: {route: any}) => {
   const dispatch = useAppDispatch();
@@ -62,7 +63,7 @@ const UserScreen = ({route}: {route: any}) => {
         <DataView label={'Phone'} text={user.phone} />
         <DataView
           label={'Last Tagged'}
-          text={user.lastTagged ? user.lastTagged : 'Not Tagged'}
+          text={getLastTaggedDisplayText(user.id, user.lastTagged)}
         />
       </DataViewContainer>
       <ListContainer title={USER} height={55}>

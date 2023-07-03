@@ -3,11 +3,20 @@ import {ReservationWithoutRoomId} from '../../../models/types/RerservationWithou
 import {useMemo} from 'react';
 
 const ReservationsView = ({
+  roomId,
   reservations,
 }: {
+  roomId: number;
   reservations: ReservationWithoutRoomId[];
 }) => {
   const ReservationList = useMemo(() => {
+    if (roomId <= 0) {
+      return (
+        <View style={styles.exceptionCard}>
+          <Text style={styles.exceptionText}></Text>
+        </View>
+      );
+    }
     if (reservations === undefined || reservations.length === 0) {
       return (
         <View style={styles.exceptionCard}>

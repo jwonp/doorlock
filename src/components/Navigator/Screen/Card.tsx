@@ -16,6 +16,7 @@ import TechTypeDataView from '../../../assets/views/data/card/TechTypeDataView';
 import {screenStyles} from '../../../assets/screen/ScreenStylyeSheet';
 import {styles} from '../../../assets/list/ListBarStyleSheet';
 import ListBarColumn from '../../../assets/list/ListBarColumn';
+import {getCardReservationId} from '../../../util/convertDisplayText';
 
 const CardScreen = () => {
   const card = useAppSelector(getSelectedCard);
@@ -51,7 +52,10 @@ const CardScreen = () => {
           <TechTypeDataView techType={card.techType} />
         </DataView>
 
-        <DataView label={'Reservation Id'} text={card.reservationId} />
+        <DataView
+          label={'Reservation Id'}
+          text={getCardReservationId(card.id, card.reservationId)}
+        />
       </DataViewContainer>
       <ListContainer title={CARD} height={45}>
         {CardListBar}

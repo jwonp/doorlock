@@ -46,7 +46,7 @@ const RoomScreen = ({navigation}: {navigation: any}) => {
         <DataView label={'Room ID'} text={room.id} />
         <DataView label={'Address'} text={room.address} />
         <DataView label={'Reservations'}>
-          <ReservationsView reservations={room.reservations} />
+          <ReservationsView roomId={room.id}reservations={room.reservations} />
         </DataView>
       </DataViewContainer>
       <ListContainer title={ROOM} height={64}>

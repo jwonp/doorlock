@@ -21,14 +21,14 @@ const initCard: CardDataState = {
 
   techType: {
     isoDep: false,
-    nfcA: true,
+    nfcA: false,
     nfcB: false,
     nfcF: false,
     nfcV: false,
-    ndef: true,
+    ndef: false,
     ndefFormatable: false,
     mifareClassic: false,
-    mifareUltralight: true,
+    mifareUltralight: false,
   },
 };
 

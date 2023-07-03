@@ -47,7 +47,7 @@ const ReservationScreen = () => {
         <DataView label={'Reservation ID'} text={reservation.id}></DataView>
         <DataView label={'User ID'} text={reservation.userId} />
         <DataView label={'Card ID'} text={reservation.cardId} />
-        <DataView label={'Room ID'} text={`${reservation.roomId}`} />
+        <DataView label={'Room ID'} text={reservation.roomId} />
         <DataView
           label={'Check In'}
           text={reservation.isCheckedIn ? 'Checked In' : 'Not Checked In'}
