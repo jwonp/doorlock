@@ -55,30 +55,6 @@ const ReservationEditModal = () => {
         dispatch(setReservationEditModalVisible(false));
       }}>
       <View style={styles.container}>
-        <View style={buttonStyles.container}>
-          <View style={buttonStyles.title_card}>
-            <View>
-              <Text style={buttonStyles.title}>To Modify Reservation Data</Text>
-            </View>
-          </View>
-          <View style={buttonStyles.button_card}>
-            <TouchableOpacity>
-              <View style={buttonStyles.button}>
-                <Text style={buttonStyles.text}>{CARD.toUpperCase()}</Text>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <View style={buttonStyles.button}>
-                <Text style={buttonStyles.text}>{ROOM.toUpperCase()}</Text>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <View style={buttonStyles.button}>
-                <Text style={buttonStyles.text}>{USER.toUpperCase()}</Text>
-              </View>
-            </TouchableOpacity>
-          </View>
-        </View>
         <View style={detailStyles.container}>
           <View style={detailStyles.detail_card}>
             <View style={detailStyles.title_card}>
@@ -147,6 +123,30 @@ const ReservationEditModal = () => {
             </View>
           </View>
         </View>
+        <View style={buttonStyles.container}>
+          <View style={buttonStyles.title_card}>
+            <View>
+              <Text style={buttonStyles.title}>Press to modify data</Text>
+            </View>
+          </View>
+          <View style={buttonStyles.button_card}>
+            <TouchableOpacity>
+              <View style={buttonStyles.button}>
+                <Text style={buttonStyles.text}>{CARD.toUpperCase()}</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <View style={buttonStyles.button}>
+                <Text style={buttonStyles.text}>{ROOM.toUpperCase()}</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <View style={buttonStyles.button}>
+                <Text style={buttonStyles.text}>{USER.toUpperCase()}</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+        </View>
         <View style={cancelStyles.container}>
           <TouchableOpacity
             onPress={() => {
@@ -178,7 +178,7 @@ const styles = StyleSheet.create({
 });
 const buttonStyles = StyleSheet.create({
   container: {
-    padding: '5%',
+    padding: '6%',
   },
   title_card: {marginBottom: '5%'},
   title: {
