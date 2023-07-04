@@ -5,12 +5,14 @@ import {RootState} from '@/redux/store';
 export interface ModalState {
   newUserModalVisible: boolean;
   selectModalVisible: boolean;
+  reservationAddModalVisible: boolean;
   reservationEditModalVisible: boolean;
 }
 
 const initialState: ModalState = {
   newUserModalVisible: false,
   selectModalVisible: false,
+  reservationAddModalVisible: false,
   reservationEditModalVisible: false,
 } as const;
 
@@ -27,6 +29,9 @@ export const modal = createSlice({
     setReservationEditModalVisible: (state, action: PayloadAction<boolean>) => {
       state.reservationEditModalVisible = action.payload;
     },
+    setReservationAddModalVisible: (state, action: PayloadAction<boolean>) => {
+      state.reservationAddModalVisible = action.payload;
+    },
   },
 });
 
@@ -35,6 +40,7 @@ export const {
   setNewUserModalVisible,
   setSelectModalVisible,
   setReservationEditModalVisible,
+  setReservationAddModalVisible,
 } = modal.actions;
 export const getNewUserModalVisible = (state: RootState) =>
   state.modal.newUserModalVisible;
@@ -42,5 +48,7 @@ export const getSelectModalVisible = (state: RootState) =>
   state.modal.selectModalVisible;
 export const getReservationEditModalVisible = (state: RootState) =>
   state.modal.reservationEditModalVisible;
+export const getReservationAddModalVisible = (state: RootState) =>
+  state.modal.reservationAddModalVisible;
 
 export default modal.reducer;

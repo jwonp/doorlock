@@ -17,6 +17,7 @@ import ListContainer from '@/assets/views/data/ListContainer';
 import DataViewContainer from '@/assets/views/data/DataViewContainer';
 import DataView from '@/assets/views/data/DataView';
 import ReservationEditModal from '@/components/Modal/Reservation/ReservationEditModal';
+import ReservationAddModal from '@/components/Modal/Reservation/ReservationAddModal';
 const ReservationScreen = () => {
   const reservation = useAppSelector(getSelectedReservation);
   const dispatch = useAppDispatch();
@@ -42,6 +43,7 @@ const ReservationScreen = () => {
 
   return (
     <View style={screenStyles.container}>
+      <ReservationAddModal/>
       <ReservationEditModal />
       <DataViewContainer>
         <DataView label={'Reservation ID'} text={reservation.id}></DataView>
