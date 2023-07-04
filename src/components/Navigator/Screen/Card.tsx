@@ -8,10 +8,7 @@ import DataViewContainer from '@/assets/views/data/DataViewContainer';
 import DataView from '@/assets/views/data/DataView';
 import ListContainer from '@/assets/views/data/ListContainer';
 import {useAppDispatch, useAppSelector} from '@/redux/hooks';
-import {
-  getSelectedCard,
-  setSelectedCard,
-} from '@/redux/features/cardState';
+import {getSelectedCard, setSelectedCard} from '@/redux/features/cardState';
 import TechTypeDataView from '@/assets/views/data/card/TechTypeDataView';
 import {screenStyles} from '@/assets/screen/ScreenStylyeSheet';
 import {styles} from '@/assets/list/data/ListBarStyleSheet';
