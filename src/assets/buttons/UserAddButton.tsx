@@ -1,7 +1,7 @@
 import {Button} from 'react-native';
 import {setNewUserModalVisible} from '@/redux/features/modalState';
 import {useAppDispatch} from '@/redux/hooks';
-const NewUserModalButton = () => {
+const UserAddButton = () => {
   const dispatach = useAppDispatch();
   return (
     <Button
@@ -13,4 +13,4 @@ const NewUserModalButton = () => {
   );
 };
 
-export default NewUserModalButton;
+export default UserAddButton;
