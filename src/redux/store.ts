@@ -4,6 +4,7 @@ import modalReducer from '@/redux/features/modalState';
 import cardReducer from '@/redux/features/cardState';
 import roomReducer from '@/redux/features/roomState';
 import reservationReducer from '@/redux/features/reservationState';
+import reservationAddReducer from '@/redux/features/reservationAddState';
 import modalTypeReducer from '@/redux/features/modalTypeState';
 
 export const makeStore = () => {
@@ -13,6 +14,7 @@ export const makeStore = () => {
       card: cardReducer,
       room: roomReducer,
       reservation: reservationReducer,
+      reservationAdd: reservationAddReducer,
       modal: modalReducer,
       modalType: modalTypeReducer,
     },

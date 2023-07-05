@@ -2,14 +2,47 @@ import {CARD, ROOM, USER} from '@/assets/static/texts/DataTypes';
 import {SLIDE} from '@/assets/static/texts/ModalText';
 import {
   getReservationAddModalVisible,
+  getSelectModalVisible,
   setReservationAddModalVisible,
+  setSelectModalVisible,
 } from '@/redux/features/modalState';
+import {ModalType, setModalType} from '@/redux/features/modalTypeState';
+import {
+  getReservationAddCardId,
+  getReservationAddRoomId,
+  getReservationAddUserId,
+} from '@/redux/features/reservationAddState';
 import {useAppDispatch, useAppSelector} from '@/redux/hooks';
+import {
+  ReservationAddUserFetcher,
+  ReservationAddCardFetcher,
+  ReservationAddRoomFetcher,
+  ReservationAddUserURL,
+  ReservationAddCardURL,
+  ReservationAddRoomURL,
+} from '@/swr/reservationSWR';
 import {Modal, View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import useSWR from 'swr';
 
 const ReservationAddModal = () => {
+  const selectModalVisible = useAppSelector(getSelectModalVisible);
   const modalVisible = useAppSelector(getReservationAddModalVisible);
   const dispatach = useAppDispatch();
+  const userId = useAppSelector(getReservationAddUserId);
+  const cardId = useAppSelector(getReservationAddCardId);
+  const roomId = useAppSelector(getReservationAddRoomId);
+  const userSWR = useSWR(
+    ReservationAddUserURL(userId),
+    ReservationAddUserFetcher,
+  );
+  const cardSWR = useSWR(
+    ReservationAddCardURL(cardId),
+    ReservationAddCardFetcher,
+  );
+  const roomSWR = useSWR(
+    ReservationAddRoomURL(roomId),
+    ReservationAddRoomFetcher,
+  );
   return (
     <Modal
       visible={modalVisible}
@@ -21,25 +54,43 @@ const ReservationAddModal = () => {
       <View style={styles.container}>
         <View style={buttonStyles.container}>
           <View style={buttonStyles.titleCard}>
-            <Text style={buttonStyles.title}>Select Reservaetion Data</Text>
+            <Text style={buttonStyles.title}>Select Reservation Data</Text>
           </View>
           <View style={buttonStyles.buttons}>
             <View style={buttonStyles.card}>
-              <TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  dispatach(setModalType(ModalType.user));
+                  if (selectModalVisible === false) {
+                    dispatach(setSelectModalVisible(true));
+                  }
+                }}>
                 <View>
                   <Text style={buttonStyles.text}>{USER.toUpperCase()}</Text>
                 </View>
               </TouchableOpacity>
             </View>
             <View style={buttonStyles.card}>
-              <TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  dispatach(setModalType(ModalType.card));
+                  if (selectModalVisible === false) {
+                    dispatach(setSelectModalVisible(true));
+                  }
+                }}>
                 <View>
                   <Text style={buttonStyles.text}>{CARD.toUpperCase()}</Text>
                 </View>
               </TouchableOpacity>
             </View>
             <View style={buttonStyles.card}>
-              <TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  dispatach(setModalType(ModalType.room));
+                  if (selectModalVisible === false) {
+                    dispatach(setSelectModalVisible(true));
+                  }
+                }}>
                 <View>
                   <Text style={buttonStyles.text}>{ROOM.toUpperCase()}</Text>
                 </View>
@@ -58,21 +109,27 @@ const ReservationAddModal = () => {
             <View style={detailStyles.card}>
               <Text style={detailStyles.titleText}>{'id'}</Text>
               <View style={detailStyles.dataCard}>
-                <Text style={detailStyles.dataText}>{'example'}</Text>
+                <Text style={detailStyles.dataText}>
+                  {userSWR?.data?.id ?? ''}
+                </Text>
               </View>
             </View>
 
             <View style={detailStyles.card}>
               <Text style={detailStyles.titleText}>{'name'}</Text>
               <View style={detailStyles.dataCard}>
-                <Text style={detailStyles.dataText}>{'example'}</Text>
+                <Text style={detailStyles.dataText}>
+                  {userSWR?.data?.name ?? ''}
+                </Text>
               </View>
             </View>
 
             <View style={detailStyles.card}>
               <Text style={detailStyles.titleText}>{'phone'}</Text>
               <View style={detailStyles.dataCard}>
-                <Text style={detailStyles.dataText}>{'example'}</Text>
+                <Text style={detailStyles.dataText}>
+                  {userSWR?.data?.phone ?? ''}
+                </Text>
               </View>
             </View>
           </View>
@@ -87,13 +144,17 @@ const ReservationAddModal = () => {
             <View style={detailStyles.card}>
               <Text style={detailStyles.titleText}>{'id'}</Text>
               <View style={detailStyles.dataCard}>
-                <Text style={detailStyles.dataText}>{'example'}</Text>
+                <Text style={detailStyles.dataText}>
+                  {roomSWR?.data?.id ?? ''}
+                </Text>
               </View>
             </View>
             <View style={detailStyles.card}>
               <Text style={detailStyles.titleText}>{'address'}</Text>
               <View style={detailStyles.dataCard}>
-                <Text style={detailStyles.dataText}>{'example'}</Text>
+                <Text style={detailStyles.dataText}>
+                  {roomSWR?.data?.address ?? ''}
+                </Text>
               </View>
             </View>
           </View>
@@ -108,7 +169,9 @@ const ReservationAddModal = () => {
             <View style={detailStyles.card}>
               <Text style={detailStyles.titleText}>{'id'}</Text>
               <View style={detailStyles.dataCard}>
-                <Text style={detailStyles.dataText}>{'example'}</Text>
+                <Text style={detailStyles.dataText}>
+                  {cardSWR?.data?.id ?? ''}
+                </Text>
               </View>
             </View>
           </View>
