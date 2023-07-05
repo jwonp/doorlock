@@ -1,5 +1,5 @@
 import {View, Text, GestureResponderEvent} from 'react-native';
-import useSWR, {SWRConfig, useSWRConfig} from 'swr';
+import useSWR from 'swr';
 import {RoomListFetecher, RoomListURL} from '@/swr/roomSWR';
 import DataViewContainer from '@/assets/views/data/DataViewContainer';
 import DataView from '@/assets/views/data/DataView';
@@ -19,7 +19,7 @@ const RoomScreen = ({navigation}: {navigation: any}) => {
   const room = useAppSelector(getSelectedRoom);
   const dispatch = useAppDispatch();
   const roomListSWR = useSWR(RoomListURL, RoomListFetecher);
-  const roomCache = useSWRConfig();
+
   const RoomListBar = useMemo(() => {
     if (!roomListSWR || !roomListSWR.data) {
       return <Text style={screenStyles.text}>No room list</Text>;
