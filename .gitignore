@@ -65,3 +65,4 @@ deprecated
 __tests__/testRequest.test.ts
 .env
 OnDevelop.txt
+ColorHex.txt
