@@ -1,20 +1,25 @@
 import * as React from 'react';
-import {AppState} from 'react-native';
+import {AppState, Image, View} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import HomeScreen from './src/components/Navigator/Screen/Home';
+
 import UserScreen from './src/components/Navigator/Screen/User';
 import NFCScanScreen from './src/components/Navigator/Screen/NFCScan';
 import ReservationScreen from './src/components/Navigator/Screen/Reservation';
 import CardScreen from './src/components/Navigator/Screen/Card';
 import {Provider} from 'react-redux';
 import {store} from './src/redux/store';
-import NewUserModalButton from './src/assets/buttons/NewUserModalButton';
+import UserAddButton from './src/assets/buttons/UserAddButton';
 import {SWRConfig} from 'swr';
 import RoomScreen from './src/components/Navigator/Screen/Room';
-import ReservationEditButton from './src/assets/buttons/ReservationEditButton';
+import ReservationButtonsList from '@/assets/list/button/ReservationButtonsList';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import ButtomTabButton from '@/assets/buttons/BottomTabButton';
+
+import BottomTabButtonList from '@/assets/list/button/BottomTabButtonList';
 
 const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 const App = (): JSX.Element => {
   return (
     <Provider store={store}>
@@ -50,7 +55,7 @@ const App = (): JSX.Element => {
           },
         }}>
         <NavigationContainer>
-          <Stack.Navigator>
+          {/* <Stack.Navigator>
             <Stack.Screen
               name="Home"
               component={HomeScreen}
@@ -62,7 +67,7 @@ const App = (): JSX.Element => {
               name="User"
               component={UserScreen}
               options={{
-                headerRight: NewUserModalButton,
+                headerRight: UserAddButton,
               }}
             />
             <Stack.Screen name="Card" component={CardScreen} />
@@ -71,11 +76,29 @@ const App = (): JSX.Element => {
               name="Reservation"
               component={ReservationScreen}
               options={{
-                headerRight: ReservationEditButton,
+                headerRight: ReservationButtonsList,
               }}
             />
             <Stack.Screen name="Scan" component={NFCScanScreen} />
-          </Stack.Navigator>
+          </Stack.Navigator> */}
+          <Tab.Navigator
+            screenOptions={{
+              tabBarItemStyle: {flexDirection: 'row', padding: '10%'},
+            }}
+            tabBar={props => (
+              <BottomTabButtonList
+                state={props.state}
+                navigation={props.navigation}
+                descriptors={props.descriptors}
+                insets={props.insets}
+              />
+            )}>
+            <Tab.Screen name="card" component={CardScreen} />
+            <Tab.Screen name="user" component={UserScreen} />
+            <Tab.Screen name="room" component={RoomScreen} />
+            <Tab.Screen name="reservation" component={ReservationScreen} />
+            <Tab.Screen name="scan" component={NFCScanScreen} />
+          </Tab.Navigator>
         </NavigationContainer>
       </SWRConfig>
     </Provider>
