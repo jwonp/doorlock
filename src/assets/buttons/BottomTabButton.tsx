@@ -57,24 +57,27 @@ const BottomTabButton = ({name, navigation}: ButtomTabButtonProps) => {
         onPress={() => {
           navigation.navigate(name);
         }}>
-        <Image style={styles.icon} source={icons[name].black} />
-        <Text style={styles.text}>
-          {}
-        </Text>
+        <View style={styles.image}>
+          <Image style={styles.icon} source={icons[name].black} />
+        </View>
       </Pressable>
     </View>
   );
 };
 const styles = StyleSheet.create({
   container: {
-    padding: '2%',
+    width: '20%',
+    paddingTop: '2%',
+    paddingBottom: '2%',
   },
-  icon: {width: 27, height: 27},
+  image: {
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    marginTop: '2%',
+    marginBottom: '2%',
+  },
 
-  text: {
-    fontSize: 20,
-    color: '#3c3c3c',
-  },
+  icon: {width: 27, height: 27},
 });
 
 export default BottomTabButton;

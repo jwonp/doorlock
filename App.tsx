@@ -93,11 +93,76 @@ const App = (): JSX.Element => {
                 insets={props.insets}
               />
             )}>
-            <Tab.Screen name="card" component={CardScreen} />
-            <Tab.Screen name="user" component={UserScreen} />
-            <Tab.Screen name="room" component={RoomScreen} />
-            <Tab.Screen name="reservation" component={ReservationScreen} />
-            <Tab.Screen name="scan" component={NFCScanScreen} />
+            <Tab.Screen
+              name="card"
+              component={CardScreen}
+              options={{
+                headerStyle: {
+                  backgroundColor: '#967E76',
+                },
+
+                headerTitleStyle: {
+                  fontWeight: 'bold',
+                  color: '#ffffff',
+                },
+              }}
+            />
+            <Tab.Screen
+              name="user"
+              component={UserScreen}
+              options={{
+                headerStyle: {
+                  backgroundColor: '#967E76',
+                },
+
+                headerTitleStyle: {
+                  fontWeight: 'bold',
+                  color: '#ffffff',
+                },
+              }}
+            />
+            <Tab.Screen
+              name="room"
+              component={RoomScreen}
+              options={{
+                headerStyle: {
+                  backgroundColor: '#967E76',
+                },
+
+                headerTitleStyle: {
+                  fontWeight: 'bold',
+                  color: '#ffffff',
+                },
+              }}
+            />
+            <Tab.Screen
+              name="reservation"
+              component={ReservationScreen}
+              options={{
+                headerStyle: {
+                  backgroundColor: '#967E76',
+                },
+
+                headerTitleStyle: {
+                  fontWeight: 'bold',
+                  color: '#ffffff',
+                },
+              }}
+            />
+            <Tab.Screen
+              name="scan"
+              component={NFCScanScreen}
+              options={{
+                headerStyle: {
+                  backgroundColor: '#967E76',
+                },
+
+                headerTitleStyle: {
+                  fontWeight: 'bold',
+                  color: '#ffffff',
+                },
+              }}
+            />
           </Tab.Navigator>
         </NavigationContainer>
       </SWRConfig>

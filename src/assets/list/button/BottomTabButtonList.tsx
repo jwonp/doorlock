@@ -9,7 +9,9 @@ const BottomTabButtonList = ({
   insets,
 }: BottomTabBarProps) => {
   console.log(state.history);
-  console.log(navigation.isFocused());
+  console.log(state.key);
+
+  console.log(navigation.getId());
   const TabButtons = state.routeNames.map((item, index) => (
     <BottomTabButton key={index} navigation={navigation} name={item} />
   ));
@@ -17,7 +19,7 @@ const BottomTabButtonList = ({
 };
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#ffffff',
+    backgroundColor: '#EEE3CB',
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingLeft: '5%',

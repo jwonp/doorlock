@@ -8,7 +8,7 @@ import {
 } from '@/assets/static/texts/DataTypes';
 export const styles = StyleSheet.create({
   text: {
-    color: '#ffffff',
+    color: '#000000',
   },
   right: {
     textAlign: 'right',
@@ -65,7 +65,7 @@ export const reservationWithStyles = StyleSheet.create({
 });
 export const listStyles = StyleSheet.create({
   itemContainer: {
-    backgroundColor: '#3c3c3c',
+    backgroundColor: '#9BABB8',
     borderBottomWidth: 1,
     borderBottomColor: '#ffffff',
     padding: '4%',

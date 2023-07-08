@@ -1,6 +1,6 @@
-import {View, StyleSheet, Text, ScrollView} from 'react-native';
+import {View, StyleSheet, ScrollView} from 'react-native';
 import ListBarColumn from '@/assets/list/data/ListBarColumn';
-import {CARD, DataTypes} from '@/assets/static/texts/DataTypes';
+import {DataTypes} from '@/assets/static/texts/DataTypes';
 
 const ListContainer = ({
   title,
@@ -24,13 +24,13 @@ const ListContainer = ({
 };
 const styles = StyleSheet.create({
   text: {
-    color: '#3c3c3c',
+    color: '#000000',
   },
 });
 const listStyles = StyleSheet.create({
   titleContainer: {
     padding: '2%',
-    backgroundColor: '#3c3c3c',
+    backgroundColor: '#9BABB8',
     borderTopWidth: 1,
     borderBottomWidth: 2,
     borderColor: '#ffffff',
@@ -41,7 +41,7 @@ const listStyles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   listScrollView: {
-    backgroundColor: '#3c3c3c',
+    backgroundColor: '#9BABB8',
     flexDirection: 'column',
   },
 });
