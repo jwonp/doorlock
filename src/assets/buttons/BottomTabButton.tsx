@@ -12,8 +12,13 @@ import ReservationIcon from '@/public/reservation.png';
 import ReservationWhiteIcon from '@/public/reservation-white.png';
 import ScanIcon from '@/public/scan.png';
 import ScanWhiteIcon from '@/public/scan-white.png';
+type History = {
+  type: 'route';
+  key: string;
+};
 type ButtomTabButtonProps = {
   name: string;
+  history: History[];
   navigation: NavigationHelpers<ParamListBase, BottomTabNavigationEventMap>;
 };
 type ButtonImage = {
@@ -27,7 +32,7 @@ type ButtonIcon = {
   scan: ButtonImage;
   reservation: ButtonImage;
 };
-const BottomTabButton = ({name, navigation}: ButtomTabButtonProps) => {
+const BottomTabButton = ({name, history, navigation}: ButtomTabButtonProps) => {
   const icons: ButtonIcon = {
     user: {
       black: UserIcon,
@@ -52,16 +57,22 @@ const BottomTabButton = ({name, navigation}: ButtomTabButtonProps) => {
   };
 
   return (
-    <View style={styles.container}>
-      <Pressable
-        onPress={() => {
-          navigation.navigate(name);
-        }}>
-        <View style={styles.image}>
-          <Image style={styles.icon} source={icons[name].black} />
-        </View>
-      </Pressable>
-    </View>
+    <Pressable
+      style={styles.container}
+      onPress={() => {
+        navigation.navigate(name);
+      }}>
+      <View style={styles.image}>
+        <Image
+          style={styles.icon}
+          source={
+            history[history.length - 1].key.startsWith(name)
+              ? icons[name].white
+              : icons[name].black
+          }
+        />
+      </View>
+    </Pressable>
   );
 };
 const styles = StyleSheet.create({
