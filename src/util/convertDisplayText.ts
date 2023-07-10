@@ -25,8 +25,18 @@ export const getCardReservationId = (cardId: string, reservationId: number) => {
   if (!cardId) {
     return '';
   }
-  if(!reservationId) {
-    return "No Reservation"
+  if (!reservationId) {
+    return 'No Reservation';
   }
   return reservationId;
+};
+
+export const getCheckedIn = (reservationId: number, isCheckedIn: boolean) => {
+  if (reservationId <= 0) {
+    return '';
+  }
+  if (isCheckedIn === false) {
+    return 'Not Checked In';
+  }
+  return 'Checked In';
 };
