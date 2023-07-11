@@ -25,12 +25,12 @@ const DataView = ({label, text, children}: DataView) => {
 };
 const styles = StyleSheet.create({
   dataContainer: {
-    backgroundColor: '#9BABB8',
+    backgroundColor: '#967E76',
     padding: '2%',
   },
 
   title: {
-    color: '#000000',
+    color: '#ffffff',
     fontSize: 16,
     marginBottom: '1%',
   },

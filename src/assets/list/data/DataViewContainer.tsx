@@ -6,10 +6,9 @@ const DataViewContainer = ({children}: {children: React.ReactNode}) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#9BABB8',
+    backgroundColor: '#967E76',
     padding: '2%',
   },
-  itemContainer: {},
 });
 
 export default DataViewContainer;
