@@ -14,9 +14,8 @@ import {SWRConfig} from 'swr';
 import RoomScreen from './src/components/Navigator/Screen/Room';
 import ReservationButtonsList from '@/assets/list/button/ReservationButtonsList';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import ButtomTabButton from '@/assets/buttons/BottomTabButton';
-
 import BottomTabButtonList from '@/assets/list/button/BottomTabButtonList';
+import ReservationAddModal from '@/components/Modal/Reservation/ReservationAddModal';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -55,32 +54,6 @@ const App = (): JSX.Element => {
           },
         }}>
         <NavigationContainer>
-          {/* <Stack.Navigator>
-            <Stack.Screen
-              name="Home"
-              component={HomeScreen}
-              options={{
-                title: 'Welcome Home',
-              }}
-            />
-            <Stack.Screen
-              name="User"
-              component={UserScreen}
-              options={{
-                headerRight: UserAddButton,
-              }}
-            />
-            <Stack.Screen name="Card" component={CardScreen} />
-            <Stack.Screen name="Room" component={RoomScreen} />
-            <Stack.Screen
-              name="Reservation"
-              component={ReservationScreen}
-              options={{
-                headerRight: ReservationButtonsList,
-              }}
-            />
-            <Stack.Screen name="Scan" component={NFCScanScreen} />
-          </Stack.Navigator> */}
           <Tab.Navigator
             screenOptions={{
               tabBarItemStyle: {flexDirection: 'row', padding: '10%'},
@@ -99,9 +72,12 @@ const App = (): JSX.Element => {
               options={{
                 headerStyle: {
                   backgroundColor: '#967E76',
+                  borderWidth: 2,
+                  borderBottomColor: '#EEE3CB',
                 },
 
                 headerTitleStyle: {
+                  textTransform: 'uppercase',
                   fontWeight: 'bold',
                   color: '#ffffff',
                 },
@@ -113,12 +89,16 @@ const App = (): JSX.Element => {
               options={{
                 headerStyle: {
                   backgroundColor: '#967E76',
+                  borderWidth: 2,
+                  borderBottomColor: '#EEE3CB',
                 },
 
                 headerTitleStyle: {
+                  textTransform: 'uppercase',
                   fontWeight: 'bold',
                   color: '#ffffff',
                 },
+                headerRight: () => <UserAddButton />,
               }}
             />
             <Tab.Screen
@@ -127,9 +107,12 @@ const App = (): JSX.Element => {
               options={{
                 headerStyle: {
                   backgroundColor: '#967E76',
+                  borderWidth: 2,
+                  borderBottomColor: '#EEE3CB',
                 },
 
                 headerTitleStyle: {
+                  textTransform: 'uppercase',
                   fontWeight: 'bold',
                   color: '#ffffff',
                 },
@@ -141,12 +124,15 @@ const App = (): JSX.Element => {
               options={{
                 headerStyle: {
                   backgroundColor: '#967E76',
+                  borderWidth: 2,
+                  borderBottomColor: '#EEE3CB',
                 },
-
                 headerTitleStyle: {
+                  textTransform: 'uppercase',
                   fontWeight: 'bold',
                   color: '#ffffff',
                 },
+                headerRight: () => <ReservationButtonsList />,
               }}
             />
             <Tab.Screen
@@ -155,9 +141,12 @@ const App = (): JSX.Element => {
               options={{
                 headerStyle: {
                   backgroundColor: '#967E76',
+                  borderWidth: 2,
+                  borderBottomColor: '#EEE3CB',
                 },
 
                 headerTitleStyle: {
+                  textTransform: 'uppercase',
                   fontWeight: 'bold',
                   color: '#ffffff',
                 },
