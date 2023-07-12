@@ -1,16 +1,21 @@
-import {Button} from 'react-native';
+import {Pressable, StyleSheet, Image, View} from 'react-native';
 import {setNewUserModalVisible} from '@/redux/features/modalState';
 import {useAppDispatch} from '@/redux/hooks';
+import UserAddIcon from '@/public/user-add.png';
 const UserAddButton = () => {
   const dispatach = useAppDispatch();
   return (
-    <Button
+    <Pressable
       onPress={() => {
         dispatach(setNewUserModalVisible(true));
-      }}
-      title={'New'}
-      color={'#3c3c3c'}></Button>
+      }}>
+      <View style={{marginRight: '9%'}}>
+        <Image style={styles.icon} source={UserAddIcon} />
+      </View>
+    </Pressable>
   );
 };
-
+const styles = StyleSheet.create({
+  icon: {width: 27, height: 27},
+});
 export default UserAddButton;
