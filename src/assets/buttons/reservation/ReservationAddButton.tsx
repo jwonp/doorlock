@@ -1,17 +1,19 @@
 import {setReservationAddModalVisible} from '@/redux/features/modalState';
 import {useAppDispatch} from '@/redux/hooks';
-import {Button} from 'react-native';
+import {Pressable, Image, StyleSheet} from 'react-native';
+import AddIcon from '@/public/add.png';
+import {headerButtonStyles} from '../HeaderButtonStyles';
 
 const ReservationAddButton = () => {
   const dispatch = useAppDispatch();
 
   return (
-    <Button
-      title={'Add'}
-      color={'#3c3c3c'}
+    <Pressable
       onPress={() => {
         dispatch(setReservationAddModalVisible(true));
-      }}></Button>
+      }}>
+      <Image style={headerButtonStyles.icon} source={AddIcon} />
+    </Pressable>
   );
 };
 
