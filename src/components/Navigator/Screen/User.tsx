@@ -2,7 +2,7 @@ import {View, Text, StyleSheet, GestureResponderEvent} from 'react-native';
 
 import {useAppDispatch, useAppSelector} from '@/redux/hooks';
 import {getSelectedUser, setUser} from '@/redux/features/userState';
-import NewUserModal from '@/components/Modal/User/NewUserModal';
+import NewUserModal from '@/components/Modal/User/UserAddModal';
 import useSWR from 'swr';
 import {UserListFetcher, UserListURL} from '@/swr/userSWR';
 import {useEffect, useMemo} from 'react';
