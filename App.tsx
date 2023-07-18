@@ -9,13 +9,23 @@ import ReservationScreen from './src/components/Navigator/Screen/Reservation';
 import CardScreen from './src/components/Navigator/Screen/Card';
 import {Provider} from 'react-redux';
 import {store} from './src/redux/store';
-import UserAddButton from './src/assets/buttons/UserAddButton';
+
 import {SWRConfig} from 'swr';
 import RoomScreen from './src/components/Navigator/Screen/Room';
-import ReservationButtonsList from '@/assets/list/button/ReservationButtonsList';
+import ReservationButtonList from '@/assets/list/button/ReservationButtonList';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import BottomTabButtonList from '@/assets/list/button/BottomTabButtonList';
-import ReservationAddModal from '@/components/Modal/Reservation/ReservationAddModal';
+import SelectCancelButton from '@/assets/buttons/SelectCancelButton';
+import CardButtonList from '@/assets/list/button/CardButtonList';
+import RoomButtonList from '@/assets/list/button/RoomButtonList';
+import {
+  CARD,
+  RESERVATION,
+  ROOM,
+  SCAN,
+  USER,
+} from '@/assets/static/texts/DataTypes';
+import UserButtonList from '@/assets/list/button/UserButtonList';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -67,7 +77,7 @@ const App = (): JSX.Element => {
               />
             )}>
             <Tab.Screen
-              name="card"
+              name={CARD}
               component={CardScreen}
               options={{
                 headerStyle: {
@@ -77,14 +87,17 @@ const App = (): JSX.Element => {
                 },
 
                 headerTitleStyle: {
-                  textTransform: 'uppercase',
                   fontWeight: 'bold',
                   color: '#ffffff',
                 },
+                headerTitle: 'Card',
+                headerTitleAlign: 'center',
+                headerLeft: () => <SelectCancelButton />,
+                headerRight: () => <CardButtonList />,
               }}
             />
             <Tab.Screen
-              name="user"
+              name={USER}
               component={UserScreen}
               options={{
                 headerStyle: {
@@ -94,15 +107,16 @@ const App = (): JSX.Element => {
                 },
 
                 headerTitleStyle: {
-                  textTransform: 'uppercase',
                   fontWeight: 'bold',
                   color: '#ffffff',
                 },
-                headerRight: () => <UserAddButton />,
+                headerTitle: 'User',
+                headerTitleAlign: 'center',
+                headerRight: () => <UserButtonList />,
               }}
             />
             <Tab.Screen
-              name="room"
+              name={ROOM}
               component={RoomScreen}
               options={{
                 headerStyle: {
@@ -112,14 +126,17 @@ const App = (): JSX.Element => {
                 },
 
                 headerTitleStyle: {
-                  textTransform: 'uppercase',
                   fontWeight: 'bold',
                   color: '#ffffff',
                 },
+                headerTitle: 'Room',
+                headerTitleAlign: 'center',
+                headerLeft: () => <SelectCancelButton />,
+                headerRight: () => <RoomButtonList />,
               }}
             />
             <Tab.Screen
-              name="reservation"
+              name={RESERVATION}
               component={ReservationScreen}
               options={{
                 headerStyle: {
@@ -128,15 +145,17 @@ const App = (): JSX.Element => {
                   borderBottomColor: '#EEE3CB',
                 },
                 headerTitleStyle: {
-                  textTransform: 'uppercase',
                   fontWeight: 'bold',
                   color: '#ffffff',
                 },
-                headerRight: () => <ReservationButtonsList />,
+                headerTitle: 'Reservation',
+                headerTitleAlign: 'center',
+                headerLeft: () => <SelectCancelButton />,
+                headerRight: () => <ReservationButtonList />,
               }}
             />
             <Tab.Screen
-              name="scan"
+              name={SCAN}
               component={NFCScanScreen}
               options={{
                 headerStyle: {
@@ -146,10 +165,11 @@ const App = (): JSX.Element => {
                 },
 
                 headerTitleStyle: {
-                  textTransform: 'uppercase',
                   fontWeight: 'bold',
                   color: '#ffffff',
                 },
+                headerTitle: 'Scan',
+                headerTitleAlign: 'center',
               }}
             />
           </Tab.Navigator>
