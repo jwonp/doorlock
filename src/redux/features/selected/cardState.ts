@@ -3,7 +3,6 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {RootState} from '@/redux/store';
 import {TechType} from '@/assets/models/types/TechType';
 import {CardWithReservationResponse} from '@/assets/models/dto/card/CardWithReservationResponse';
-import {act} from 'react-test-renderer';
 
 export interface CardDataState {
   id: string;
