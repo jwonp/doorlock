@@ -3,6 +3,7 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {RootState} from '@/redux/store';
 import {TechType} from '@/assets/models/types/TechType';
 import {CardWithReservationResponse} from '@/assets/models/dto/card/CardWithReservationResponse';
+import {act} from 'react-test-renderer';
 
 export interface CardDataState {
   id: string;
@@ -12,7 +13,7 @@ export interface CardDataState {
 }
 interface CardWithReservation extends CardWithReservationResponse {}
 export interface CardState {
-  selectedCard: CardWithReservation;
+  selectedCards: string[];
 }
 const initCard: CardDataState = {
   id: '',
@@ -32,28 +33,32 @@ const initCard: CardDataState = {
   },
 };
 
-const initSelectedCard: CardWithReservation = {
-  ...initCard,
-  reservationId: 0,
-  roomId: 0,
-  userId: '',
-};
+const initSelectedCards: string[] = [];
 const initialState: CardState = {
-  selectedCard: initSelectedCard,
+  selectedCards: initSelectedCards,
 };
 
 export const card = createSlice({
   name: 'card',
   initialState,
   reducers: {
-    setSelectedCard: (state, action: PayloadAction<CardWithReservation>) => {
-      state.selectedCard = action.payload;
+    addCardSelected: (state, action: PayloadAction<string>) => {
+      state.selectedCards = [...state.selectedCards, action.payload];
+    },
+    deleteCardSelected: (state, action: PayloadAction<string>) => {
+      state.selectedCards = state.selectedCards.filter(
+        value => value !== action.payload,
+      );
+    },
+    resetCardSelected: state => {
+      state.selectedCards = initSelectedCards;
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const {setSelectedCard} = card.actions;
-export const getSelectedCard = (state: RootState) => state.card.selectedCard;
+export const {addCardSelected, deleteCardSelected, resetCardSelected} =
+  card.actions;
+export const getSelectedCards = (state: RootState) => state.card.selectedCards;
 
 export default card.reducer;
