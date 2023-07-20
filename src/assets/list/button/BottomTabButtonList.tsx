@@ -1,6 +1,7 @@
 import BottomTabButton from '@/assets/buttons/BottomTabButton';
+import { DataTypes } from '@/assets/static/texts/DataTypes';
 import {BottomTabBarProps} from '@react-navigation/bottom-tabs';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, View, Text} from 'react-native';
 
 const BottomTabButtonList = ({
   state,
@@ -8,18 +9,19 @@ const BottomTabButtonList = ({
   descriptors,
   insets,
 }: BottomTabBarProps) => {
-  console.log(state.history);
-  console.log(state.key);
-
-  console.log(navigation.getId());
   const TabButtons = state.routeNames.map((item, index) => (
-    <BottomTabButton key={index} navigation={navigation} name={item} />
+    <BottomTabButton
+      key={index}
+      history={state.history}
+      navigation={navigation}
+      name={item as DataTypes}
+    />
   ));
   return <View style={styles.container}>{TabButtons}</View>;
 };
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#EEE3CB',
+    backgroundColor: '#D7C0AE',
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingLeft: '5%',
