@@ -17,8 +17,23 @@ import {
 import {useAppDispatch, useAppSelector} from '@/redux/hooks';
 import {Pressable, View, Image, GestureResponderEvent} from 'react-native';
 import CheckedIcon from '@/public/checked.png';
+import {
+  addUserSelected,
+  deleteUserSelected,
+  getSelectedUsers,
+} from '@/redux/features/selected/userState';
+import {ActionCreatorWithOptionalPayload} from '@reduxjs/toolkit';
+type Selected = {
+  [index in DataType]: any[];
+};
+type DeleteSelected = {
+  [index in DataType]: ActionCreatorWithOptionalPayload<any, string>;
+};
+type AddSelected = {
+  [index in DataType]: ActionCreatorWithOptionalPayload<any, string>;
+};
 type SelectableListBarProps = {
-  id: string | number;
+  id: any;
   type: DataType;
   children: React.ReactNode;
   onLongPress?: (event: GestureResponderEvent) => void;
@@ -30,27 +45,31 @@ const Selectable = ({
   onLongPress,
 }: SelectableListBarProps) => {
   const dispatch = useAppDispatch();
-  const selected = {
+  const selected: Selected = {
     card: useAppSelector(getSelectedCards),
+    user: useAppSelector(getSelectedUsers),
     room: useAppSelector(getSelectedRooms),
     reservation: useAppSelector(getSelectedReservations),
   };
-  const delelteSelected = {
+  const deleteSelected: DeleteSelected = {
     card: deleteCardSelected,
+    user: deleteUserSelected,
     room: deleteRoomSelected,
     reservation: deleteReservationSelected,
   };
-  const addSelected = {
+  const addSelected: AddSelected = {
     card: addCardSelected,
+    user: addUserSelected,
     room: addRoomSelected,
     reservation: addReservationSelected,
   };
+
   const isSelected = selected[type].includes(id);
   return (
     <Pressable
       onPress={() => {
         isSelected
-          ? dispatch(delelteSelected[type](id))
+          ? dispatch(deleteSelected[type](id))
           : dispatch(addSelected[type](id));
       }}
       onLongPress={onLongPress}>
