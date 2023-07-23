@@ -32,6 +32,6 @@ export const screen = createSlice({
 
 // Action creators are generated for each case reducer function
 export const {setScreen} = screen.actions;
-export const getModalType = (state: RootState) => state.screen.type;
+export const getScreenType = (state: RootState) => state.screen.type;
 
 export default screen.reducer;
