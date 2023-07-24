@@ -1,38 +1,51 @@
-import { Text, View} from 'react-native';
-import {useAppDispatch, useAppSelector} from '@/redux/hooks';
-import {
-  getSelectedReservation,
-
-} from '@/redux/features/reservationState';
+import {Text, View} from 'react-native';
 import useSWR from 'swr';
-import {ReservationListFetcher, ReservationListURL} from '@/swr/reservationSWR';
-import {screenStyles} from '@/assets/screen/ScreenStylyeSheet';
-import {useMemo} from 'react';
-
+import {ReservationFetcher, ReservationURL} from '@/swr/reservationSWR';
+import {screenStyles} from '@/assets/screen/ScreenStyleSheet';
+import {useEffect, useMemo} from 'react';
 import {RESERVATION} from '@/assets/static/texts/DataTypes';
-
 import ReservationEditModal from '@/components/Modal/Reservation/ReservationEditModal';
 import ReservationAddModal from '@/components/Modal/Reservation/ReservationAddModal';
-
 import SelectModal from '@/components/Modal/SelectModal';
-
 import ReservationListBar from '@/assets/list/data/reservation/ReservationListBar';
+import Selectable from '@/assets/list/data/Selectable';
+import {useAppDispatch, useAppSelector} from '@/redux/hooks';
+import {setReservationEditId} from '@/redux/features/modal/data/reservationEditState';
+import {
+  getSelectModalVisible,
+  setReservationEditModalVisible,
+} from '@/redux/features/modal/modalState';
+import {setSelectModalAction} from '@/redux/features/modal/selectModalState';
+import {EDIT} from '@/assets/static/texts/SelectModalActions';
+
 const ReservationScreen = () => {
-  const reservation = useAppSelector(getSelectedReservation);
   const dispatch = useAppDispatch();
-  const reservationSWR = useSWR(ReservationListURL, ReservationListFetcher);
+  const selectModalVisible = useAppSelector(getSelectModalVisible);
+  const reservationSWR = useSWR(ReservationURL, ReservationFetcher);
   const ListBar = useMemo(() => {
     if (!reservationSWR || !reservationSWR.data) {
-      return <Text style={{color: '#ffffff'}}>No Reservation List</Text>;
+      return <Text style={{color: '#ffffff'}}>No Reservation</Text>;
     }
     return reservationSWR.data.map((item, index) => (
-      <ReservationListBar key={index} data={item} />
+      <Selectable
+        key={index}
+        id={item.id}
+        type={RESERVATION}
+        onLongPress={() => {
+          dispatch(setSelectModalAction(EDIT));
+          dispatch(setReservationEditModalVisible(true));
+          dispatch(setReservationEditId(item.id));
+        }}>
+        <ReservationListBar data={item} />
+      </Selectable>
     ));
   }, [reservationSWR.data]);
-
+  useEffect(() => {
+    reservationSWR.mutate();
+  }, [selectModalVisible]);
   return (
     <View style={screenStyles.container}>
-      <SelectModal type={RESERVATION} />
+      <SelectModal />
       <ReservationAddModal />
       <ReservationEditModal />
       {ListBar}
