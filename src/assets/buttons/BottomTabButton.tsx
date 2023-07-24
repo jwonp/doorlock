@@ -12,12 +12,18 @@ import ReservationIcon from '@/public/reservation.png';
 import ReservationWhiteIcon from '@/public/reservation-white.png';
 import ScanIcon from '@/public/scan.png';
 import ScanWhiteIcon from '@/public/scan-white.png';
+import {useAppDispatch} from '@/redux/hooks';
+import {resetCardSelected} from '@/redux/features/selected/cardState';
+import {resetRoomSelected} from '@/redux/features/selected/roomState';
+import {resetReservationSelected} from '@/redux/features/selected/reservationState';
+import {DataTypes} from '../static/texts/DataTypes';
+import {setScreen} from '@/redux/features/modal/screenState';
 type History = {
   type: 'route';
   key: string;
 };
 type ButtomTabButtonProps = {
-  name: string;
+  name: DataTypes;
   history: History[];
   navigation: NavigationHelpers<ParamListBase, BottomTabNavigationEventMap>;
 };
@@ -33,6 +39,7 @@ type ButtonIcon = {
   reservation: ButtonImage;
 };
 const BottomTabButton = ({name, history, navigation}: ButtomTabButtonProps) => {
+  const dispatch = useAppDispatch();
   const icons: ButtonIcon = {
     user: {
       black: UserIcon,
@@ -55,11 +62,19 @@ const BottomTabButton = ({name, history, navigation}: ButtomTabButtonProps) => {
       white: ReservationWhiteIcon,
     },
   };
-
+  const resetSelected = {
+    card: resetCardSelected,
+    room: resetRoomSelected,
+    reservation: resetReservationSelected,
+  };
   return (
     <Pressable
       style={styles.container}
       onPress={() => {
+        dispatch(setScreen(name));
+        if (resetSelected[name]) {
+          dispatch(resetSelected[name]());
+        }
         navigation.navigate(name);
       }}>
       <View style={styles.image}>
