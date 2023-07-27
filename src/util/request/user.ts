@@ -1,11 +1,11 @@
 import {AxiosResponse} from 'axios';
-import {UserAddRequest} from '@/assets/models/dto/user/UserAddRequest';
+import {UserAddRequest} from '@/assets/models/dto/user/UserRequest';
 import {request} from '@/util/request/controller/ApiController';
 import Config from 'react-native-config';
 import {
   UserModifyRoomRequest,
   UserModifyCardRequest,
-} from '@/assets/models/dto/user/UserModifyRequest';
+} from '@/assets/models/dto/user/UserRequest';
 
 export const addUser = async (user: UserAddRequest) => {
   return await request.post(`${Config.BACKEND_ENDPOINT}/user`, user);
@@ -20,7 +20,7 @@ export const modifyCardidInUser = async (
   };
   return await request.patch('/user/card', CardIdModifyData);
 };
-export const modifyRoomidInUser = async (
+export const modifyRoomIdInUser = async (
   roomId: number,
   userId: string,
 ): Promise<AxiosResponse<boolean, any>> => {
@@ -29,4 +29,14 @@ export const modifyRoomidInUser = async (
     roomId: roomId,
   };
   return await request.patch('/user/room', UserIdModifyData);
+};
+
+export const deleteSelectedUsers = async (selectedUserIDList: string[]) => {
+  if (!selectedUserIDList || selectedUserIDList.length < 1) {
+    return;
+  }
+  const userListToDelete = {
+    idList: selectedUserIDList,
+  };
+  return await request.delete('/user', {data: userListToDelete});
 };
