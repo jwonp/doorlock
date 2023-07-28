@@ -1,4 +1,3 @@
-import {setCardAddModalVisibie} from '@/redux/features/modal/modalState';
 import {Pressable, View, Image} from 'react-native';
 import {headerButtonStyles} from './HeaderButtonStyles';
 import {useAppDispatch} from '@/redux/hooks';
@@ -17,7 +16,9 @@ const ModalOpenButton = ({
   return (
     <Pressable
       onPress={() => {
-        onPress();
+        if (onPress) {
+          onPress();
+        }
         dispatch(setModalVisible(true));
       }}>
       <View style={headerButtonStyles.marginRight}>
