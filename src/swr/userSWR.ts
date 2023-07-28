@@ -1,9 +1,9 @@
 import axios from 'axios';
 import Config from 'react-native-config';
 
-import {UserListResponse} from '@/assets/models/dto/user/UserListResponse';
-import {UserDataState} from '@/redux/features/userState';
-import { request } from '@/util/request/controller/ApiController';
+import {UserListResponse} from '@/assets/models/dto/user/UserResponse';
+import {UserDataState} from '@/redux/features/selected/userState';
+import {request} from '@/util/request/controller/ApiController';
 export const UserListFetcher = (url: string): Promise<UserListResponse[]> =>
   request.get(url).then(res => res.data);
 

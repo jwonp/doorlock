@@ -1,4 +1,4 @@
-import {RoomWithReservationResponse} from '@/assets/models/dto/room/RoomWithReservationResponse';
+import {RoomWithReservationResponse} from '@/assets/models/dto/room/RoomResponse';
 import {listBarStyles} from '@/assets/static/styles/ListBarStyles';
 import {getRoomReservationsText} from '@/util/convertDisplayText';
 import {View, Text} from 'react-native';

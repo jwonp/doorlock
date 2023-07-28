@@ -1,4 +1,4 @@
-import {CardWithReservationResponse} from '@/assets/models/dto/card/CardWithReservationResponse';
+import {CardWithReservationResponse} from '@/assets/models/dto/card/CardResponse';
 import {listBarStyles} from '@/assets/static/styles/ListBarStyles';
 import {View, Text} from 'react-native';
 
