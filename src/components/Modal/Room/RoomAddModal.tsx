@@ -17,28 +17,37 @@ import {
 import {modalHeaderStlyes, modalStyles} from '@/assets/modals/ModalStyles';
 import CloseIcon from '@/public/close-white.png';
 import CheckIcon from '@/public/checked.png';
-import { SLIDE } from '@/assets/static/texts/ModalText';
-import { addRoom } from '@/util/request/room';
+import {SLIDE} from '@/assets/static/texts/ModalText';
+import {addRoom} from '@/util/request/room';
+import {RoomListURL, RoomListFetecher} from '@/swr/roomSWR';
+import useSWR from 'swr';
 const RoomAddModal = () => {
+  const roomListSWR = useSWR(RoomListURL, RoomListFetecher);
   const modalVisible = useAppSelector(getRoomAddModalVisible);
   const dispatch = useAppDispatch();
   const [address, setAddress] = useState<string>('');
-  const onPressAddRoom = () => {};
+  const closeModal = () => {
+    setAddress('');
+    dispatch(setRoomAddModalVisible(false));
+  };
+  const onPressAddRoom = () => {
+    addRoom(address).then(res => roomListSWR.mutate());
+    closeModal();
+  };
   return (
     <Modal
       visible={modalVisible}
       transparent={true}
       animationType={SLIDE}
       onRequestClose={() => {
-        dispatch(setRoomAddModalVisible(false));
+        closeModal();
       }}>
       <View style={modalStyles.container}>
         <View style={modalStyles.header}>
           <View style={modalHeaderStlyes.closeContainer}>
             <Pressable
               onPress={() => {
-                addRoom(address);
-                dispatch(setRoomAddModalVisible(false));
+                closeModal();
               }}>
               <Image source={CloseIcon} style={modalHeaderStlyes.icon} />
             </Pressable>
