@@ -2,7 +2,6 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
 import {RootState} from '@/redux/store';
 import {TechType} from '@/assets/models/types/TechType';
-import {CardWithReservationResponse} from '@/assets/models/dto/card/CardWithReservationResponse';
 
 export interface CardDataState {
   id: string;
@@ -10,29 +9,13 @@ export interface CardDataState {
   type: string;
   techType: TechType;
 }
-interface CardWithReservation extends CardWithReservationResponse {}
+
 export interface CardState {
   selectedCards: string[];
 }
-const initCard: CardDataState = {
-  id: '',
-  maxSize: 0,
-  type: '',
-
-  techType: {
-    isoDep: false,
-    nfcA: false,
-    nfcB: false,
-    nfcF: false,
-    nfcV: false,
-    ndef: false,
-    ndefFormatable: false,
-    mifareClassic: false,
-    mifareUltralight: false,
-  },
-};
 
 const initSelectedCards: string[] = [];
+
 const initialState: CardState = {
   selectedCards: initSelectedCards,
 };
