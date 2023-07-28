@@ -8,6 +8,7 @@ export interface ModalState {
   cardAddModalVisibie: boolean;
   roomAddModalVisible: boolean;
   selectModalVisible: boolean;
+  cardDetailModalVisible: boolean;
   reservationAddModalVisible: boolean;
   reservationEditModalVisible: boolean;
 }
@@ -18,6 +19,7 @@ const initialState: ModalState = {
   cardAddModalVisibie: false,
   roomAddModalVisible: false,
   selectModalVisible: false,
+  cardDetailModalVisible: false,
   reservationAddModalVisible: false,
   reservationEditModalVisible: false,
 } as const;
@@ -41,6 +43,9 @@ export const modal = createSlice({
     setSelectModalVisible: (state, action: PayloadAction<boolean>) => {
       state.selectModalVisible = action.payload;
     },
+    setCardDetailModalVisible: (state, action: PayloadAction<boolean>) => {
+      state.cardDetailModalVisible = action.payload;
+    },
     setReservationEditModalVisible: (state, action: PayloadAction<boolean>) => {
       state.reservationEditModalVisible = action.payload;
     },
@@ -57,6 +62,7 @@ export const {
   setCardAddModalVisibie,
   setRoomAddModalVisible,
   setSelectModalVisible,
+  setCardDetailModalVisible,
   setReservationEditModalVisible,
   setReservationAddModalVisible,
 } = modal.actions;
@@ -70,6 +76,8 @@ export const getRoomAddModalVisible = (state: RootState) =>
   state.modal.roomAddModalVisible;
 export const getSelectModalVisible = (state: RootState) =>
   state.modal.selectModalVisible;
+export const getCardDetailModalVisible = (state: RootState) =>
+  state.modal.cardDetailModalVisible;
 export const getReservationEditModalVisible = (state: RootState) =>
   state.modal.reservationEditModalVisible;
 export const getReservationAddModalVisible = (state: RootState) =>

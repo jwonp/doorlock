@@ -1,11 +1,14 @@
 import {configureStore} from '@reduxjs/toolkit';
-import userReducer from '@/redux/features/userState';
-import modalReducer from '@/redux/features/modalState';
-import cardReducer from '@/redux/features/cardState';
-import roomReducer from '@/redux/features/roomState';
-import reservationReducer from '@/redux/features/reservationState';
-import reservationAddReducer from '@/redux/features/reservationAddState';
-import modalTypeReducer from '@/redux/features/modalTypeState';
+import userReducer from '@/redux/features/selected/userState';
+import modalReducer from '@/redux/features/modal/modalState';
+import cardReducer from '@/redux/features/selected/cardState';
+import roomReducer from '@/redux/features/selected/roomState';
+import reservationReducer from '@/redux/features/selected/reservationState';
+import reservationAddReducer from '@/redux/features/modal/data/reservationAddState';
+import screenReducer from '@/redux/features/modal/screenState';
+import selectModalTypeReducer from '@/redux/features/modal/selectModalState';
+import reservationEditReducer from '@/redux/features/modal/data/reservationEditState';
+import cardDetailReducer from '@/redux/features/modal/data/CardDetailState';
 
 export const makeStore = () => {
   return configureStore({
@@ -14,9 +17,12 @@ export const makeStore = () => {
       card: cardReducer,
       room: roomReducer,
       reservation: reservationReducer,
+      cardDetail: cardDetailReducer,
       reservationAdd: reservationAddReducer,
       modal: modalReducer,
-      modalType: modalTypeReducer,
+      screen: screenReducer,
+      selectModal: selectModalTypeReducer,
+      reservationEdit: reservationEditReducer,
     },
   });
 };
