@@ -1,11 +1,26 @@
-export const getDisplayText = (text: string | number | undefined) => {
-  if (typeof text === undefined) {
-    return '';
+import {ReservationWithoutRoomId} from '@/assets/models/types/RerservationWithoutRoomId';
+import {TechType} from '@/assets/models/types/TechType';
+import {convertFirstTextUpperCase} from './convertFirstTextUpperCase';
+
+export const getDisplayTechTypes = (techType: TechType): string => {
+  const techTypeMap = Object.entries(techType).filter(
+    ([_, isExist]) => isExist,
+  );
+  let displayText = '';
+  techTypeMap.forEach(([type, _]) => {
+    displayText = `${displayText}${convertFirstTextUpperCase(type)} `;
+  });
+  return displayText;
+};
+export const getDisplayText = (
+  text: string | number | undefined,
+  expect?: string,
+  exception?: string,
+) => {
+  if (text === undefined || (text as number) <= 0) {
+    return exception ?? '';
   }
-  if (typeof text === 'string') {
-    return text;
-  }
-  return (text as number) > 0 ? text.toString() : '';
+  return expect ?? text.toString();
 };
 
 export const getLastTaggedDisplayText = (
@@ -16,7 +31,7 @@ export const getLastTaggedDisplayText = (
     return '';
   }
   if (!lastTagged) {
-    return 'Not Tagged';
+    return 'No last tag';
   }
   return lastTagged;
 };
@@ -39,4 +54,21 @@ export const getCheckedIn = (reservationId: number, isCheckedIn: boolean) => {
     return 'Not Checked In';
   }
   return 'Checked In';
+};
+
+export const getRoomReservationsText = (
+  reservations: ReservationWithoutRoomId[],
+) => {
+  if (!reservations) {
+    return '';
+  }
+  if (reservations.length < 1) {
+    return 'No Reservation';
+  }
+  if (reservations.length === 1) {
+    return `#${reservations[0].id} reserved by ${reservations[0].userId}`;
+  }
+  return `#${reservations[0].id} reserved by ${reservations[0].userId}, ${
+    reservations.length - 1
+  } more...`;
 };
