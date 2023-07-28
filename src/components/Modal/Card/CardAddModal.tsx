@@ -5,16 +5,19 @@ import {useAppDispatch, useAppSelector} from '@/redux/hooks';
 import {
   getCardAddModalVisible,
   setCardAddModalVisibie,
-} from '@/redux/features/modalState';
+} from '@/redux/features/modal/modalState';
 import {SLIDE} from '@/assets/static/texts/ModalText';
-import {modalHeaderStlyes, modalStyles} from '../ModalStyles';
+import {modalHeaderStlyes, modalStyles} from '@/assets/modals/ModalStyles';
 import CloseIcon from '@/public/close-white.png';
 import {AxiosError} from 'axios';
+import {CardListURL, CardListFetcher} from '@/swr/cardSWR';
+import useSWR from 'swr';
 
 NfcManager.start();
 const CardAddModal = () => {
+  const cardListSWR = useSWR(CardListURL, CardListFetcher);
   const modalVisible = useAppSelector(getCardAddModalVisible);
-  const dispatach = useAppDispatch();
+  const dispatch = useAppDispatch();
   const readNdef = async () => {
     try {
       // register for the NFC tag with NDEF in it
@@ -25,13 +28,14 @@ const CardAddModal = () => {
 
       addCard(tag)
         .then(res => {
-          dispatach(setCardAddModalVisibie(false));
+          cardListSWR.mutate();
+          dispatch(setCardAddModalVisibie(false));
         })
         .catch((err: AxiosError) => {
           console.log(err.response.status);
         })
         .finally(() => {
-          dispatach(setCardAddModalVisibie(false));
+          dispatch(setCardAddModalVisibie(false));
         });
     } catch (ex) {
       console.warn('Oops!', ex);
@@ -50,15 +54,15 @@ const CardAddModal = () => {
       }}
       onRequestClose={() => {
         NfcManager.cancelTechnologyRequest();
-        dispatach(setCardAddModalVisibie(false));
+        dispatch(setCardAddModalVisibie(false));
       }}>
       <View style={modalStyles.container}>
         <View style={modalStyles.header}>
-          <View style={modalHeaderStlyes.iconContainer}>
+          <View style={modalHeaderStlyes.closeContainer}>
             <Pressable
               onPress={() => {
                 NfcManager.cancelTechnologyRequest();
-                dispatach(setCardAddModalVisibie(false));
+                dispatch(setCardAddModalVisibie(false));
               }}>
               <Image style={modalHeaderStlyes.icon} source={CloseIcon} />
             </Pressable>
