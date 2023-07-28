@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {View, Text, Pressable, StyleSheet} from 'react-native';
 import NfcManager, {NfcTech, TagEvent} from 'react-native-nfc-manager';
 import {addCard} from '@/util/request/card';
 
@@ -36,9 +36,9 @@ const NFCScanScreen = () => {
 
   return (
     <View style={styles.wrapper}>
-      <TouchableOpacity onPress={readNdef}>
+      <Pressable onPress={readNdef}>
         <Text style={styles.text}>Scan a Tag</Text>
-      </TouchableOpacity>
+      </Pressable>
       <Text style={styles.text}>{result}</Text>
       {tag === null ? (
         <Text style={styles.text}>NO DATA</Text>
