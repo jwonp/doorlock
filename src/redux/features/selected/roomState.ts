@@ -1,19 +1,9 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-
 import {RootState} from '@/redux/store';
-import {RoomWithReservationResponse} from '@/assets/models/dto/room/RoomWithReservationResponse';
-import {Room} from '@/assets/models/entity/Room';
-
 export interface RoomState {
   selectedRooms: number[];
 }
-interface RoomWithReservation extends RoomWithReservationResponse {}
-const initRoom: Room = {
-  id: 0,
-  address: '',
-};
 const initSelectedRooms: number[] = [];
-
 const initialState: RoomState = {
   selectedRooms: initSelectedRooms,
 };
