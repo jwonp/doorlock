@@ -8,8 +8,8 @@ import reservationAddReducer from '@/redux/features/modal/data/reservationAddSta
 import screenReducer from '@/redux/features/modal/screenState';
 import selectModalTypeReducer from '@/redux/features/modal/selectModalState';
 import reservationEditReducer from '@/redux/features/modal/data/reservationEditState';
-import cardDetailReducer from '@/redux/features/modal/data/CardDetailState';
-
+import cardDetailReducer from '@/redux/features/modal/data/cardDetailState';
+import userEditReducer from '@/redux/features/modal/data/userEditState';
 export const makeStore = () => {
   return configureStore({
     reducer: {
@@ -23,6 +23,7 @@ export const makeStore = () => {
       screen: screenReducer,
       selectModal: selectModalTypeReducer,
       reservationEdit: reservationEditReducer,
+      userEdit: userEditReducer,
     },
   });
 };
