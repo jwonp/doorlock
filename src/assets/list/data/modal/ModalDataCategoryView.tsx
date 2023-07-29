@@ -3,48 +3,27 @@ import {useAppDispatch, useAppSelector} from '@/redux/hooks';
 import {
   getSelectModalVisible,
   setSelectModalVisible,
-} from '@/redux/features/modalState';
-import {ModalType, setModalType} from '@/redux/features/modalTypeState';
+} from '@/redux/features/modal/modalState';
+import {DataType} from '@/redux/features/modal/screenState';
 import EditIcon from '@/public/edit.png';
-import {CARD, ROOM, USER} from '@/assets/static/texts/DataTypes';
+import {setSelectedModalType} from '@/redux/features/modal/selectModalState';
 type ModalDataCategoryViewProps = {
-  type: string;
-};
-
-type CategoryType = {
-  text: string;
-  type: ModalType;
-};
-
-type Category = {
-  user: CategoryType;
-  room: CategoryType;
-  card: CategoryType;
+  type: DataType;
 };
 
 const ModalDataCategoryView = ({type}: ModalDataCategoryViewProps) => {
   const dispatach = useAppDispatch();
   const selectModalVisible = useAppSelector(getSelectModalVisible);
-  const category: Category = {
-    user: {
-      text: USER.toUpperCase(),
-      type: ModalType.user,
-    },
-    room: {
-      text: ROOM.toUpperCase(),
-      type: ModalType.room,
-    },
-    card: {
-      text: CARD.toUpperCase(),
-      type: ModalType.card,
-    },
-  };
+
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>{category[type].text}</Text>
+      <Text style={styles.text}>
+        {(DataType[type] as string).toUpperCase()}
+      </Text>
+
       <Pressable
         onPress={() => {
-          dispatach(setModalType(category[type].type));
+          dispatach(setSelectedModalType(DataType[type]));
           if (selectModalVisible === false) {
             dispatach(setSelectModalVisible(true));
           }
