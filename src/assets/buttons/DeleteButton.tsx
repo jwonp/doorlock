@@ -26,10 +26,8 @@ import {
   resetUserSelected,
 } from '@/redux/features/selected/userState';
 import {UserListFetcher, UserListURL} from '@/swr/userSWR';
-import {deleteSelectedCards} from '@/util/request/card';
-import {deleteSelectedRooms} from '@/util/request/room';
-import {deleteSelectedUsers} from '@/util/request/user';
-import {deleteSelectedReservations} from '@/util/request/reservation';
+
+import { deleteSelected } from '@/util/getDeleteSelecteds';
 
 type DeleteButtonProps = {
   type: DataTypes;
@@ -55,17 +53,12 @@ const DeleteButton = ({type}: DeleteButtonProps) => {
     user: useSWR(UserListURL, UserListFetcher),
     reservation: useSWR(ReservationURL, ReservationFetcher),
   };
-  const deleteSelected = {
-    card: deleteSelectedCards(selected.card),
-    room: deleteSelectedRooms(selected.room),
-    user: deleteSelectedUsers(selected.user),
-    reservation: deleteSelectedReservations(selected.reservation),
-  };
+
   return (
     <Pressable
       style={{display: selected[type].length > 0 ? 'flex' : 'none'}}
       onPress={() => {
-        deleteSelected[type].then(() => {
+        deleteSelected(type, selected[type]).then(() => {
           dataSWR[type].mutate();
         });
         dispatch(resetSelected[type]());
