@@ -9,9 +9,9 @@ import CardAddModal from '@/components/Modal/Card/CardAddModal';
 import Selectable from '@/assets/list/data/Selectable';
 import {CARD} from '@/assets/static/texts/DataTypes';
 import {useAppDispatch} from '@/redux/hooks';
-import {setCardDetail} from '@/redux/features/modal/data/CardDetailState';
+import {setCardDetail} from '@/redux/features/modal/data/cardDetailState';
 import CardDetailModal from '@/components/Modal/Card/CardDetailModal';
-import { setCardDetailModalVisible } from '@/redux/features/modal/modalState';
+import {setCardDetailModalVisible} from '@/redux/features/modal/modalState';
 const CardScreen = ({navigation}: {navigation: any}) => {
   const cardListSWR = useSWR(CardListURL, CardListFetcher);
   const dispatch = useAppDispatch();
@@ -36,7 +36,7 @@ const CardScreen = ({navigation}: {navigation: any}) => {
   return (
     <ScrollView style={screenStyles.container}>
       <CardAddModal />
-      <CardDetailModal/>
+      <CardDetailModal />
       {ListBar}
     </ScrollView>
   );
