@@ -1,2 +1,3 @@
-import {UserDataState} from '../../../../redux/features/selected/userState';
-export interface UserListResponse extends UserDataState {}
+import {User} from '../../entity/User';
+
+export interface UserListResponse extends Omit<User, 'password'> {}
