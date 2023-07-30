@@ -16,17 +16,23 @@ import {
   getSelectedReservations,
   resetReservationSelected,
 } from '@/redux/features/selected/reservationState';
+import {
+  getSelectedUsers,
+  resetUserSelected,
+} from '@/redux/features/selected/userState';
 const SelectCancelButton = () => {
   const modalType = useAppSelector(getScreenType);
   const dispatch = useAppDispatch();
   const selecedType = {
     card: useAppSelector(getSelectedCards),
     room: useAppSelector(getSelectedRooms),
+    user: useAppSelector(getSelectedUsers),
     reservation: useAppSelector(getSelectedReservations),
   };
   const reset = {
     card: resetCardSelected,
     room: resetRoomSelected,
+    user: resetUserSelected,
     reservation: resetReservationSelected,
   };
   const getSelected = (): string[] | number[] => {
