@@ -41,10 +41,9 @@ const UserEditModal = () => {
     user.password && (user.password.length === 0 || user.password.length > 7);
   const isPasswordCheckValid =
     isPasswordValid && user.password === passwordCheck;
-  const isChanged =
-    isPasswordCheckValid ||
-    preUser.name !== user.name ||
-    preUser.phone !== user.phone;
+  const isNameChanged = preUser.name !== user.name;
+  const isPhoneChanged = preUser.phone !== user.phone;
+  const isChanged = isPasswordCheckValid || isNameChanged || isPhoneChanged;
 
   return (
     <Modal
@@ -74,7 +73,12 @@ const UserEditModal = () => {
             <Pressable
               style={!isChanged && styles.hidden}
               onPress={() => {
-                const userModified: UserPatchRequest = {};
+                const userModified: UserPatchRequest = {
+                  name: isNameChanged ? user.name : undefined,
+                  password: isPasswordCheckValid ? user.password : undefined,
+                  phone: isPhoneChanged ? user.phone : undefined,
+                };
+
                 modifyUser(userModified)
                   .then(() => {
                     closeModal();
