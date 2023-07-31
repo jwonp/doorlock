@@ -1,3 +1,6 @@
+import {Optional} from '@/util/type';
+import {User} from '../../entity/User';
+
 export interface UserAddRequest {
   id: string;
   password: string;
@@ -16,3 +19,5 @@ export interface UserModifyCardRequest extends UserModifyRequest {
 export interface UserModifyRoomRequest extends UserModifyRequest {
   roomId: number;
 }
+
+export interface UserPatchRequest extends Partial<Omit<User, 'id'>> {}

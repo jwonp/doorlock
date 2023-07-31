@@ -1,5 +1,8 @@
 import {AxiosResponse} from 'axios';
-import {UserAddRequest} from '@/assets/models/dto/user/UserRequest';
+import {
+  UserAddRequest,
+  UserPatchRequest,
+} from '@/assets/models/dto/user/UserRequest';
 import {request} from '@/util/request/controller/ApiController';
 import Config from 'react-native-config';
 import {
@@ -39,4 +42,11 @@ export const deleteSelectedUsers = async (selectedUserIDList: string[]) => {
     idList: selectedUserIDList,
   };
   return await request.delete('/user', {data: userListToDelete});
+};
+
+export const modifyUser = async (user: UserPatchRequest) => {
+  if (!user) {
+    return;
+  }
+  return await request.patch('/user', user);
 };

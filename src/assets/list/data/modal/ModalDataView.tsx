@@ -5,27 +5,31 @@ import {
   TextInput,
   TextInputChangeEventData,
   NativeSyntheticEvent,
+  TextInputProps,
 } from 'react-native';
 type ModalDataViewProps = {
   title: string;
   text: string;
   isEditable?: boolean;
-  onChange?: (e: NativeSyntheticEvent<TextInputChangeEventData>) => void;
+  isValid?: boolean;
+  textInputProps?: TextInputProps;
 };
 const ModalDataView = ({
   title,
   text,
   isEditable,
-  onChange,
+  isValid = true,
+  textInputProps,
 }: ModalDataViewProps) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{title}</Text>
       <View style={styles.card}>
         {isEditable ? (
-          <TextInput style={styles.input} onChange={onChange}>
-            {text ?? ''}
-          </TextInput>
+          <TextInput
+            style={isValid ? styles.input : styles.notValid}
+            {...textInputProps}
+            value={text ?? ''}></TextInput>
         ) : (
           <Text style={styles.text}>{text ?? ''}</Text>
         )}
@@ -50,6 +54,14 @@ const styles = StyleSheet.create({
     height: 20,
     lineHeight: 20,
   },
+  notValid: {
+    fontSize: 14,
+    color: '#ff0000',
+    padding: 0,
+    height: 20,
+    lineHeight: 20,
+  },
   text: {fontSize: 14, color: '#000000', height: 20, lineHeight: 20},
 });
+
 export default ModalDataView;
