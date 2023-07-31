@@ -48,5 +48,6 @@ export const modifyUser = async (user: UserPatchRequest) => {
   if (!user) {
     return;
   }
+
   return await request.patch('/user', user);
 };
