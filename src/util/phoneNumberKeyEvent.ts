@@ -1,4 +1,7 @@
 export const getPhoneNumber = (prePhoneNumber: string, pressedKey: string) => {
+  if (prePhoneNumber.length >= 13 && pressedKey !== 'Backspace') {
+    return prePhoneNumber;
+  }
   if (pressedKey === 'Backspace') {
     return prePhoneNumber.slice(0, prePhoneNumber.length - 1);
   }
