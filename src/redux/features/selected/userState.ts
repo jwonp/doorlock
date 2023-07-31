@@ -2,12 +2,6 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
 import {RootState} from '@/redux/store';
 
-export interface UserDataState {
-  id: string;
-  name: string;
-  phone: string;
-  lastTagged: string;
-}
 export interface UserState {
   selectedUsers: string[];
 }
