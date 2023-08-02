@@ -1,6 +1,7 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
 import {RootState} from '@/redux/store';
+import {act} from 'react-test-renderer';
 
 export interface ModalState {
   logModalVisible: boolean;
@@ -10,6 +11,7 @@ export interface ModalState {
   selectModalVisible: boolean;
   cardDetailModalVisible: boolean;
   userEditModalVisible: boolean;
+  roomDetailModalVisible: boolean;
   reservationAddModalVisible: boolean;
   reservationEditModalVisible: boolean;
 }
@@ -22,6 +24,7 @@ const initialState: ModalState = {
   selectModalVisible: false,
   cardDetailModalVisible: false,
   userEditModalVisible: false,
+  roomDetailModalVisible: false,
   reservationAddModalVisible: false,
   reservationEditModalVisible: false,
 } as const;
@@ -51,6 +54,9 @@ export const modal = createSlice({
     setUserEditModalVisible: (state, action: PayloadAction<boolean>) => {
       state.userEditModalVisible = action.payload;
     },
+    setRoomDetailModalVisible: (state, action: PayloadAction<boolean>) => {
+      state.roomDetailModalVisible = action.payload;
+    },
     setReservationEditModalVisible: (state, action: PayloadAction<boolean>) => {
       state.reservationEditModalVisible = action.payload;
     },
@@ -69,6 +75,7 @@ export const {
   setSelectModalVisible,
   setCardDetailModalVisible,
   setUserEditModalVisible,
+  setRoomDetailModalVisible,
   setReservationEditModalVisible,
   setReservationAddModalVisible,
 } = modal.actions;
@@ -86,6 +93,8 @@ export const getCardDetailModalVisible = (state: RootState) =>
   state.modal.cardDetailModalVisible;
 export const getUserEditModalVisible = (state: RootState) =>
   state.modal.userEditModalVisible;
+export const getRoomDetailModalVisible = (state: RootState) =>
+  state.modal.roomDetailModalVisible;
 export const getReservationEditModalVisible = (state: RootState) =>
   state.modal.reservationEditModalVisible;
 export const getReservationAddModalVisible = (state: RootState) =>

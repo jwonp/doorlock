@@ -7,15 +7,29 @@ import RoomListBar from '@/assets/list/data/room/RoomListBar';
 import RoomAddModal from '@/components/Modal/Room/RoomAddModal';
 import {ROOM} from '@/assets/static/texts/DataTypes';
 import Selectable from '@/assets/list/data/Selectable';
+import {useAppDispatch} from '@/redux/hooks';
+import {setRoomDetailModalVisible} from '@/redux/features/modal/modalState';
+import RoomDetailModal from '@/components/Modal/Room/RoomDetailModal';
+import {setRoomDetail} from '@/redux/features/modal/data/roomDetailState';
+import ReservationEditModal from '@/components/Modal/Reservation/ReservationEditModal';
+import SelectModal from '@/components/Modal/SelectModal';
 
 const RoomScreen = ({navigation}: {navigation: any}) => {
   const roomListSWR = useSWR(RoomListURL, RoomListFetecher);
+  const dispatch = useAppDispatch();
   const ListBar = useMemo(() => {
     if (!roomListSWR || !roomListSWR.data) {
       return <Text style={{color: '#ffffff'}}>No Room</Text>;
     }
     return roomListSWR.data.map((item, index) => (
-      <Selectable key={index} id={item.id} type={ROOM}>
+      <Selectable
+        key={index}
+        id={item.id}
+        type={ROOM}
+        onLongPress={() => {
+          dispatch(setRoomDetail(item));
+          dispatch(setRoomDetailModalVisible(true));
+        }}>
         <RoomListBar data={item} />
       </Selectable>
     ));
@@ -24,6 +38,9 @@ const RoomScreen = ({navigation}: {navigation: any}) => {
   return (
     <View style={screenStyles.container}>
       <RoomAddModal />
+      <RoomDetailModal />
+      <SelectModal />
+      <ReservationEditModal />
       {ListBar}
     </View>
   );

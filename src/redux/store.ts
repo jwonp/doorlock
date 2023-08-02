@@ -10,6 +10,7 @@ import selectModalTypeReducer from '@/redux/features/modal/selectModalState';
 import reservationEditReducer from '@/redux/features/modal/data/reservationEditState';
 import cardDetailReducer from '@/redux/features/modal/data/cardDetailState';
 import userEditReducer from '@/redux/features/modal/data/userEditState';
+import roomDetailReducer from '@/redux/features/modal/data/roomDetailState';
 export const makeStore = () => {
   return configureStore({
     reducer: {
@@ -22,6 +23,7 @@ export const makeStore = () => {
       modal: modalReducer,
       screen: screenReducer,
       selectModal: selectModalTypeReducer,
+      roomDetail: roomDetailReducer,
       reservationEdit: reservationEditReducer,
       userEdit: userEditReducer,
     },
