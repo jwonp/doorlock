@@ -57,7 +57,7 @@ const RoomDetailModal = () => {
                   borderColor: '#EEE3CB',
                 }}></View>
               <Pressable
-                onLongPress={() => {
+                onPress={() => {
                   dispatch(setSelectModalAction(EDIT));
                   dispatch(setReservationEditId(item.id));
                   dispatch(setReservationEditModalVisible(true));
