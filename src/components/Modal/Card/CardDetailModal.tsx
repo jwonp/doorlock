@@ -4,7 +4,7 @@ import CloseIcon from '@/public/close-white.png';
 import ModalDataContainer from '@/assets/list/data/modal/ModalDataContainer';
 import ModalDataView from '@/assets/list/data/modal/ModalDataView';
 import {useAppDispatch, useAppSelector} from '@/redux/hooks';
-import {getCardDetail} from '@/redux/features/modal/data/CardDetailState';
+import {getCardDetail} from '@/redux/features/modal/data/cardDetailState';
 
 import {
   getCardDetailModalVisible,
@@ -35,7 +35,7 @@ const CardDetailModal = () => {
             </Pressable>
           </View>
           <View style={modalHeaderStlyes.titleContainer}>
-            <Text style={modalHeaderStlyes.title}></Text>
+            <Text style={modalHeaderStlyes.title}>Card</Text>
           </View>
         </View>
         <View style={modalStyles.main}>
@@ -51,12 +51,19 @@ const CardDetailModal = () => {
               text={getDisplayTechTypes(detail.techType)}
             />
             <ModalDataView title={'Type'} text={detail.type} />
-            <ModalDataView
-              title={'Reservation ID'}
-              text={detail.reservationId.toString()}
-            />
-            <ModalDataView title={'User ID'} text={detail.userId} />
-            <ModalDataView title={'Room ID'} text={detail.roomId.toString()} />
+            {detail.reservationId > 0 && (
+              <>
+                <ModalDataView
+                  title={'Reservation ID'}
+                  text={detail.reservationId.toString()}
+                />
+                <ModalDataView title={'User ID'} text={detail.userId} />
+                <ModalDataView
+                  title={'Room ID'}
+                  text={detail.roomId.toString()}
+                />
+              </>
+            )}
           </ModalDataContainer>
         </View>
       </View>
