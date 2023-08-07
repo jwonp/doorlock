@@ -11,7 +11,10 @@ import {
   setCardDetailModalVisible,
 } from '@/redux/features/modal/modalState';
 import {SLIDE} from '@/assets/static/texts/ModalText';
-import {getDisplayTechTypes} from '@/util/convertDisplayText';
+import {
+  getDisplayTechTypes,
+  getLastTaggedDisplayText,
+} from '@/util/convertDisplayText';
 const CardDetailModal = () => {
   const detail = useAppSelector(getCardDetail);
   const modalVisible = useAppSelector(getCardDetailModalVisible);
@@ -49,6 +52,10 @@ const CardDetailModal = () => {
             <ModalDataView
               title={'Tech Type'}
               text={getDisplayTechTypes(detail.techType)}
+            />
+            <ModalDataView
+              title={'Last Tagged'}
+              text={getLastTaggedDisplayText(detail.id, detail.lastTagged)}
             />
             <ModalDataView title={'Type'} text={detail.type} />
             {detail.reservationId > 0 && (
