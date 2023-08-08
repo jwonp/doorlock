@@ -51,17 +51,17 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#000000',
     padding: 0,
-    height: 20,
+    height: 23,
     lineHeight: 20,
   },
   notValid: {
     fontSize: 14,
     color: '#ff0000',
     padding: 0,
-    height: 20,
+    height: 23,
     lineHeight: 20,
   },
-  text: {fontSize: 14, color: '#000000', height: 20, lineHeight: 20},
+  text: {fontSize: 14, color: '#000000', height: 23, lineHeight: 20},
 });
 
 export default ModalDataView;
