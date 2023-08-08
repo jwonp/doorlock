@@ -1,5 +1,6 @@
 import {CardWithReservationResponse} from '@/assets/models/dto/card/CardResponse';
 import {listBarStyles} from '@/assets/static/styles/ListBarStyles';
+import {getLastTaggedDisplayText} from '@/util/convertDisplayText';
 import {View, Text} from 'react-native';
 
 type CardListBarProps = {
@@ -17,6 +18,9 @@ const CardListBar = ({data}: CardListBarProps) => {
       </View>
       <View>
         <Text style={listBarStyles.detailText}>{detailText}</Text>
+        <Text style={listBarStyles.detailText}>
+          {getLastTaggedDisplayText(data.id, data.lastTagged)}
+        </Text>
       </View>
     </View>
   );
