@@ -2,10 +2,14 @@ import React, {useState} from 'react';
 import {View, Text, Pressable, StyleSheet} from 'react-native';
 import NfcManager, {NfcTech, TagEvent} from 'react-native-nfc-manager';
 import {addCard} from '@/util/request/card';
+import { authorizeCard } from '@/util/request/auth';
+import { AxiosResponse } from 'axios';
+import { CardAuthorizedResponse } from '@/assets/models/dto/auth/AuthResponse';
+import { ADMIN } from '@/assets/static/texts/AuthorizeResults';
 
 // Pre-step, call this before any NFC operations
 NfcManager.start();
-const NFCScanScreen = () => {
+const NFCScanScreen = ({navigation}: {navigation: any}) => {
   const [tag, setTag] = useState<TagEvent>(null);
   const [result, setResult] = useState<String>('');
   const readNdef = async () => {
@@ -16,14 +20,11 @@ const NFCScanScreen = () => {
       // the resolved tag object will contain `ndefMessage` property
       const tag = await NfcManager.getTag();
 
-      addCard(tag)
-        .then(res => {
-          setResult(`${res.data.id} is saved`);
-        })
-        .catch(err => {
-          setResult('Fail to request add card');
-        });
-
+      authorizeCard(tag.id).then((res:AxiosResponse<CardAuthorizedResponse>)=>{
+        if(res.data.result === ADMIN){
+          navigation.navigate('Card')
+        }
+      });
       setTag(tag);
       
     } catch (ex) {
