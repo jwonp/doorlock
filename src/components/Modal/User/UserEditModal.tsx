@@ -41,8 +41,8 @@ const UserEditModal = () => {
     user.password && (user.password.length === 0 || user.password.length > 7);
   const isPasswordCheckValid =
     isPasswordValid && user.password === passwordCheck;
-  const isNameChanged = preUser.name !== user.name;
-  const isPhoneChanged = preUser.phone !== user.phone;
+  const isNameChanged = preUser && preUser.name !== user.name;
+  const isPhoneChanged = preUser && preUser.phone !== user.phone;
   const isChanged = isPasswordCheckValid || isNameChanged || isPhoneChanged;
 
   return (
@@ -74,6 +74,7 @@ const UserEditModal = () => {
               style={!isChanged && styles.hidden}
               onPress={() => {
                 const userModified: UserPatchRequest = {
+                  id: user.id,
                   name: isNameChanged ? user.name : undefined,
                   password: isPasswordCheckValid ? user.password : undefined,
                   phone: isPhoneChanged ? user.phone : undefined,
@@ -156,11 +157,6 @@ const UserEditModal = () => {
                   );
                 },
               }}
-            />
-
-            <ModalDataView
-              title={'Last Tagged'}
-              text={getLastTaggedDisplayText(user.id, user.lastTagged)}
             />
           </ModalDataContainer>
         </View>
