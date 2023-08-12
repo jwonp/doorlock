@@ -1,4 +1,3 @@
-import {Optional} from '@/util/type';
 import {User} from '../../entity/User';
 
 export interface UserAddRequest {
@@ -20,4 +19,4 @@ export interface UserModifyRoomRequest extends UserModifyRequest {
   roomId: number;
 }
 
-export interface UserPatchRequest extends Partial<Omit<User, 'id'>> {}
+export interface UserPatchRequest extends Partial<User> {}
