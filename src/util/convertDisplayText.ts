@@ -24,10 +24,10 @@ export const getDisplayText = (
 };
 
 export const getLastTaggedDisplayText = (
-  userId: string,
+  cardId: string,
   lastTagged: string,
 ) => {
-  if (!userId) {
+  if (!cardId) {
     return '';
   }
   if (!lastTagged) {
