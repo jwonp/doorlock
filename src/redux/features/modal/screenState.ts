@@ -1,13 +1,20 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
 import {RootState} from '@/redux/store';
-import { CARD, RESERVATION, ROOM, USER } from '@/assets/static/texts/DataTypes';
+import {
+  CARD,
+  RESERVATION,
+  ROOM,
+  SCAN,
+  USER,
+} from '@/assets/static/texts/DataTypes';
 
 export const DataType = {
   card: CARD,
   user: USER,
   room: ROOM,
-  reservation:RESERVATION
+  reservation: RESERVATION,
+  scan: SCAN,
 } as const;
 
 export type DataType = (typeof DataType)[keyof typeof DataType];
