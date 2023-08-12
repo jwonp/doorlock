@@ -1,7 +1,10 @@
 import BottomTabButton from '@/assets/buttons/BottomTabButton';
-import { DataTypes } from '@/assets/static/texts/DataTypes';
+import {DataTypes} from '@/assets/static/texts/DataTypes';
+import {DataType, getScreenType} from '@/redux/features/modal/screenState';
+import {useAppSelector} from '@/redux/hooks';
 import {BottomTabBarProps} from '@react-navigation/bottom-tabs';
-import {StyleSheet, View, Text} from 'react-native';
+
+import {StyleSheet, View} from 'react-native';
 
 const BottomTabButtonList = ({
   state,
@@ -9,6 +12,7 @@ const BottomTabButtonList = ({
   descriptors,
   insets,
 }: BottomTabBarProps) => {
+  const screen = useAppSelector(getScreenType);
   const TabButtons = state.routeNames.map((item, index) => (
     <BottomTabButton
       key={index}
@@ -17,7 +21,12 @@ const BottomTabButtonList = ({
       name={item as DataTypes}
     />
   ));
-  return <View style={styles.container}>{TabButtons}</View>;
+
+  return (
+    <View style={screen === DataType.scan ? styles.hidden : styles.container}>
+      {TabButtons}
+    </View>
+  );
 };
 const styles = StyleSheet.create({
   container: {
@@ -27,6 +36,9 @@ const styles = StyleSheet.create({
     paddingLeft: '5%',
     paddingRight: '5%',
     paddingBottom: '3%',
+  },
+  hidden: {
+    display: 'none',
   },
 });
 export default BottomTabButtonList;
