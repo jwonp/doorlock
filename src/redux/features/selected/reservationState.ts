@@ -1,8 +1,5 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-
 import {RootState} from '@/redux/store';
-
-import {Reservation} from '@/assets/models/entity/Reservation';
 
 export interface ReservationState {
   selectedReservations: number[];
