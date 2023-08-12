@@ -3,18 +3,23 @@ export const modalStyles = StyleSheet.create({
   container: {
     backgroundColor: '#967E76',
     height: '100%',
-    padding: '5%',
   },
   header: {
-    height: 55,
+    height: 70,
+    padding: '3%',
+    paddingTop: '5%',
   },
   main: {
-    height: '95%',
+    height: '100%',
+    padding: '5%',
+    paddingTop: 0,
   },
 });
 export const modalHeaderStlyes = StyleSheet.create({
   closeContainer: {
     position: 'absolute',
+    top: 20,
+    left: 15,
     zIndex: 10,
   },
   icon: {width: 24, height: 24},
@@ -27,11 +32,12 @@ export const modalHeaderStlyes = StyleSheet.create({
     fontWeight: 'bold',
     lineHeight: 23,
     textAlign: 'center',
-    fontSize: 18,
+    fontSize: 20,
   },
   submitContainer: {
     position: 'absolute',
-    right: 0,
+    top: 18,
+    right: 20,
     zIndex: 10,
   },
   submit: {
