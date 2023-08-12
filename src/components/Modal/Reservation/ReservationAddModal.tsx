@@ -2,16 +2,15 @@ import {CARD, ROOM, USER} from '@/assets/static/texts/DataTypes';
 import {SLIDE} from '@/assets/static/texts/ModalText';
 import {
   getReservationAddModalVisible,
-  getSelectModalVisible,
   setReservationAddModalVisible,
-  setSelectModalVisible,
-} from '@/redux/features/modalState';
-import {ModalType, setModalType} from '@/redux/features/modalTypeState';
+} from '@/redux/features/modal/modalState';
+
 import {
   getReservationAddCardId,
   getReservationAddRoomId,
   getReservationAddUserId,
-} from '@/redux/features/reservationAddState';
+  resetIds,
+} from '@/redux/features/modal/data/reservationAddState';
 import {useAppDispatch, useAppSelector} from '@/redux/hooks';
 import {
   ReservationAddUserFetcher,
@@ -21,13 +20,20 @@ import {
   ReservationAddCardURL,
   ReservationAddRoomURL,
 } from '@/swr/reservationSWR';
-import {Modal, View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {Modal, View, Image, Text, StyleSheet, Pressable} from 'react-native';
 import useSWR from 'swr';
-
+import ModalDataView from '@/assets/list/data/modal/ModalDataView';
+import ModalDataCategoryView from '@/assets/list/data/modal/ModalDataCategoryView';
+import ModalDataContainer from '@/assets/list/data/modal/ModalDataContainer';
+import {modalHeaderStlyes, modalStyles} from '@/assets/modals/ModalStyles';
+import CloseIcon from '@/public/close-white.png';
+import {addReservation} from '@/util/request/reservation';
+import {ReservationAddRequest} from '@/assets/models/dto/reservation/ReservationRequest';
+import {AxiosError} from 'axios';
+import {useEffect} from 'react';
 const ReservationAddModal = () => {
-  const selectModalVisible = useAppSelector(getSelectModalVisible);
   const modalVisible = useAppSelector(getReservationAddModalVisible);
-  const dispatach = useAppDispatch();
+  const dispatch = useAppDispatch();
   const userId = useAppSelector(getReservationAddUserId);
   const cardId = useAppSelector(getReservationAddCardId);
   const roomId = useAppSelector(getReservationAddRoomId);
@@ -43,149 +49,77 @@ const ReservationAddModal = () => {
     ReservationAddRoomURL(roomId),
     ReservationAddRoomFetcher,
   );
+  const isNotSelected = userId === '' || cardId === '' || roomId === 0;
+  useEffect(() => {
+    userSWR.mutate();
+  }, [userId]);
+  useEffect(() => {
+    cardSWR.mutate();
+  }, [cardId]);
+  useEffect(() => {
+    roomSWR.mutate();
+  }, [roomId]);
   return (
     <Modal
       visible={modalVisible}
       transparent={false}
       animationType={SLIDE}
       onRequestClose={() => {
-        dispatach(setReservationAddModalVisible(false));
+        dispatch(setReservationAddModalVisible(false));
       }}>
-      <View style={styles.container}>
-        <View style={buttonStyles.container}>
-          <View style={buttonStyles.titleCard}>
-            <Text style={buttonStyles.title}>Select Reservation Data</Text>
+      <View style={modalStyles.container}>
+        <View style={modalStyles.header}>
+          <View style={modalHeaderStlyes.closeContainer}>
+            <Pressable
+              onPress={() => {
+                dispatch(setReservationAddModalVisible(false));
+              }}>
+              <Image source={CloseIcon} style={modalHeaderStlyes.icon} />
+            </Pressable>
           </View>
-          <View style={buttonStyles.buttons}>
-            <View style={buttonStyles.card}>
-              <TouchableOpacity
+          <View style={modalHeaderStlyes.titleContainer}>
+            <Text style={modalHeaderStlyes.title}>Add Reservation</Text>
+          </View>
+          <View style={modalHeaderStlyes.submitContainer}>
+            <View style={isNotSelected && modalHeaderStlyes.hidden}>
+              <Pressable
                 onPress={() => {
-                  dispatach(setModalType(ModalType.user));
-                  if (selectModalVisible === false) {
-                    dispatach(setSelectModalVisible(true));
-                  }
+                  const reservation: ReservationAddRequest = {
+                    userId: userId,
+                    cardId: cardId,
+                    roomId: roomId,
+                  };
+
+                  addReservation(reservation)
+                    .then(() => {
+                      dispatch(resetIds());
+                      dispatch(setReservationAddModalVisible(false));
+                    })
+                    .catch((err: AxiosError) => {
+                      console.warn('Fail to reserve');
+                    });
                 }}>
-                <View>
-                  <Text style={buttonStyles.text}>{USER.toUpperCase()}</Text>
-                </View>
-              </TouchableOpacity>
-            </View>
-            <View style={buttonStyles.card}>
-              <TouchableOpacity
-                onPress={() => {
-                  dispatach(setModalType(ModalType.card));
-                  if (selectModalVisible === false) {
-                    dispatach(setSelectModalVisible(true));
-                  }
-                }}>
-                <View>
-                  <Text style={buttonStyles.text}>{CARD.toUpperCase()}</Text>
-                </View>
-              </TouchableOpacity>
-            </View>
-            <View style={buttonStyles.card}>
-              <TouchableOpacity
-                onPress={() => {
-                  dispatach(setModalType(ModalType.room));
-                  if (selectModalVisible === false) {
-                    dispatach(setSelectModalVisible(true));
-                  }
-                }}>
-                <View>
-                  <Text style={buttonStyles.text}>{ROOM.toUpperCase()}</Text>
-                </View>
-              </TouchableOpacity>
+                <Text style={modalHeaderStlyes.submit}>add</Text>
+              </Pressable>
             </View>
           </View>
         </View>
-        <View style={detailStyles.container}>
-          <View style={detailStyles.categoryContainer}>
-            <View>
-              <Text style={detailStyles.categoryText}>
-                {USER.toUpperCase()}
-              </Text>
-            </View>
-
-            <View style={detailStyles.card}>
-              <Text style={detailStyles.titleText}>{'id'}</Text>
-              <View style={detailStyles.dataCard}>
-                <Text style={detailStyles.dataText}>
-                  {userSWR?.data?.id ?? ''}
-                </Text>
-              </View>
-            </View>
-
-            <View style={detailStyles.card}>
-              <Text style={detailStyles.titleText}>{'name'}</Text>
-              <View style={detailStyles.dataCard}>
-                <Text style={detailStyles.dataText}>
-                  {userSWR?.data?.name ?? ''}
-                </Text>
-              </View>
-            </View>
-
-            <View style={detailStyles.card}>
-              <Text style={detailStyles.titleText}>{'phone'}</Text>
-              <View style={detailStyles.dataCard}>
-                <Text style={detailStyles.dataText}>
-                  {userSWR?.data?.phone ?? ''}
-                </Text>
-              </View>
-            </View>
-          </View>
-
-          <View style={detailStyles.categoryContainer}>
-            <View>
-              <Text style={detailStyles.categoryText}>
-                {ROOM.toUpperCase()}
-              </Text>
-            </View>
-
-            <View style={detailStyles.card}>
-              <Text style={detailStyles.titleText}>{'id'}</Text>
-              <View style={detailStyles.dataCard}>
-                <Text style={detailStyles.dataText}>
-                  {roomSWR?.data?.id ?? ''}
-                </Text>
-              </View>
-            </View>
-            <View style={detailStyles.card}>
-              <Text style={detailStyles.titleText}>{'address'}</Text>
-              <View style={detailStyles.dataCard}>
-                <Text style={detailStyles.dataText}>
-                  {roomSWR?.data?.address ?? ''}
-                </Text>
-              </View>
-            </View>
-          </View>
-
-          <View style={detailStyles.categoryContainer}>
-            <View>
-              <Text style={detailStyles.categoryText}>
-                {CARD.toUpperCase()}
-              </Text>
-            </View>
-
-            <View style={detailStyles.card}>
-              <Text style={detailStyles.titleText}>{'id'}</Text>
-              <View style={detailStyles.dataCard}>
-                <Text style={detailStyles.dataText}>
-                  {cardSWR?.data?.id ?? ''}
-                </Text>
-              </View>
-            </View>
-          </View>
-        </View>
-
-        <View style={cancelStyles.container}>
-          <TouchableOpacity
-            onPress={() => {
-              dispatach(setReservationAddModalVisible(false));
-            }}>
-            <View style={cancelStyles.button}>
-              <Text style={cancelStyles.text}>Cancel</Text>
-            </View>
-          </TouchableOpacity>
+        <View style={modalStyles.main}>
+          <ModalDataContainer>
+            <ModalDataCategoryView type={USER} />
+            <ModalDataView title={'id'} text={userSWR?.data?.id} />
+            <ModalDataView title={'name'} text={userSWR?.data?.name} />
+            <ModalDataView title={'phone'} text={userSWR?.data?.phone} />
+          </ModalDataContainer>
+          <ModalDataContainer>
+            <ModalDataCategoryView type={ROOM} />
+            <ModalDataView title={'id'} text={roomSWR?.data?.id.toString()} />
+            <ModalDataView title={'address'} text={roomSWR?.data?.address} />
+          </ModalDataContainer>
+          <ModalDataContainer>
+            <ModalDataCategoryView type={CARD} />
+            <ModalDataView title={'id'} text={cardSWR?.data?.id} />
+          </ModalDataContainer>
         </View>
       </View>
     </Modal>
@@ -195,72 +129,24 @@ const styles = StyleSheet.create({
   container: {
     height: '100%',
     padding: '5%',
-    backgroundColor: '#3c3c3c',
+    backgroundColor: '#967E76',
   },
-});
-const buttonStyles = StyleSheet.create({
-  container: {
-    padding: '2%',
+  detail: {
+    padding: '3%',
   },
-  buttons: {
-    paddingLeft: '2%',
-    paddingRight: '2%',
-    justifyContent: 'space-between',
-    flexDirection: 'row',
+  cancel: {
+    marginTop: '5%',
+    padding: '5%',
   },
-  titleCard: {
-    padding: ' 1.5%',
-    marginBottom: '2%',
-  },
-  title: {
-    fontSize: 22,
-    color: '#ffffff',
-  },
-  card: {
-    width: '31%',
-    padding: '1.5%',
-    backgroundColor: '#ffffff',
-
-    borderRadius: 18,
-  },
-  text: {
-    textAlign: 'center',
-    color: '#3c3c3c',
-  },
-});
-const detailStyles = StyleSheet.create({
-  container: {padding: '3%'},
-  card: {
-    marginTop: '3%',
-    paddingLeft: '2%',
-  },
-  categoryContainer: {marginTop: '6%'},
-  categoryText: {
-    fontSize: 18,
-    color: '#ffffff',
-  },
-
-  titleText: {fontSize: 16, color: '#ffffff'},
-
-  dataCard: {
-    marginTop: '2%',
-    paddingLeft: '4%',
-    paddingBottom: '1%',
-    backgroundColor: '#ffffff',
-    borderRadius: 14,
-  },
-  dataText: {fontSize: 14, color: '#3c3c3c'},
-});
-const cancelStyles = StyleSheet.create({
-  container: {marginTop: '5%', padding: '5%'},
   button: {
-    backgroundColor: '#ffffff',
+    backgroundColor: '#EEE3CB',
     borderRadius: 20,
   },
   text: {
     fontSize: 20,
     textAlign: 'center',
-    color: '#3c3c3c',
+    color: '#000000',
   },
 });
+
 export default ReservationAddModal;
