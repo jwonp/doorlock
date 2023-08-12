@@ -1,14 +1,10 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
 import {RootState} from '@/redux/store';
-import {TechType} from '@/assets/models/types/TechType';
 
-export interface CardDataState {
-  id: string;
-  maxSize: number;
-  type: string;
-  techType: TechType;
-}
+import {Card} from '@/assets/models/entity/Card';
+
+export interface CardDataState extends Card {}
 
 export interface CardState {
   selectedCards: string[];
