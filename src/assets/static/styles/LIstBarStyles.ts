@@ -25,6 +25,11 @@ export const listBarStyles = StyleSheet.create({
     textAlign: 'left',
     lineHeight: 24,
   },
+  detailTextOnRight: {
+    color: '#000000',
+    textAlign: 'right',
+    lineHeight: 24,
+  },
   flexRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
