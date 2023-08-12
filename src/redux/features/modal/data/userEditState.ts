@@ -10,7 +10,6 @@ const initialState: UserEditState = {
   id: '',
   name: '',
   phone: '',
-  lastTagged: '',
 };
 export const initialUserEditState = initialState;
 export const userEdit = createSlice({
@@ -21,7 +20,6 @@ export const userEdit = createSlice({
       state.id = action.payload.id;
       state.name = action.payload.name;
       state.phone = action.payload.phone;
-      state.lastTagged = action.payload.lastTagged;
     },
     setName: (state, action: PayloadAction<string>) => {
       state.name = action.payload;
