@@ -88,6 +88,7 @@ const styles = StyleSheet.create({
     marginTop: '55%',
   },
   tagMsg: {
+    color: '#ffffff',
     fontSize: 30,
     textAlign: 'center',
     lineHeight: 50,
