@@ -11,7 +11,8 @@ const ModalDataContainer = ({
   return (
     <View
       style={{
-        marginTop: '6%',
+        marginTop: '5%',
+        marginBottom: '3%',
         marginLeft: `${tab * 2}%`,
       }}>
       {children}
