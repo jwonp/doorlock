@@ -1,22 +1,21 @@
-import React, {useState} from 'react';
-import {View, Text, Pressable, StyleSheet} from 'react-native';
-import NfcManager, {NfcTech, TagEvent} from 'react-native-nfc-manager';
-
+import React, {useEffect, useState} from 'react';
+import {View, Text, StyleSheet} from 'react-native';
+import NfcManager, {NfcTech} from 'react-native-nfc-manager';
 import {authorizeCard} from '@/util/request/auth';
-import {AxiosResponse} from 'axios';
-import {CardAuthorizedResponse} from '@/assets/models/dto/auth/AuthResponse';
 import {ADMIN} from '@/assets/static/texts/AuthorizeResults';
 import {useAppDispatch} from '@/redux/hooks';
 import {DataType, setScreen} from '@/redux/features/modal/screenState';
+import {screenStyles} from '@/assets/screen/ScreenStyleSheet';
 
 // Pre-step, call this before any NFC operations
 NfcManager.start();
 const NFCScanScreen = ({navigation}: {navigation: any}) => {
   const dispatch = useAppDispatch();
   const [isEnabled, setEnabled] = useState(false);
+
   const readNdef = async () => {
-    setEnabled(true);
     try {
+      setEnabled(true);
       // register for the NFC tag with NDEF in it
       await NfcManager.requestTechnology(NfcTech.Ndef);
       // the resolved tag object will contain `ndefMessage` property
@@ -30,32 +29,49 @@ const NFCScanScreen = ({navigation}: {navigation: any}) => {
       });
     } catch (ex) {
       console.log('fail to tag', ex);
-      setEnabled(false);
     } finally {
       // stop the nfc scanning
-      NfcManager.cancelTechnologyRequest();
-      setEnabled(false);
+      NfcManager.cancelTechnologyRequest().then(() => {
+        setEnabled(false);
+      });
     }
   };
-
+  useEffect(() => {
+    if (isEnabled === false) {
+      readNdef();
+    }
+  }, [isEnabled]);
   return (
-    <View style={styles.wrapper}>
-      <Pressable onPress={readNdef}>
-        <Text style={styles.text}>
-          {isEnabled ? 'Tag your card' : 'Press to start'}
-        </Text>
-      </Pressable>
+    <View style={screenStyles.container}>
+      <View style={styles.wrapper}>
+        <View style={styles.button}>
+          <Text style={styles.text}>
+            {isEnabled ? 'Tag your card' : 'Press to start'}
+          </Text>
+        </View>
+      </View>
     </View>
   );
 };
 const styles = StyleSheet.create({
   wrapper: {
+    backgroundColor: '#967E76',
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
+  button: {
+    width: '95%',
+    height: '7%',
+    backgroundColor: '#EEE3CB',
+    borderRadius: 14,
+  },
   text: {
-    color: '#3c3c3c',
+    textAlign: 'center',
+    verticalAlign: 'middle',
+    lineHeight: 40,
+    fontSize: 18,
+    color: '#000000',
   },
 });
 
