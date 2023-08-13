@@ -107,18 +107,18 @@ const ReservationAddModal = () => {
         <View style={modalStyles.main}>
           <ModalDataContainer>
             <ModalDataCategoryView type={USER} />
-            <ModalDataView title={'id'} text={userSWR?.data?.id} />
-            <ModalDataView title={'name'} text={userSWR?.data?.name} />
-            <ModalDataView title={'phone'} text={userSWR?.data?.phone} />
+            <ModalDataView title={'User ID'} text={userSWR?.data?.id} />
+            <ModalDataView title={'Name'} text={userSWR?.data?.name} />
+            <ModalDataView title={'Phone'} text={userSWR?.data?.phone} />
           </ModalDataContainer>
           <ModalDataContainer>
             <ModalDataCategoryView type={ROOM} />
-            <ModalDataView title={'id'} text={roomSWR?.data?.id.toString()} />
-            <ModalDataView title={'address'} text={roomSWR?.data?.address} />
+            <ModalDataView title={'Room ID'} text={roomSWR?.data?.id.toString()} />
+            <ModalDataView title={'Address'} text={roomSWR?.data?.address} />
           </ModalDataContainer>
           <ModalDataContainer>
             <ModalDataCategoryView type={CARD} />
-            <ModalDataView title={'id'} text={cardSWR?.data?.id} />
+            <ModalDataView title={'Card ID'} text={cardSWR?.data?.id} />
           </ModalDataContainer>
         </View>
       </View>
