@@ -65,6 +65,7 @@ const RoomAddModal = () => {
         </View>
         <View style={modalStyles.main}>
           <View style={styles.inputContainer}>
+            <Text style={styles.inputLabel}>Address</Text>
             <View style={styles.inputCard}>
               <TextInput
                 onChangeText={e => {
@@ -88,7 +89,8 @@ const RoomAddModal = () => {
 };
 
 const styles = StyleSheet.create({
-  inputContainer: {marginTop: 'auto', marginBottom: 'auto'},
+  inputContainer: {},
+  inputLabel: {color: '#ffffff', fontSize: 18, marginBottom: '2%'},
   inputCard: {
     backgroundColor: '#EEE3CB',
     borderRadius: 10,

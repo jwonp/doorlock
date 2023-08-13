@@ -97,6 +97,7 @@ const UserAddModal = () => {
         </View>
         <View style={modalStyles.main}>
           <View style={styles.inputContainer}>
+            <Text style={styles.inputLabel}>User ID</Text>
             <View style={styles.inputCard}>
               <TextInput
                 onChangeText={e => {
@@ -113,6 +114,7 @@ const UserAddModal = () => {
                 <Image style={iconStyles.check} source={CheckIcon} />
               </View>
             </View>
+            <Text style={styles.inputLabel}>Password</Text>
             <View style={styles.inputCard}>
               <TextInput
                 onChangeText={e => {
@@ -130,6 +132,7 @@ const UserAddModal = () => {
                 <Image style={iconStyles.check} source={CheckIcon} />
               </View>
             </View>
+            <Text style={styles.inputLabel}>Password Check</Text>
             <View style={styles.inputCard}>
               <TextInput
                 onChangeText={e => {
@@ -152,6 +155,7 @@ const UserAddModal = () => {
                 <Image style={iconStyles.check} source={CheckIcon} />
               </View>
             </View>
+            <Text style={styles.inputLabel}>Name</Text>
             <View style={styles.inputCard}>
               <TextInput
                 onChangeText={e => {
@@ -167,6 +171,7 @@ const UserAddModal = () => {
                 <Image style={iconStyles.check} source={CheckIcon} />
               </View>
             </View>
+            <Text style={styles.inputLabel}>Phone</Text>
             <View style={styles.inputCard}>
               <TextInput
                 onKeyPress={e => {
@@ -194,9 +199,10 @@ const UserAddModal = () => {
   );
 };
 const styles = StyleSheet.create({
-  inputContainer: {marginTop: 'auto', marginBottom: 'auto'},
+  inputContainer: {},
+  inputLabel: {color: '#ffffff', fontSize: 18, marginBottom: '2%'},
   inputCard: {
-    backgroundColor: '#EEE3CB',
+    backgroundColor: '#ffffff',
     borderRadius: 10,
     marginBottom: '5%',
     paddingLeft: '5%',
