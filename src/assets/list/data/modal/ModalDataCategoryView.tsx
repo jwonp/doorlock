@@ -12,7 +12,7 @@ type ModalDataCategoryViewProps = {
 };
 
 const ModalDataCategoryView = ({type}: ModalDataCategoryViewProps) => {
-  const dispatach = useAppDispatch();
+  const dispatch = useAppDispatch();
   const selectModalVisible = useAppSelector(getSelectModalVisible);
 
   return (
@@ -23,9 +23,9 @@ const ModalDataCategoryView = ({type}: ModalDataCategoryViewProps) => {
 
       <Pressable
         onPress={() => {
-          dispatach(setSelectedModalType(DataType[type]));
+          dispatch(setSelectedModalType(DataType[type]));
           if (selectModalVisible === false) {
-            dispatach(setSelectModalVisible(true));
+            dispatch(setSelectModalVisible(true));
           }
         }}>
         <Image style={styles.icon} source={EditIcon} />
