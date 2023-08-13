@@ -104,7 +104,7 @@ const ReservationEditModal = () => {
             </Pressable>
           </View>
           <View style={modalHeaderStlyes.titleContainer}>
-            <Text style={modalHeaderStlyes.title}>Reservation Details</Text>
+            <Text style={modalHeaderStlyes.title}>Edit Reservation</Text>
           </View>
           <View style={modalHeaderStlyes.submitContainer}>
             <View style={isNotModified && modalHeaderStlyes.hidden}>
