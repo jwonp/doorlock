@@ -68,12 +68,12 @@ const CardAddModal = () => {
             </Pressable>
           </View>
           <View style={modalHeaderStlyes.titleContainer}>
-            <Text style={modalHeaderStlyes.title}>New Card</Text>
+            <Text style={modalHeaderStlyes.title}>Add Card</Text>
           </View>
         </View>
         <View style={styles.container}>
           <View style={styles.tagMsgCard}>
-            <Text style={styles.tagMsg}>Tag your Card on Device</Text>
+            <Text style={styles.tagMsg}>Tag your card</Text>
           </View>
         </View>
       </View>
@@ -82,16 +82,22 @@ const CardAddModal = () => {
 };
 const styles = StyleSheet.create({
   container: {
-    height: '100%',
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: '5%',
   },
   tagMsgCard: {
-    marginTop: '55%',
+    width: '100%',
+    height: '7%',
+    backgroundColor: '#EEE3CB',
+    borderRadius: 14,
   },
   tagMsg: {
-    color: '#ffffff',
-    fontSize: 30,
+    color: '#000000',
+    fontSize: 20,
     textAlign: 'center',
-    lineHeight: 50,
+    lineHeight: 44,
   },
 });
 
