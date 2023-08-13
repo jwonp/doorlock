@@ -1,5 +1,5 @@
 import {Image, Modal, Pressable, StyleSheet, Text, View} from 'react-native';
-import NfcManager, {NfcTech, TagEvent} from 'react-native-nfc-manager';
+import NfcManager, {NfcTech} from 'react-native-nfc-manager';
 import {addCard} from '@/util/request/card';
 import {useAppDispatch, useAppSelector} from '@/redux/hooks';
 import {
@@ -32,13 +32,13 @@ const CardAddModal = () => {
           dispatch(setCardAddModalVisibie(false));
         })
         .catch((err: AxiosError) => {
-          console.log(err.response.status);
+          console.log(err.response);
         })
         .finally(() => {
           dispatch(setCardAddModalVisibie(false));
         });
     } catch (ex) {
-      console.warn('Oops!', ex);
+      console.log('fail to scan', ex);
     } finally {
       // stop the nfc scanning
       NfcManager.cancelTechnologyRequest();
