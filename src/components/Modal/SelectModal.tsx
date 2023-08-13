@@ -6,6 +6,7 @@ import {
   Text,
   Pressable,
   TextInput,
+  ScrollView,
 } from 'react-native';
 import {useAppDispatch, useAppSelector} from '@/redux/hooks';
 import {
@@ -13,9 +14,11 @@ import {
   setSelectModalVisible,
 } from '@/redux/features/modal/modalState';
 import {FADE} from '@/assets/static/texts/ModalText';
-import {useMemo} from 'react';
+import {useMemo, useState} from 'react';
 import useSWR from 'swr';
 import {
+  ReservationSearchFetcher,
+  ReservationSearchURL,
   ReservationSelectFetcher,
   ReservationSelectURL,
 } from '@/swr/reservationSWR';
@@ -42,18 +45,25 @@ import {
   setRoomEditId,
   setUserEditId,
 } from '@/redux/features/modal/data/reservationEditState';
+import {DataType} from '@/redux/features/modal/screenState';
 
+export type ListBarProps = {
+  isDisable?: boolean;
+};
 const SelectModal = () => {
   const dispatch = useAppDispatch();
   const actionType = useAppSelector(getSelectModalAction);
   const modalVisible = useAppSelector(getSelectModalVisible);
   const modalType = useAppSelector(getSelectedModalType);
-
+  const [query, setQuery] = useState<string>('');
   const SelectDataSWR = useSWR(
     ReservationSelectURL(modalType),
     ReservationSelectFetcher,
   );
- 
+  const SearchDataSWR = useSWR(
+    ReservationSearchURL(modalType, query),
+    ReservationSearchFetcher,
+  );
   const ListBarType = {
     card: CardListBar,
     user: UserListBar,
@@ -65,42 +75,51 @@ const SelectModal = () => {
     if (!SelectDataSWR || !SelectDataSWR.data) {
       return <Text>{`No ${modalType}`}</Text>;
     }
-    return SelectDataSWR.data.map((item, index) => (
-      <Pressable
-        key={index}
-        onPress={() => {
-          if (actionType === ADD) {
-            if (modalType === USER) {
-              dispatch(setUserId(item.id));
-            }
-            if (modalType === ROOM) {
-              dispatch(setRoomId(item.id));
-            }
-            if (modalType === CARD) {
-              dispatch(setCardId(item.id));
-            }
-          }
-          if (actionType === EDIT) {
-            if (modalType === USER) {
-              dispatch(setUserEditId(item.id));
-            }
-            if (modalType === ROOM) {
-              dispatch(setRoomEditId(item.id));
-            }
-            if (modalType === CARD) {
-              dispatch(setCardEditId(item.id));
-            }
-          }
-          dispatch(setSelectModalVisible(false));
-        }}>
-        <ListBar data={item} />
-      </Pressable>
-    ));
-  }, [SelectDataSWR]);
+    const dataSWR =
+      SearchDataSWR && SearchDataSWR.data ? SearchDataSWR : SelectDataSWR;
+    return dataSWR.data.map(
+      (item, index) =>
+        (modalType !== DataType.card || item.reservationId < 1) && (
+          <Pressable
+            key={index}
+            onPress={() => {
+              if (actionType === ADD) {
+                if (modalType === USER) {
+                  dispatch(setUserId(item.id));
+                }
+                if (modalType === ROOM) {
+                  dispatch(setRoomId(item.id));
+                }
+                if (modalType === CARD) {
+                  dispatch(setCardId(item.id));
+                }
+              }
+              if (actionType === EDIT) {
+                if (modalType === USER) {
+                  dispatch(setUserEditId(item.id));
+                }
+                if (modalType === ROOM) {
+                  dispatch(setRoomEditId(item.id));
+                }
+                if (modalType === CARD) {
+                  dispatch(setCardEditId(item.id));
+                }
+              }
+              dispatch(setSelectModalVisible(false));
+            }}>
+            <ListBar data={item} />
+          </Pressable>
+        ),
+    );
+  }, [SelectDataSWR, SearchDataSWR]);
+  const closeModal = () => {
+    setQuery('');
+    dispatch(setSelectModalVisible(false));
+  };
   return (
     <Modal
       onRequestClose={() => {
-        dispatch(setSelectModalVisible(false));
+        closeModal();
       }}
       transparent={false}
       visible={modalVisible}
@@ -110,7 +129,7 @@ const SelectModal = () => {
           <View style={modalHeaderStlyes.closeContainer}>
             <Pressable
               onPress={() => {
-                dispatch(setSelectModalVisible(false));
+                closeModal();
               }}>
               <Image source={CloseIcon} style={modalHeaderStlyes.icon} />
             </Pressable>
@@ -129,6 +148,9 @@ const SelectModal = () => {
                     maxLength={50}
                     placeholderTextColor={'#000000'}
                     placeholder={'Search'}
+                    onEndEditing={e => {
+                      setQuery(e.nativeEvent.text);
+                    }}
                   />
                 </View>
               </View>
@@ -136,7 +158,7 @@ const SelectModal = () => {
           </View>
         </View>
         <View style={modalStyles.main}>
-          <View style={listStyles.container}>{ListBarList}</View>
+          <ScrollView style={listStyles.container}>{ListBarList}</ScrollView>
         </View>
       </View>
     </Modal>
@@ -175,7 +197,8 @@ const headerStyles = StyleSheet.create({
 });
 const listStyles = StyleSheet.create({
   container: {
-    height: '70%',
+    paddingLeft: '5%',
+    paddingRight: '5%',
   },
 });
 export default SelectModal;

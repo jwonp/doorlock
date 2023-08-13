@@ -66,3 +66,15 @@ export const ReservationSelectFetcher = (url: string) =>
 export const ReservationSelectURL = (type: DataType) => {
   return `${Config.BACKEND_ENDPOINT}/${type}/list/reservation`;
 };
+
+export const ReservationSearchFetcher = (url: string) => {
+  return request.get(url).then(res => res.data);
+};
+export const ReservationSearchURL = (type: DataType, query: string) => {
+  const searchBy = {
+    card: 'id',
+    user: 'id',
+    room: 'address',
+  };
+  return `${Config.BACKEND_ENDPOINT}/${type}/search?${searchBy[type]}=${query}`;
+};
