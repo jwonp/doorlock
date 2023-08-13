@@ -3,14 +3,19 @@ import {View, Text, StyleSheet} from 'react-native';
 import NfcManager, {NfcTech} from 'react-native-nfc-manager';
 import {authorizeCard} from '@/util/request/auth';
 import {ADMIN} from '@/assets/static/texts/AuthorizeResults';
-import {useAppDispatch} from '@/redux/hooks';
-import {DataType, setScreen} from '@/redux/features/modal/screenState';
+import {useAppDispatch, useAppSelector} from '@/redux/hooks';
+import {
+  DataType,
+  getScreenType,
+  setScreen,
+} from '@/redux/features/modal/screenState';
 import {screenStyles} from '@/assets/screen/ScreenStyleSheet';
 
 // Pre-step, call this before any NFC operations
 NfcManager.start();
 const NFCScanScreen = ({navigation}: {navigation: any}) => {
   const dispatch = useAppDispatch();
+  const screen = useAppSelector(getScreenType);
   const [isEnabled, setEnabled] = useState(false);
 
   const readNdef = async () => {
@@ -37,6 +42,7 @@ const NFCScanScreen = ({navigation}: {navigation: any}) => {
     }
   };
   useEffect(() => {
+    if (screen !== DataType.scan) return;
     if (isEnabled === false) {
       readNdef();
     }
