@@ -14,6 +14,8 @@ const ModalDataContainer = ({
         marginTop: '5%',
         marginBottom: '3%',
         marginLeft: `${tab * 2}%`,
+        paddingLeft: '5%',
+        paddingRight: '5%',
       }}>
       {children}
     </View>

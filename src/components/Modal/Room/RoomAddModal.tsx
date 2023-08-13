@@ -89,7 +89,7 @@ const RoomAddModal = () => {
 };
 
 const styles = StyleSheet.create({
-  inputContainer: {},
+  inputContainer: {paddingLeft: '5%', paddingRight: '5%'},
   inputLabel: {color: '#ffffff', fontSize: 18, marginBottom: '2%'},
   inputCard: {
     backgroundColor: '#EEE3CB',

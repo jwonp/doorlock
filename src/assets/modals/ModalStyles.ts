@@ -10,9 +10,7 @@ export const modalStyles = StyleSheet.create({
     paddingTop: '5%',
   },
   main: {
-    height: '100%',
-    padding: '5%',
-    paddingTop: 0,
+    height: '91%',
   },
 });
 export const modalHeaderStlyes = StyleSheet.create({

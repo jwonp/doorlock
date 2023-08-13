@@ -199,7 +199,7 @@ const UserAddModal = () => {
   );
 };
 const styles = StyleSheet.create({
-  inputContainer: {},
+  inputContainer: {paddingLeft: '3%', paddingRight: '3%'},
   inputLabel: {color: '#ffffff', fontSize: 18, marginBottom: '2%'},
   inputCard: {
     backgroundColor: '#ffffff',
