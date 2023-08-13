@@ -1,8 +1,10 @@
 import {UserListResponse} from '@/assets/models/dto/user/UserResponse';
 import {listBarStyles} from '@/assets/static/styles/ListBarStyles';
 import {View, Text} from 'react-native';
-
-const UserListBar = ({data}: {data: UserListResponse}) => {
+interface UserListBarProps {
+  data: UserListResponse;
+}
+const UserListBar = ({data}: UserListBarProps) => {
   return (
     <View style={listBarStyles.container}>
       <View style={listBarStyles.titleCard}>

@@ -2,7 +2,10 @@ import {RoomWithReservationResponse} from '@/assets/models/dto/room/RoomResponse
 import {listBarStyles} from '@/assets/static/styles/ListBarStyles';
 import {getRoomReservationsText} from '@/util/convertDisplayText';
 import {View, Text} from 'react-native';
-const RoomListBar = ({data}: {data: RoomWithReservationResponse}) => {
+interface RoomListBarProps {
+  data: RoomWithReservationResponse;
+}
+const RoomListBar = ({data}: RoomListBarProps) => {
   return (
     <View style={listBarStyles.container}>
       <View style={listBarStyles.titleCard}>

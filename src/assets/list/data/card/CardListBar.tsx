@@ -3,9 +3,9 @@ import {listBarStyles} from '@/assets/static/styles/ListBarStyles';
 import {getLastTaggedDisplayText} from '@/util/convertDisplayText';
 import {View, Text} from 'react-native';
 
-type CardListBarProps = {
+interface CardListBarProps {
   data: CardWithReservationResponse;
-};
+}
 const CardListBar = ({data}: CardListBarProps) => {
   const detailText = data.reservationId
     ? `#${data.reservationId} | ${data.userId} reserved Room ${data.roomId}`
