@@ -33,13 +33,16 @@ export const reservationAdd = createSlice({
       state.roomId = action.payload;
     },
     resetIds: state => {
-      state = initialState;
+      state.roomId = initialState.roomId;
+      state.cardId = initialState.cardId;
+      state.userId = initialState.userId;
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const {setIds, setUserId, setCardId, setRoomId,resetIds} = reservationAdd.actions;
+export const {setIds, setUserId, setCardId, setRoomId, resetIds} =
+  reservationAdd.actions;
 export const getReservationAddIds = (state: RootState) => state.reservationAdd;
 export const getReservationAddUserId = (state: RootState) =>
   state.reservationAdd.userId;

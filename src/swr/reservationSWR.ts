@@ -3,7 +3,7 @@ import {request} from '@/util/request/controller/ApiController';
 import {Reservation} from '@/assets/models/entity/Reservation';
 import {ReservationFullResponse} from '@/assets/models/dto/reservation/ReservationResponse';
 import {
-  ReservationAddCardResponse,
+  // ReservationAddCardResponse,
   ReservationAddRoomResponse,
   ReservationAddUserResponse,
 } from '@/assets/models/dto/reservation/ReservationResponse';
@@ -34,18 +34,6 @@ export const ReservationAddUserURL = (id: string) => {
     return;
   }
   return `${Config.BACKEND_ENDPOINT}/user?id=${id}`;
-};
-
-export const ReservationAddCardFetcher = (
-  url: string,
-): Promise<ReservationAddCardResponse> =>
-  request.get(url).then(res => res.data);
-
-export const ReservationAddCardURL = (id: string) => {
-  if (!id || id === '') {
-    return;
-  }
-  return `${Config.BACKEND_ENDPOINT}/card?id=${id}`;
 };
 
 export const ReservationAddRoomFetcher = (

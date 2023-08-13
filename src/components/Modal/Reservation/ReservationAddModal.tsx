@@ -14,10 +14,8 @@ import {
 import {useAppDispatch, useAppSelector} from '@/redux/hooks';
 import {
   ReservationAddUserFetcher,
-  ReservationAddCardFetcher,
   ReservationAddRoomFetcher,
   ReservationAddUserURL,
-  ReservationAddCardURL,
   ReservationAddRoomURL,
 } from '@/swr/reservationSWR';
 import {Modal, View, Image, Text, StyleSheet, Pressable} from 'react-native';
@@ -41,10 +39,7 @@ const ReservationAddModal = () => {
     ReservationAddUserURL(userId),
     ReservationAddUserFetcher,
   );
-  const cardSWR = useSWR(
-    ReservationAddCardURL(cardId),
-    ReservationAddCardFetcher,
-  );
+
   const roomSWR = useSWR(
     ReservationAddRoomURL(roomId),
     ReservationAddRoomFetcher,
@@ -53,26 +48,28 @@ const ReservationAddModal = () => {
   useEffect(() => {
     userSWR.mutate();
   }, [userId]);
-  useEffect(() => {
-    cardSWR.mutate();
-  }, [cardId]);
+
   useEffect(() => {
     roomSWR.mutate();
   }, [roomId]);
+  const closeModal = () => {
+    dispatch(resetIds());
+    dispatch(setReservationAddModalVisible(false));
+  };
   return (
     <Modal
       visible={modalVisible}
       transparent={false}
       animationType={SLIDE}
       onRequestClose={() => {
-        dispatch(setReservationAddModalVisible(false));
+        closeModal();
       }}>
       <View style={modalStyles.container}>
         <View style={modalStyles.header}>
           <View style={modalHeaderStlyes.closeContainer}>
             <Pressable
               onPress={() => {
-                dispatch(setReservationAddModalVisible(false));
+                closeModal();
               }}>
               <Image source={CloseIcon} style={modalHeaderStlyes.icon} />
             </Pressable>
@@ -107,18 +104,21 @@ const ReservationAddModal = () => {
         <View style={modalStyles.main}>
           <ModalDataContainer>
             <ModalDataCategoryView type={USER} />
-            <ModalDataView title={'User ID'} text={userSWR?.data?.id} />
+            <ModalDataView title={'User ID'} text={userId} />
             <ModalDataView title={'Name'} text={userSWR?.data?.name} />
             <ModalDataView title={'Phone'} text={userSWR?.data?.phone} />
           </ModalDataContainer>
           <ModalDataContainer>
             <ModalDataCategoryView type={ROOM} />
-            <ModalDataView title={'Room ID'} text={roomSWR?.data?.id.toString()} />
+            <ModalDataView
+              title={'Room ID'}
+              text={roomId > 0 && roomId.toString()}
+            />
             <ModalDataView title={'Address'} text={roomSWR?.data?.address} />
           </ModalDataContainer>
           <ModalDataContainer>
             <ModalDataCategoryView type={CARD} />
-            <ModalDataView title={'Card ID'} text={cardSWR?.data?.id} />
+            <ModalDataView title={'Card ID'} text={cardId} />
           </ModalDataContainer>
         </View>
       </View>
