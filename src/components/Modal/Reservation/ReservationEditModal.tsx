@@ -129,7 +129,7 @@ const ReservationEditModal = () => {
           </View>
         </View>
 
-        <ScrollView>
+        <View>
           <View style={modalStyles.main}>
             <ModalDataContainer>
               <ModalDataView
@@ -187,7 +187,7 @@ const ReservationEditModal = () => {
               />
             </ModalDataContainer>
           </View>
-        </ScrollView>
+        </View>
       </View>
     </Modal>
   );
