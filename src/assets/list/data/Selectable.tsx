@@ -45,19 +45,19 @@ const Selectable = ({
   onLongPress,
 }: SelectableListBarProps) => {
   const dispatch = useAppDispatch();
-  const selected: Selected = {
+  const selected: Omit<Selected, 'scan'> = {
     card: useAppSelector(getSelectedCards),
     user: useAppSelector(getSelectedUsers),
     room: useAppSelector(getSelectedRooms),
     reservation: useAppSelector(getSelectedReservations),
   };
-  const deleteSelected: DeleteSelected = {
+  const deleteSelected: Omit<DeleteSelected, 'scan'> = {
     card: deleteCardSelected,
     user: deleteUserSelected,
     room: deleteRoomSelected,
     reservation: deleteReservationSelected,
   };
-  const addSelected: AddSelected = {
+  const addSelected: Omit<AddSelected, 'scan'> = {
     card: addCardSelected,
     user: addUserSelected,
     room: addRoomSelected,
