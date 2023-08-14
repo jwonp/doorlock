@@ -9,6 +9,7 @@ const dataTypeSet = {
   user: USER,
   room: ROOM,
   reservation: RESERVATION,
+  scan: SCAN,
 } as const;
 
 export type DataTypes = (typeof dataTypeSet)[keyof typeof dataTypeSet];
