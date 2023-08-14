@@ -1,6 +1,6 @@
 import {BottomTabNavigationEventMap} from '@react-navigation/bottom-tabs';
 import {NavigationHelpers, ParamListBase} from '@react-navigation/native';
-import {View, Image, Text, StyleSheet, Pressable} from 'react-native';
+import {View, Image, StyleSheet, Pressable} from 'react-native';
 
 import CardIcon from '@/public/card.png';
 import CardWhiteIcon from '@/public/card-white.png';
@@ -16,8 +16,14 @@ import {useAppDispatch} from '@/redux/hooks';
 import {resetCardSelected} from '@/redux/features/selected/cardState';
 import {resetRoomSelected} from '@/redux/features/selected/roomState';
 import {resetReservationSelected} from '@/redux/features/selected/reservationState';
-import {DataTypes} from '../static/texts/DataTypes';
+import {DataTypes, ROOM, SCAN} from '../static/texts/DataTypes';
 import {setScreen} from '@/redux/features/modal/screenState';
+import {
+  setSelectModalAction,
+  setSelectedModalType,
+} from '@/redux/features/modal/selectModalState';
+import {setSelectModalVisible} from '@/redux/features/modal/modalState';
+
 type History = {
   type: 'route';
   key: string;
@@ -67,6 +73,7 @@ const BottomTabButton = ({name, history, navigation}: ButtomTabButtonProps) => {
     room: resetRoomSelected,
     reservation: resetReservationSelected,
   };
+
   return (
     <Pressable
       style={styles.container}
@@ -74,6 +81,11 @@ const BottomTabButton = ({name, history, navigation}: ButtomTabButtonProps) => {
         dispatch(setScreen(name));
         if (resetSelected[name]) {
           dispatch(resetSelected[name]());
+        }
+        if (name === SCAN) {
+          dispatch(setSelectModalVisible(true));
+          dispatch(setSelectedModalType(ROOM));
+          dispatch(setSelectModalAction(SCAN));
         }
         navigation.navigate(name);
       }}>
