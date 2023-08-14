@@ -34,7 +34,7 @@ import {
   getSelectedModalType,
 } from '@/redux/features/modal/selectModalState';
 import {ADD, EDIT} from '@/assets/static/texts/SelectModalActions';
-import {CARD, ROOM, USER} from '@/assets/static/texts/DataTypes';
+import {CARD, ROOM, SCAN, USER} from '@/assets/static/texts/DataTypes';
 import {
   setCardId,
   setRoomId,
@@ -46,7 +46,8 @@ import {
   setUserEditId,
 } from '@/redux/features/modal/data/reservationEditState';
 import {DataType} from '@/redux/features/modal/screenState';
-
+import {setAddress} from '@/redux/features/AddressState';
+import EncryptedStorage from 'react-native-encrypted-storage';
 export type ListBarProps = {
   isDisable?: boolean;
 };
@@ -70,7 +71,14 @@ const SelectModal = () => {
     room: RoomListBar,
   };
   const ListBar = ListBarType[modalType];
-
+  const storeAddressOnStorage = async (address: string) => {
+    try {
+      return await EncryptedStorage.setItem('address', address);
+    } catch (error) {
+      console.log(error.code);
+    }
+    return new Promise<void>(() => {});
+  };
   const ListBarList = useMemo(() => {
     if (!SelectDataSWR || !SelectDataSWR.data) {
       return <Text>{`No ${modalType}`}</Text>;
@@ -104,6 +112,11 @@ const SelectModal = () => {
                 if (modalType === CARD) {
                   dispatch(setCardEditId(item.id));
                 }
+              }
+              if (actionType === SCAN) {
+                storeAddressOnStorage(item.address).then(() => {
+                  dispatch(setAddress(item.address));
+                });
               }
               dispatch(setSelectModalVisible(false));
             }}>
