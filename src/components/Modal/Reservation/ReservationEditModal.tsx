@@ -8,8 +8,6 @@ import {SLIDE} from '@/assets/static/texts/ModalText';
 import {CARD, ROOM, USER} from '@/assets/static/texts/DataTypes';
 import useSWR from 'swr';
 import {
-  ReservationAddCardFetcher,
-  ReservationAddCardURL,
   ReservationAddRoomFetcher,
   ReservationAddRoomURL,
   ReservationAddUserFetcher,
@@ -50,10 +48,7 @@ const ReservationEditModal = () => {
     userId ? ReservationAddUserURL(userId) : null,
     ReservationAddUserFetcher,
   );
-  const cardSWR = useSWR(
-    cardId ? ReservationAddCardURL(cardId) : null,
-    ReservationAddCardFetcher,
-  );
+
   const roomSWR = useSWR(
     roomId ? ReservationAddRoomURL(roomId) : null,
     ReservationAddRoomFetcher,
@@ -75,9 +70,7 @@ const ReservationEditModal = () => {
   useEffect(() => {
     userSWR.mutate();
   }, [userId]);
-  useEffect(() => {
-    cardSWR.mutate();
-  }, [cardId]);
+
   useEffect(() => {
     roomSWR.mutate();
   }, [roomId]);
@@ -139,10 +132,7 @@ const ReservationEditModal = () => {
             </ModalDataContainer>
             <ModalDataContainer tab={1}>
               <ModalDataCategoryView type={USER} />
-              <ModalDataView
-                title={'User ID'}
-                text={userSWR && userSWR.data ? userSWR.data.id : detail.userId}
-              />
+              <ModalDataView title={'User ID'} text={userId} />
               <ModalDataView
                 title={'Name'}
                 text={userSWR && userSWR.data ? userSWR.data.name : detail.name}
@@ -156,21 +146,11 @@ const ReservationEditModal = () => {
             </ModalDataContainer>
             <ModalDataContainer tab={1}>
               <ModalDataCategoryView type={CARD} />
-              <ModalDataView
-                title={'Card ID'}
-                text={cardSWR && cardSWR.data ? cardSWR.data.id : detail.cardId}
-              />
+              <ModalDataView title={'Card ID'} text={cardId} />
             </ModalDataContainer>
             <ModalDataContainer tab={1}>
               <ModalDataCategoryView type={ROOM} />
-              <ModalDataView
-                title={'Room ID'}
-                text={
-                  roomSWR && roomSWR.data
-                    ? roomSWR.data.id.toString()
-                    : detail.roomId.toString()
-                }
-              />
+              <ModalDataView title={'Room ID'} text={roomId.toString()} />
               <ModalDataView
                 title={'Address'}
                 text={
