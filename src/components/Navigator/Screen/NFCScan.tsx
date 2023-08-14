@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, Pressable} from 'react-native';
 import NfcManager, {NfcTech} from 'react-native-nfc-manager';
 import {authorizeCard} from '@/util/request/auth';
 import {ADMIN} from '@/assets/static/texts/AuthorizeResults';
@@ -10,14 +10,27 @@ import {
   setScreen,
 } from '@/redux/features/modal/screenState';
 import {screenStyles} from '@/assets/screen/ScreenStyleSheet';
-
+import SelectModal from '@/components/Modal/SelectModal';
+import {getAddress} from '@/redux/features/AddressState';
+import EncryptedStorage from 'react-native-encrypted-storage';
 // Pre-step, call this before any NFC operations
 NfcManager.start();
 const NFCScanScreen = ({navigation}: {navigation: any}) => {
   const dispatch = useAppDispatch();
   const screen = useAppSelector(getScreenType);
+  const address = useAppSelector(getAddress);
   const [isEnabled, setEnabled] = useState(false);
+  const getAddressFromStorage = async () => {
+    try {
+      const address = await EncryptedStorage.getItem('address');
 
+      if (address !== undefined) {
+        return address;
+      }
+    } catch (error) {
+      console.log(error.code);
+    }
+  };
   const readNdef = async () => {
     try {
       setEnabled(true);
@@ -25,8 +38,8 @@ const NFCScanScreen = ({navigation}: {navigation: any}) => {
       await NfcManager.requestTechnology(NfcTech.Ndef);
       // the resolved tag object will contain `ndefMessage` property
       const tag = await NfcManager.getTag();
-
-      authorizeCard(tag.id).then(res => {
+      const addressFromStorage = await getAddressFromStorage();
+      authorizeCard(tag.id, addressFromStorage).then(res => {
         if (res.data.result === ADMIN) {
           dispatch(setScreen(DataType.card));
           navigation.navigate('card');
@@ -46,16 +59,19 @@ const NFCScanScreen = ({navigation}: {navigation: any}) => {
     if (isEnabled === false) {
       readNdef();
     }
-  }, [isEnabled]);
+  }, [isEnabled, screen]);
   return (
     <View style={screenStyles.container}>
-      <View style={styles.wrapper}>
-        <View style={styles.button}>
-          <Text style={styles.text}>
-            {isEnabled ? 'Tag your card' : 'Press to start'}
-          </Text>
+      <SelectModal />
+      <Pressable onPress={readNdef}>
+        <View style={styles.wrapper}>
+          <View style={styles.button}>
+            <Text style={styles.text}>
+              {`Tag your card \nhere is\n${address}`}
+            </Text>
+          </View>
         </View>
-      </View>
+      </Pressable>
     </View>
   );
 };
@@ -68,7 +84,7 @@ const styles = StyleSheet.create({
   },
   button: {
     width: '95%',
-    height: '7%',
+
     backgroundColor: '#EEE3CB',
     borderRadius: 14,
   },
