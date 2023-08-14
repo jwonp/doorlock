@@ -1,7 +1,6 @@
 import * as React from 'react';
-import {AppState, Image, View} from 'react-native';
+import {AppState} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import UserScreen from './src/components/Navigator/Screen/User';
 import NFCScanScreen from './src/components/Navigator/Screen/NFCScan';
@@ -27,8 +26,8 @@ import {
 } from '@/assets/static/texts/DataTypes';
 import UserButtonList from '@/assets/list/button/UserButtonList';
 
-const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
+
 const App = (): JSX.Element => {
   return (
     <Provider store={store}>
@@ -68,6 +67,7 @@ const App = (): JSX.Element => {
             screenOptions={{
               tabBarItemStyle: {flexDirection: 'row', padding: '10%'},
             }}
+            // initialRouteName={'scan'}
             tabBar={props => (
               <BottomTabButtonList
                 state={props.state}
