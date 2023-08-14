@@ -11,6 +11,7 @@ import reservationEditReducer from '@/redux/features/modal/data/reservationEditS
 import cardDetailReducer from '@/redux/features/modal/data/cardDetailState';
 import userEditReducer from '@/redux/features/modal/data/userEditState';
 import roomDetailReducer from '@/redux/features/modal/data/roomDetailState';
+import addressReducer from '@/redux/features/AddressState';
 export const makeStore = () => {
   return configureStore({
     reducer: {
@@ -26,6 +27,7 @@ export const makeStore = () => {
       roomDetail: roomDetailReducer,
       reservationEdit: reservationEditReducer,
       userEdit: userEditReducer,
+      address: addressReducer,
     },
   });
 };
