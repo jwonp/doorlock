@@ -19,7 +19,6 @@ import {
   setPassword,
   setPhone,
 } from '@/redux/features/modal/data/userEditState';
-import {getLastTaggedDisplayText} from '@/util/convertDisplayText';
 import {useState} from 'react';
 import {UserPatchRequest} from '@/assets/models/dto/user/UserRequest';
 import {modifyUser} from '@/util/request/user';

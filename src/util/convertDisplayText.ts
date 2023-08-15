@@ -23,19 +23,15 @@ export const getDisplayText = (
   return expect ?? text.toString();
 };
 
-export const getLastTaggedDisplayText = (
-  cardId: string,
-  lastTagged: string,
-) => {
-  if (!cardId) {
-    return '';
-  }
+export const getLastTaggedDisplayText = (lastTagged: string) => {
   if (!lastTagged) {
     return 'No last tag';
   }
-  return lastTagged;
+  return rewriteLastTagged(lastTagged);
 };
-
+const rewriteLastTagged = (lastTagged: string) => {
+  return lastTagged.split('.', 1)[0].replaceAll('-', '/').replaceAll('T', ' ');
+};
 export const getCardReservationId = (cardId: string, reservationId: number) => {
   if (!cardId) {
     return '';

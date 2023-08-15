@@ -19,7 +19,7 @@ const CardListBar = ({data}: CardListBarProps) => {
       <View>
         <Text style={listBarStyles.detailText}>{detailText}</Text>
         <Text style={listBarStyles.detailText}>
-          {getLastTaggedDisplayText(data.id, data.lastTagged)}
+          {getLastTaggedDisplayText(data.lastTagged)}
         </Text>
       </View>
     </View>

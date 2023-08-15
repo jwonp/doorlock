@@ -55,7 +55,7 @@ const CardDetailModal = () => {
             />
             <ModalDataView
               title={'Last Tagged'}
-              text={getLastTaggedDisplayText(detail.id, detail.lastTagged)}
+              text={getLastTaggedDisplayText(detail.lastTagged)}
             />
             <ModalDataView title={'Type'} text={detail.type} />
             {detail.reservationId > 0 && (
