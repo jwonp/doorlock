@@ -34,7 +34,7 @@ import {
   getSelectedModalType,
 } from '@/redux/features/modal/selectModalState';
 import {ADD, EDIT} from '@/assets/static/texts/SelectModalActions';
-import {CARD, ROOM, SCAN, USER} from '@/assets/static/texts/DataTypes';
+import {CARD, ROOM, TAG, USER} from '@/assets/static/texts/DataTypes';
 import {
   setCardId,
   setRoomId,
@@ -45,7 +45,7 @@ import {
   setRoomEditId,
   setUserEditId,
 } from '@/redux/features/modal/data/reservationEditState';
-import {DataType} from '@/redux/features/modal/screenState';
+
 import {setAddress} from '@/redux/features/AddressState';
 import EncryptedStorage from 'react-native-encrypted-storage';
 export type ListBarProps = {
@@ -87,7 +87,7 @@ const SelectModal = () => {
       SearchDataSWR && SearchDataSWR.data ? SearchDataSWR : SelectDataSWR;
     return dataSWR.data.map(
       (item, index) =>
-        (modalType !== DataType.card || item.reservationId < 1) && (
+        (modalType !== CARD || item.reservationId < 1) && (
           <Pressable
             key={index}
             onPress={() => {
@@ -113,7 +113,7 @@ const SelectModal = () => {
                   dispatch(setCardEditId(item.id));
                 }
               }
-              if (actionType === SCAN) {
+              if (actionType === TAG) {
                 storeAddressOnStorage(item.address).then(() => {
                   dispatch(setAddress(item.address));
                 });
@@ -139,7 +139,12 @@ const SelectModal = () => {
       animationType={FADE}>
       <View style={modalStyles.container}>
         <View style={modalStyles.header}>
-          <View style={modalHeaderStlyes.closeContainer}>
+          <View
+            style={
+              actionType === TAG
+                ? styles.hidden
+                : modalHeaderStlyes.closeContainer
+            }>
             <Pressable
               onPress={() => {
                 closeModal();
@@ -212,6 +217,11 @@ const listStyles = StyleSheet.create({
   container: {
     paddingLeft: '5%',
     paddingRight: '5%',
+  },
+});
+const styles = StyleSheet.create({
+  hidden: {
+    display: 'none',
   },
 });
 export default SelectModal;

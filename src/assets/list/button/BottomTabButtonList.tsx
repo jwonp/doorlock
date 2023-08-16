@@ -1,6 +1,6 @@
 import BottomTabButton from '@/assets/buttons/BottomTabButton';
-import {DataTypes} from '@/assets/static/texts/DataTypes';
-import {DataType, getScreenType} from '@/redux/features/modal/screenState';
+import {DataTypes, TAG} from '@/assets/static/texts/DataTypes';
+import {getScreenType} from '@/redux/features/modal/screenState';
 import {useAppSelector} from '@/redux/hooks';
 import {BottomTabBarProps} from '@react-navigation/bottom-tabs';
 
@@ -23,7 +23,7 @@ const BottomTabButtonList = ({
   ));
 
   return (
-    <View style={screen === DataType.scan ? styles.hidden : styles.container}>
+    <View style={screen === TAG ? styles.hidden : styles.container}>
       {TabButtons}
     </View>
   );

@@ -1,4 +1,3 @@
-import {DataType} from '@/redux/features/modal/screenState';
 import {
   addCardSelected,
   deleteCardSelected,
@@ -23,18 +22,19 @@ import {
   getSelectedUsers,
 } from '@/redux/features/selected/userState';
 import {ActionCreatorWithOptionalPayload} from '@reduxjs/toolkit';
+import {DataTypes} from '@/assets/static/texts/DataTypes';
 type Selected = {
-  [index in DataType]: any[];
+  [index in DataTypes]: any[];
 };
 type DeleteSelected = {
-  [index in DataType]: ActionCreatorWithOptionalPayload<any, string>;
+  [index in DataTypes]: ActionCreatorWithOptionalPayload<any, string>;
 };
 type AddSelected = {
-  [index in DataType]: ActionCreatorWithOptionalPayload<any, string>;
+  [index in DataTypes]: ActionCreatorWithOptionalPayload<any, string>;
 };
 type SelectableListBarProps = {
   id: any;
-  type: DataType;
+  type: DataTypes;
   children: React.ReactNode;
   onLongPress?: (event: GestureResponderEvent) => void;
 };
@@ -45,19 +45,19 @@ const Selectable = ({
   onLongPress,
 }: SelectableListBarProps) => {
   const dispatch = useAppDispatch();
-  const selected: Omit<Selected, 'scan'> = {
+  const selected: Omit<Selected, 'tag' | 'log'> = {
     card: useAppSelector(getSelectedCards),
     user: useAppSelector(getSelectedUsers),
     room: useAppSelector(getSelectedRooms),
     reservation: useAppSelector(getSelectedReservations),
   };
-  const deleteSelected: Omit<DeleteSelected, 'scan'> = {
+  const deleteSelected: Omit<DeleteSelected, 'tag' | 'log'> = {
     card: deleteCardSelected,
     user: deleteUserSelected,
     room: deleteRoomSelected,
     reservation: deleteReservationSelected,
   };
-  const addSelected: Omit<AddSelected, 'scan'> = {
+  const addSelected: Omit<AddSelected, 'tag' | 'log'> = {
     card: addCardSelected,
     user: addUserSelected,
     room: addRoomSelected,

@@ -12,11 +12,13 @@ import ReservationIcon from '@/public/reservation.png';
 import ReservationWhiteIcon from '@/public/reservation-white.png';
 import ScanIcon from '@/public/scan.png';
 import ScanWhiteIcon from '@/public/scan-white.png';
+import LogIcon from '@/public/log.png';
+import LogWhiteIcon from '@/public/log-white.png';
 import {useAppDispatch} from '@/redux/hooks';
 import {resetCardSelected} from '@/redux/features/selected/cardState';
 import {resetRoomSelected} from '@/redux/features/selected/roomState';
 import {resetReservationSelected} from '@/redux/features/selected/reservationState';
-import {DataTypes, ROOM, SCAN} from '../static/texts/DataTypes';
+import {DataTypes, ROOM, TAG} from '../static/texts/DataTypes';
 import {setScreen} from '@/redux/features/modal/screenState';
 import {
   setSelectModalAction,
@@ -41,7 +43,8 @@ type ButtonIcon = {
   user: ButtonImage;
   room: ButtonImage;
   card: ButtonImage;
-  scan: ButtonImage;
+  tag: ButtonImage;
+  log: ButtonImage;
   reservation: ButtonImage;
 };
 const BottomTabButton = ({name, history, navigation}: ButtomTabButtonProps) => {
@@ -59,9 +62,13 @@ const BottomTabButton = ({name, history, navigation}: ButtomTabButtonProps) => {
       black: CardIcon,
       white: CardWhiteIcon,
     },
-    scan: {
+    tag: {
       black: ScanIcon,
       white: ScanWhiteIcon,
+    },
+    log: {
+      black: LogIcon,
+      white: LogWhiteIcon,
     },
     reservation: {
       black: ReservationIcon,
@@ -82,10 +89,10 @@ const BottomTabButton = ({name, history, navigation}: ButtomTabButtonProps) => {
         if (resetSelected[name]) {
           dispatch(resetSelected[name]());
         }
-        if (name === SCAN) {
+        if (name === TAG) {
           dispatch(setSelectModalVisible(true));
           dispatch(setSelectedModalType(ROOM));
-          dispatch(setSelectModalAction(SCAN));
+          dispatch(setSelectModalAction(TAG));
         }
         navigation.navigate(name);
       }}>
@@ -104,7 +111,7 @@ const BottomTabButton = ({name, history, navigation}: ButtomTabButtonProps) => {
 };
 const styles = StyleSheet.create({
   container: {
-    width: '20%',
+    width: '16%',
     paddingTop: '2%',
     paddingBottom: '2%',
   },

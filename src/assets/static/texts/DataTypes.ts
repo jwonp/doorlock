@@ -1,15 +1,17 @@
 export const CARD = 'card';
 export const USER = 'user';
 export const ROOM = 'room';
+export const LOG = 'log';
 export const RESERVATION = 'reservation';
-export const SCAN = 'scan';
+export const TAG = 'tag';
 
-const dataTypeSet = {
+export const DataType = {
   card: CARD,
   user: USER,
   room: ROOM,
+  log: LOG,
   reservation: RESERVATION,
-  scan: SCAN,
+  tag: TAG,
 } as const;
 
-export type DataTypes = (typeof dataTypeSet)[keyof typeof dataTypeSet];
+export type DataTypes = (typeof DataType)[keyof typeof DataType];

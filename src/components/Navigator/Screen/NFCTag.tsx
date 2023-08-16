@@ -4,22 +4,22 @@ import NfcManager, {NfcTech} from 'react-native-nfc-manager';
 import {authorizeCard} from '@/util/request/auth';
 import {ADMIN} from '@/assets/static/texts/AuthorizeResults';
 import {useAppDispatch, useAppSelector} from '@/redux/hooks';
-import {
-  DataType,
-  getScreenType,
-  setScreen,
-} from '@/redux/features/modal/screenState';
+import {getScreenType, setScreen} from '@/redux/features/modal/screenState';
 import {screenStyles} from '@/assets/screen/ScreenStyleSheet';
 import SelectModal from '@/components/Modal/SelectModal';
 import {getAddress} from '@/redux/features/AddressState';
 import EncryptedStorage from 'react-native-encrypted-storage';
+import {CardListURL, CardListFetcher} from '@/swr/cardSWR';
+import useSWR from 'swr';
+import {CARD, TAG} from '@/assets/static/texts/DataTypes';
 // Pre-step, call this before any NFC operations
 NfcManager.start();
-const NFCScanScreen = ({navigation}: {navigation: any}) => {
+const NFCTagScreen = ({navigation}: {navigation: any}) => {
   const dispatch = useAppDispatch();
   const screen = useAppSelector(getScreenType);
   const address = useAppSelector(getAddress);
   const [isEnabled, setEnabled] = useState(false);
+  const cardListSWR = useSWR(CardListURL, CardListFetcher);
   const getAddressFromStorage = async () => {
     try {
       const address = await EncryptedStorage.getItem('address');
@@ -41,7 +41,8 @@ const NFCScanScreen = ({navigation}: {navigation: any}) => {
       const addressFromStorage = await getAddressFromStorage();
       authorizeCard(tag.id, addressFromStorage).then(res => {
         if (res.data.result === ADMIN) {
-          dispatch(setScreen(DataType.card));
+          dispatch(setScreen(CARD));
+          cardListSWR.mutate();
           navigation.navigate('card');
         }
       });
@@ -55,7 +56,7 @@ const NFCScanScreen = ({navigation}: {navigation: any}) => {
     }
   };
   useEffect(() => {
-    if (screen !== DataType.scan) return;
+    if (screen !== TAG) return;
     if (isEnabled === false) {
       readNdef();
     }
@@ -97,4 +98,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default NFCScanScreen;
+export default NFCTagScreen;
