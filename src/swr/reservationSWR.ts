@@ -7,7 +7,8 @@ import {
   ReservationAddRoomResponse,
   ReservationAddUserResponse,
 } from '@/assets/models/dto/reservation/ReservationResponse';
-import {DataType} from '@/redux/features/modal/screenState';
+import { DataTypes } from '@/assets/static/texts/DataTypes';
+
 
 export const ReservationFetcher = (url: string): Promise<Reservation[]> =>
   request.get(url).then(res => res.data);
@@ -51,14 +52,14 @@ export const ReservationAddRoomURL = (id: number) => {
 export const ReservationSelectFetcher = (url: string) =>
   request.get(url).then(res => res.data);
 
-export const ReservationSelectURL = (type: DataType) => {
+export const ReservationSelectURL = (type: DataTypes) => {
   return `${Config.BACKEND_ENDPOINT}/${type}/list/reservation`;
 };
 
 export const ReservationSearchFetcher = (url: string) => {
   return request.get(url).then(res => res.data);
 };
-export const ReservationSearchURL = (type: DataType, query: string) => {
+export const ReservationSearchURL = (type: DataTypes, query: string) => {
   const searchBy = {
     card: 'id',
     user: 'id',
