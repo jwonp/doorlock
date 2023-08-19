@@ -2,6 +2,7 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
 import {RootState} from '@/redux/store';
 import {CardWithReservationResponse} from '@/assets/models/dto/card/CardResponse';
+import {act} from 'react-test-renderer';
 
 export interface CardWithReservation extends CardWithReservationResponse {}
 
@@ -23,6 +24,7 @@ const initialState: CardWithReservation = {
     mifareClassic: false,
     mifareUltralight: false,
   },
+  lastTagged: '',
 };
 
 export const cardDetail = createSlice({
@@ -37,6 +39,7 @@ export const cardDetail = createSlice({
       state.techType = action.payload.techType;
       state.type = action.payload.type;
       state.userId = action.payload.userId;
+      state.lastTagged = action.payload.lastTagged;
     },
   },
 });
