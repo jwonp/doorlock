@@ -1,23 +1,24 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {RootState} from '@/redux/store';
-import {DataType} from './screenState';
+
 import {Actions, ADD} from '@/assets/static/texts/SelectModalActions';
+import { CARD, DataTypes } from '@/assets/static/texts/DataTypes';
 
 export interface ModalState {
   action: Actions;
-  type: DataType;
+  type: DataTypes;
 }
 
 const initialState: ModalState = {
   action: ADD,
-  type: DataType.card,
+  type: CARD,
 } as const;
 
 export const selectModal = createSlice({
   name: 'selectModal',
   initialState,
   reducers: {
-    setSelectedModalType: (state, action: PayloadAction<DataType>) => {
+    setSelectedModalType: (state, action: PayloadAction<DataTypes>) => {
       state.type = action.payload;
     },
     setSelectModalAction: (state, action: PayloadAction<Actions>) => {
