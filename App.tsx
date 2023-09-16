@@ -3,7 +3,7 @@ import {AppState} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 
 import UserScreen from './src/components/Navigator/Screen/User';
-import NFCScanScreen from './src/components/Navigator/Screen/NFCScan';
+import NFCScanScreen from './src/components/Navigator/Screen/NFCTag';
 import ReservationScreen from './src/components/Navigator/Screen/Reservation';
 import CardScreen from './src/components/Navigator/Screen/Card';
 import {Provider} from 'react-redux';
@@ -19,12 +19,14 @@ import CardButtonList from '@/assets/list/button/CardButtonList';
 import RoomButtonList from '@/assets/list/button/RoomButtonList';
 import {
   CARD,
+  LOG,
   RESERVATION,
   ROOM,
-  SCAN,
+  TAG,
   USER,
 } from '@/assets/static/texts/DataTypes';
 import UserButtonList from '@/assets/list/button/UserButtonList';
+import LogScreen from '@/components/Navigator/Screen/Log';
 
 const Tab = createBottomTabNavigator();
 
@@ -67,7 +69,7 @@ const App = (): JSX.Element => {
             screenOptions={{
               tabBarItemStyle: {flexDirection: 'row', padding: '10%'},
             }}
-            // initialRouteName={'scan'}
+            initialRouteName={TAG}
             tabBar={props => (
               <BottomTabButtonList
                 state={props.state}
@@ -156,7 +158,25 @@ const App = (): JSX.Element => {
               }}
             />
             <Tab.Screen
-              name={SCAN}
+              name={LOG}
+              component={LogScreen}
+              options={{
+                headerStyle: {
+                  backgroundColor: '#967E76',
+                  borderWidth: 2,
+                  borderBottomColor: '#EEE3CB',
+                },
+
+                headerTitleStyle: {
+                  fontWeight: 'bold',
+                  color: '#ffffff',
+                },
+                headerTitle: 'Log',
+                headerTitleAlign: 'center',
+              }}
+            />
+            <Tab.Screen
+              name={TAG}
               component={NFCScanScreen}
               options={{
                 headerStyle: {
@@ -169,7 +189,7 @@ const App = (): JSX.Element => {
                   fontWeight: 'bold',
                   color: '#ffffff',
                 },
-                headerTitle: 'Scan',
+                headerTitle: 'Tag',
                 headerTitleAlign: 'center',
               }}
             />
