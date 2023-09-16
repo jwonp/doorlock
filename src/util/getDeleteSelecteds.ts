@@ -11,21 +11,22 @@ import {deleteSelectedRooms} from './request/room';
 import {deleteSelectedUsers} from './request/user';
 
 export const deleteSelected = async (
+  jwt: string,
   type: DataTypes,
   selections: string[] | number[],
 ) => {
   switch (type) {
     case CARD:
-      return await deleteSelectedCards(selections as string[]);
+      return await deleteSelectedCards(jwt, selections as string[]);
 
     case ROOM:
-      return await deleteSelectedRooms(selections as number[]);
+      return await deleteSelectedRooms(jwt, selections as number[]);
 
     case USER:
-      return await deleteSelectedUsers(selections as string[]);
+      return await deleteSelectedUsers(jwt, selections as string[]);
 
     case RESERVATION:
-      return await deleteSelectedReservations(selections as number[]);
+      return await deleteSelectedReservations(jwt, selections as number[]);
     default:
       return;
   }

@@ -10,25 +10,25 @@ import {
 import { DataTypes } from '@/assets/static/texts/DataTypes';
 
 
-export const ReservationFetcher = (url: string): Promise<Reservation[]> =>
-  request.get(url).then(res => res.data);
+export const ReservationFetcher = (jwt:string,url: string): Promise<Reservation[]> =>
+  request(jwt).get(url).then(res => res.data);
 
 export const ReservationURL = () => {
   return `${Config.BACKEND_ENDPOINT}/reservation/list`;
 };
 
 export const ReservationDetailFetcher = (
-  url: string,
-): Promise<ReservationFullResponse> => request.get(url).then(res => res.data);
+  jwt:string, url: string,
+): Promise<ReservationFullResponse> => request(jwt).get(url).then(res => res.data);
 
 export const ReservationDetailURL = (id: number) => {
   return `${Config.BACKEND_ENDPOINT}/reservation/full?id=${id}`;
 };
 
 export const ReservationAddUserFetcher = (
-  url: string,
+  jwt:string, url: string,
 ): Promise<ReservationAddUserResponse> =>
-  request.get(url).then(res => res.data);
+  request(jwt).get(url).then(res => res.data);
 
 export const ReservationAddUserURL = (id: string) => {
   if (!id || id === '') {
@@ -38,9 +38,9 @@ export const ReservationAddUserURL = (id: string) => {
 };
 
 export const ReservationAddRoomFetcher = (
-  url: string,
+  jwt:string, url: string,
 ): Promise<ReservationAddRoomResponse> =>
-  request.get(url).then(res => res.data);
+  request(jwt).get(url).then(res => res.data);
 
 export const ReservationAddRoomURL = (id: number) => {
   if (!id || id === 0) {
@@ -49,15 +49,15 @@ export const ReservationAddRoomURL = (id: number) => {
   return `${Config.BACKEND_ENDPOINT}/room?id=${id}`;
 };
 
-export const ReservationSelectFetcher = (url: string) =>
-  request.get(url).then(res => res.data);
+export const ReservationSelectFetcher = (jwt:string,url: string) =>
+  request(jwt).get(url).then(res => res.data);
 
 export const ReservationSelectURL = (type: DataTypes) => {
   return `${Config.BACKEND_ENDPOINT}/${type}/list/reservation`;
 };
 
-export const ReservationSearchFetcher = (url: string) => {
-  return request.get(url).then(res => res.data);
+export const ReservationSearchFetcher = (jwt:string,url: string) => {
+  return request(jwt).get(url).then(res => res.data);
 };
 export const ReservationSearchURL = (type: DataTypes, query: string) => {
   const searchBy = {

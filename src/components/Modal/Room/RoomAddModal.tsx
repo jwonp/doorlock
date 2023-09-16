@@ -21,7 +21,9 @@ import {SLIDE} from '@/assets/static/texts/ModalText';
 import {addRoom} from '@/util/request/room';
 import {RoomListURL, RoomListFetecher} from '@/swr/roomSWR';
 import useSWR from 'swr';
+import { getToken } from '@/redux/features/tokenState';
 const RoomAddModal = () => {
+  const jwt = useAppSelector(getToken);
   const roomListSWR = useSWR(RoomListURL, RoomListFetecher);
   const modalVisible = useAppSelector(getRoomAddModalVisible);
   const dispatch = useAppDispatch();
@@ -31,7 +33,7 @@ const RoomAddModal = () => {
     dispatch(setRoomAddModalVisible(false));
   };
   const onPressAddRoom = () => {
-    addRoom(address).then(res => roomListSWR.mutate());
+    addRoom(jwt,address).then(res => roomListSWR.mutate());
     closeModal();
   };
   return (

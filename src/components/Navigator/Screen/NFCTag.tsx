@@ -8,10 +8,11 @@ import {getScreenType, setScreen} from '@/redux/features/modal/screenState';
 import {screenStyles} from '@/assets/screen/ScreenStyleSheet';
 import SelectModal from '@/components/Modal/SelectModal';
 import {getAddress} from '@/redux/features/AddressState';
-import EncryptedStorage from 'react-native-encrypted-storage';
+
 import {CardListURL, CardListFetcher} from '@/swr/cardSWR';
 import useSWR from 'swr';
 import {CARD, TAG} from '@/assets/static/texts/DataTypes';
+import {getToken, setToken} from '@/redux/features/tokenState';
 // Pre-step, call this before any NFC operations
 NfcManager.start();
 const NFCTagScreen = ({navigation}: {navigation: any}) => {
@@ -19,18 +20,9 @@ const NFCTagScreen = ({navigation}: {navigation: any}) => {
   const screen = useAppSelector(getScreenType);
   const address = useAppSelector(getAddress);
   const [isEnabled, setEnabled] = useState(false);
-  const cardListSWR = useSWR(CardListURL, CardListFetcher);
-  const getAddressFromStorage = async () => {
-    try {
-      const address = await EncryptedStorage.getItem('address');
+  const jwt = useAppSelector(getToken)
+  const cardListSWR = useSWR(CardListURL, (url:string)=>CardListFetcher(jwt,url));
 
-      if (address !== undefined) {
-        return address;
-      }
-    } catch (error) {
-      console.log(error.code);
-    }
-  };
   const readNdef = async () => {
     try {
       setEnabled(true);
@@ -38,10 +30,12 @@ const NFCTagScreen = ({navigation}: {navigation: any}) => {
       await NfcManager.requestTechnology(NfcTech.Ndef);
       // the resolved tag object will contain `ndefMessage` property
       const tag = await NfcManager.getTag();
-      const addressFromStorage = await getAddressFromStorage();
-      authorizeCard(tag.id, addressFromStorage).then(res => {
-        if (res.data.result === ADMIN) {
+
+      authorizeCard(tag.id, address).then(res => {
+        if (res.data.result.split('.').length > 2) {
           dispatch(setScreen(CARD));
+          dispatch(setToken(res.data.result));
+          console.warn(res.data.result);
           cardListSWR.mutate();
           navigation.navigate('card');
         }

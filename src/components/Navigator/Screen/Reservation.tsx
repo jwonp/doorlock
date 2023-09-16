@@ -17,11 +17,18 @@ import {
 } from '@/redux/features/modal/modalState';
 import {setSelectModalAction} from '@/redux/features/modal/selectModalState';
 import {EDIT} from '@/assets/static/texts/SelectModalActions';
+import {getToken} from '@/redux/features/tokenState';
+import {getScreenType} from '@/redux/features/modal/screenState';
 
 const ReservationScreen = () => {
+  const screen = useAppSelector(getScreenType);
   const dispatch = useAppDispatch();
+  const jwt = useAppSelector(getToken);
   const selectModalVisible = useAppSelector(getSelectModalVisible);
-  const reservationSWR = useSWR(ReservationURL, ReservationFetcher);
+  const reservationSWR = useSWR(ReservationURL, (url: string) =>
+    ReservationFetcher(jwt, url),
+  );
+
   const ListBar = useMemo(() => {
     if (!reservationSWR || !reservationSWR.data) {
       return <Text style={{color: '#ffffff'}}>No Reservation</Text>;
@@ -40,9 +47,13 @@ const ReservationScreen = () => {
       </Selectable>
     ));
   }, [reservationSWR.data]);
+
   useEffect(() => {
     reservationSWR.mutate();
   }, [selectModalVisible]);
+  useEffect(() => {
+    reservationSWR.mutate();
+  }, [screen]);
   return (
     <View style={screenStyles.container}>
       <SelectModal />

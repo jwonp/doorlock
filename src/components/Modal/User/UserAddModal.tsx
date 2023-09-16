@@ -20,8 +20,10 @@ import CloseIcon from '@/public/close-white.png';
 import {modalHeaderStlyes, modalStyles} from '@/assets/modals/ModalStyles';
 import CheckIcon from '@/public/checked.png';
 import {getPhoneNumber} from '@/util/phoneNumberKeyEvent';
+import {getToken} from '@/redux/features/tokenState';
 const UserAddModal = () => {
   const dispatch = useAppDispatch();
+  const jwt = useAppSelector(getToken);
   const [newUserId, setNewUserId] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [passwordCheck, setPasswordCheck] = useState<string>('');
@@ -56,11 +58,9 @@ const UserAddModal = () => {
       phone: newUserPhone,
     };
 
-    addUser(userData)
+    addUser(jwt, userData)
       .then(res => {
-        if (res.data === true) {
-          dispatch(setUserAddModalVisible(false));
-        }
+        dispatch(setUserAddModalVisible(false));
       })
       .catch((err: AxiosError) => {});
   };

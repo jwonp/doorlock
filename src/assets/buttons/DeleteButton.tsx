@@ -28,6 +28,7 @@ import {
 import {UserListFetcher, UserListURL} from '@/swr/userSWR';
 
 import { deleteSelected } from '@/util/getDeleteSelecteds';
+import { getToken } from '@/redux/features/tokenState';
 
 type DeleteButtonProps = {
   type: DataTypes;
@@ -35,6 +36,7 @@ type DeleteButtonProps = {
 
 const DeleteButton = ({type}: DeleteButtonProps) => {
   const dispatch = useAppDispatch();
+  const jwt = useAppSelector(getToken);
   const selected = {
     card: useAppSelector(getSelectedCards),
     room: useAppSelector(getSelectedRooms),
@@ -48,17 +50,17 @@ const DeleteButton = ({type}: DeleteButtonProps) => {
     reservation: resetReservationSelected,
   };
   const dataSWR = {
-    card: useSWR(CardListURL, CardListFetcher),
-    room: useSWR(RoomListURL, RoomListFetecher),
-    user: useSWR(UserListURL, UserListFetcher),
-    reservation: useSWR(ReservationURL, ReservationFetcher),
+    card: useSWR(CardListURL, (url:string)=>CardListFetcher(jwt,url)),
+    room: useSWR(RoomListURL, (url:string)=>RoomListFetecher(jwt,url)),
+    user: useSWR(UserListURL, (url:string)=>UserListFetcher(jwt,url)),
+    reservation: useSWR(ReservationURL, (url:string)=>ReservationFetcher(jwt,url)),
   };
 
   return (
     <Pressable
       style={{display: selected[type].length > 0 ? 'flex' : 'none'}}
       onPress={() => {
-        deleteSelected(type, selected[type]).then(() => {
+        deleteSelected(jwt,type, selected[type]).then(() => {
           dataSWR[type].mutate();
         });
         dispatch(resetSelected[type]());

@@ -29,7 +29,9 @@ import {addReservation} from '@/util/request/reservation';
 import {ReservationAddRequest} from '@/assets/models/dto/reservation/ReservationRequest';
 import {AxiosError} from 'axios';
 import {useEffect} from 'react';
+import { getToken } from '@/redux/features/tokenState';
 const ReservationAddModal = () => {
+  const jwt = useAppSelector(getToken);
   const modalVisible = useAppSelector(getReservationAddModalVisible);
   const dispatch = useAppDispatch();
   const userId = useAppSelector(getReservationAddUserId);
@@ -37,12 +39,12 @@ const ReservationAddModal = () => {
   const roomId = useAppSelector(getReservationAddRoomId);
   const userSWR = useSWR(
     ReservationAddUserURL(userId),
-    ReservationAddUserFetcher,
+  (url:string)=>ReservationAddUserFetcher(jwt,url),
   );
 
   const roomSWR = useSWR(
     ReservationAddRoomURL(roomId),
-    ReservationAddRoomFetcher,
+    (url:string)=>ReservationAddRoomFetcher(jwt,url),
   );
   const isNotSelected = userId === '' || cardId === '' || roomId === 0;
   useEffect(() => {
@@ -87,7 +89,7 @@ const ReservationAddModal = () => {
                     roomId: roomId,
                   };
 
-                  addReservation(reservation)
+                  addReservation(jwt,reservation)
                     .then(() => {
                       dispatch(resetIds());
                       dispatch(setReservationAddModalVisible(false));

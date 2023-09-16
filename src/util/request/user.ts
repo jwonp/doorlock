@@ -10,10 +10,11 @@ import {
   UserModifyCardRequest,
 } from '@/assets/models/dto/user/UserRequest';
 
-export const addUser = async (user: UserAddRequest) => {
-  return await request.post(`${Config.BACKEND_ENDPOINT}/user`, user);
+export const addUser = async (jwt: string, user: UserAddRequest) => {
+  return await request(jwt).post(`${Config.BACKEND_ENDPOINT}/user`, user);
 };
 export const modifyCardidInUser = async (
+  jwt: string,
   cardId: string,
   userId: string,
 ): Promise<AxiosResponse<boolean, any>> => {
@@ -21,9 +22,10 @@ export const modifyCardidInUser = async (
     userId: userId,
     cardId: cardId,
   };
-  return await request.patch('/user/card', CardIdModifyData);
+  return await request(jwt).patch('/user/card', CardIdModifyData);
 };
 export const modifyRoomIdInUser = async (
+  jwt: string,
   roomId: number,
   userId: string,
 ): Promise<AxiosResponse<boolean, any>> => {
@@ -31,23 +33,26 @@ export const modifyRoomIdInUser = async (
     userId: userId,
     roomId: roomId,
   };
-  return await request.patch('/user/room', UserIdModifyData);
+  return await request(jwt).patch('/user/room', UserIdModifyData);
 };
 
-export const deleteSelectedUsers = async (selectedUserIDList: string[]) => {
+export const deleteSelectedUsers = async (
+  jwt: string,
+  selectedUserIDList: string[],
+) => {
   if (!selectedUserIDList || selectedUserIDList.length < 1) {
     return;
   }
   const userListToDelete = {
     idList: selectedUserIDList,
   };
-  return await request.delete('/user', {data: userListToDelete});
+  return await request(jwt).delete('/user', {data: userListToDelete});
 };
 
-export const modifyUser = async (user: UserPatchRequest) => {
+export const modifyUser = async (jwt: string, user: UserPatchRequest) => {
   if (!user) {
     return;
   }
 
-  return await request.patch('/user', user);
+  return await request(jwt).patch('/user', user);
 };

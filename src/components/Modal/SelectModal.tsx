@@ -47,23 +47,24 @@ import {
 } from '@/redux/features/modal/data/reservationEditState';
 
 import {setAddress} from '@/redux/features/AddressState';
-import EncryptedStorage from 'react-native-encrypted-storage';
+import {getToken} from '@/redux/features/tokenState';
+
 export type ListBarProps = {
   isDisable?: boolean;
 };
 const SelectModal = () => {
   const dispatch = useAppDispatch();
+  const jwt = useAppSelector(getToken);
   const actionType = useAppSelector(getSelectModalAction);
   const modalVisible = useAppSelector(getSelectModalVisible);
   const modalType = useAppSelector(getSelectedModalType);
   const [query, setQuery] = useState<string>('');
-  const SelectDataSWR = useSWR(
-    ReservationSelectURL(modalType),
-    ReservationSelectFetcher,
+  const SelectDataSWR = useSWR(ReservationSelectURL(modalType), (url: string) =>
+    ReservationSelectFetcher(jwt, url),
   );
   const SearchDataSWR = useSWR(
     ReservationSearchURL(modalType, query),
-    ReservationSearchFetcher,
+    (url: string) => ReservationSearchFetcher(jwt, url),
   );
   const ListBarType = {
     card: CardListBar,
@@ -71,14 +72,7 @@ const SelectModal = () => {
     room: RoomListBar,
   };
   const ListBar = ListBarType[modalType];
-  const storeAddressOnStorage = async (address: string) => {
-    try {
-      return await EncryptedStorage.setItem('address', address);
-    } catch (error) {
-      console.log(error.code);
-    }
-    return new Promise<void>(() => {});
-  };
+
   const ListBarList = useMemo(() => {
     if (!SelectDataSWR || !SelectDataSWR.data) {
       return <Text>{`No ${modalType}`}</Text>;
@@ -114,9 +108,7 @@ const SelectModal = () => {
                 }
               }
               if (actionType === TAG) {
-                storeAddressOnStorage(item.address).then(() => {
-                  dispatch(setAddress(item.address));
-                });
+                dispatch(setAddress(item.address));
               }
               dispatch(setSelectModalVisible(false));
             }}>

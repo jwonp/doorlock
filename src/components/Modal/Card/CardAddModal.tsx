@@ -12,9 +12,11 @@ import CloseIcon from '@/public/close-white.png';
 import {AxiosError} from 'axios';
 import {CardListURL, CardListFetcher} from '@/swr/cardSWR';
 import useSWR from 'swr';
+import {getToken} from '@/redux/features/tokenState';
 
 NfcManager.start();
 const CardAddModal = () => {
+  const jwt = useAppSelector(getToken);
   const cardListSWR = useSWR(CardListURL, CardListFetcher);
   const modalVisible = useAppSelector(getCardAddModalVisible);
   const dispatch = useAppDispatch();
@@ -26,7 +28,7 @@ const CardAddModal = () => {
       // the resolved tag object will contain `ndefMessage` property
       const tag = await NfcManager.getTag();
 
-      addCard(tag)
+      addCard(jwt, tag)
         .then(res => {
           cardListSWR.mutate();
           dispatch(setCardAddModalVisibie(false));

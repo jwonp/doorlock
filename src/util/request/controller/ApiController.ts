@@ -14,10 +14,14 @@ const errorResponse = (response: AxiosResponse) => {
     message: response.data.message ?? 'Error',
   };
 };
-const createInstance = () => {
+const createInstance = (jwt: string) => {
   const instance = axios.create({
     baseURL: Config.BACKEND_ENDPOINT,
     timeout: 1000,
+    withCredentials: true,
+    headers: {
+      Authorization: `Bearer ${jwt}`,
+    },
   });
   return setInterceptors(instance);
 };
@@ -43,4 +47,4 @@ const setInterceptors = (instance: AxiosInstance) => {
   return instance;
 };
 
-export const request = createInstance();
+export const request = (jwt: string) => createInstance(jwt);

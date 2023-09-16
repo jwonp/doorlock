@@ -5,6 +5,7 @@ import {CardAddResponse} from '@/assets/models/dto/card/CardResponse';
 import {AxiosResponse} from 'axios';
 
 export const addCard = async (
+  jwt: string,
   tag: TagEvent,
 ): Promise<AxiosResponse<CardAddResponse, any>> => {
   if (!tag.id || !tag.maxSize || !tag.techTypes || !tag.type) {
@@ -21,15 +22,18 @@ export const addCard = async (
     techTypes: parsedtechTypes,
     type: tag.type,
   };
-  return await request.post('/card', newCard);
+  return await request(jwt).post('/card', newCard);
 };
 
-export const deleteSelectedCards = async (selectedCardIDList: string[]) => {
+export const deleteSelectedCards = async (
+  jwt: string,
+  selectedCardIDList: string[],
+) => {
   if (!selectedCardIDList || selectedCardIDList.length < 1) {
     return;
   }
   const cardListToDelete = {
     idList: selectedCardIDList,
   };
-  return await request.delete('/card', {data: cardListToDelete});
+  return await request(jwt).delete('/card', {data: cardListToDelete});
 };

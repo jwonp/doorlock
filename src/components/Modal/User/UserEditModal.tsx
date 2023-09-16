@@ -24,7 +24,9 @@ import {UserPatchRequest} from '@/assets/models/dto/user/UserRequest';
 import {modifyUser} from '@/util/request/user';
 import {AxiosError} from 'axios';
 import {getPhoneNumber} from '@/util/phoneNumberKeyEvent';
+import { getToken } from '@/redux/features/tokenState';
 const UserEditModal = () => {
+  const jwt = useAppSelector(getToken);
   const modalVisible = useAppSelector(getUserEditModalVisible);
   const dispatch = useAppDispatch();
   const user = useAppSelector(getUserEdit);
@@ -79,7 +81,7 @@ const UserEditModal = () => {
                   phone: isPhoneChanged ? user.phone : undefined,
                 };
 
-                modifyUser(userModified)
+                modifyUser(jwt,userModified)
                   .then(() => {
                     closeModal();
                   })

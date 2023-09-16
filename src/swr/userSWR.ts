@@ -3,8 +3,8 @@ import Config from 'react-native-config';
 import {UserListResponse} from '@/assets/models/dto/user/UserResponse';
 import {request} from '@/util/request/controller/ApiController';
 import {User} from '@/assets/models/entity/User';
-export const UserListFetcher = (url: string): Promise<UserListResponse[]> =>
-  request.get(url).then(res => res.data);
+export const UserListFetcher = (jwt:string,url: string): Promise<UserListResponse[]> =>
+  request(jwt).get(url).then(res => res.data);
 
 export const UserListURL = () => {
   return `${Config.BACKEND_ENDPOINT}/user/list`;
