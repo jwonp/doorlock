@@ -1,6 +1,7 @@
 import {Log} from '@/assets/models/entity/Log';
 import {listBarStyles} from '@/assets/static/styles/ListBarStyles';
-import { getLastTaggedDisplayText } from '@/util/convertDisplayText';
+import {ADMIN} from '@/assets/static/texts/AuthorizeResults';
+import {getLastTaggedDisplayText} from '@/util/convertDisplayText';
 import {View, Text} from 'react-native';
 
 interface LogListBarProps {
@@ -15,7 +16,9 @@ const LogListBar = ({data}: LogListBarProps) => {
       </View>
       <View>
         <Text style={listBarStyles.detailText}>{detailText}</Text>
-        <Text style={listBarStyles.detailText}>{data.result}</Text>
+        <Text style={listBarStyles.detailText}>
+          {data.result.split('.').length > 2 ? ADMIN : data.result}
+        </Text>
         <Text style={listBarStyles.detailTextOnRight}>
           {getLastTaggedDisplayText(data.taggedTime)}
         </Text>
