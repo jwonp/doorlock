@@ -4,11 +4,12 @@ import {
   getSelectModalVisible,
   setSelectModalVisible,
 } from '@/redux/features/modal/modalState';
-import {DataType} from '@/redux/features/modal/screenState';
+
 import EditIcon from '@/public/edit.png';
 import {setSelectedModalType} from '@/redux/features/modal/selectModalState';
+import { DataType, DataTypes } from '@/assets/static/texts/DataTypes';
 type ModalDataCategoryViewProps = {
-  type: DataType;
+  type: DataTypes;
 };
 
 const ModalDataCategoryView = ({type}: ModalDataCategoryViewProps) => {
