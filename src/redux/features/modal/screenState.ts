@@ -1,37 +1,21 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
 import {RootState} from '@/redux/store';
-import {
-  CARD,
-  RESERVATION,
-  ROOM,
-  SCAN,
-  USER,
-} from '@/assets/static/texts/DataTypes';
-
-export const DataType = {
-  card: CARD,
-  user: USER,
-  room: ROOM,
-  reservation: RESERVATION,
-  scan: SCAN,
-} as const;
-
-export type DataType = (typeof DataType)[keyof typeof DataType];
+import {CARD, DataTypes, TAG} from '@/assets/static/texts/DataTypes';
 
 export interface ModalState {
-  type: DataType;
+  type: DataTypes;
 }
 
 const initialState: ModalState = {
-  type: DataType.card,
+  type: TAG,
 } as const;
 
 export const screen = createSlice({
   name: 'screen',
   initialState,
   reducers: {
-    setScreen: (state, action: PayloadAction<DataType>) => {
+    setScreen: (state, action: PayloadAction<DataTypes>) => {
       state.type = action.payload;
     },
   },
