@@ -14,9 +14,6 @@ const ReservationListBar = ({data}: {data: Reservation}) => {
       <View>
         <Text style={listBarStyles.detailText}>{detailText}</Text>
 
-        <Text style={listBarStyles.detailTextOnRight}>
-          {getCheckedIn(data.id, data.isCheckedIn)}
-        </Text>
       </View>
     </View>
   );
