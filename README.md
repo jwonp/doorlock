@@ -116,7 +116,7 @@
     환경 설정 과정
     
     - 우선 tsconfig.json 에서 기본적인 절대 경로에 대한 설정을 추가했습니다.
-        <img src="https://s3.ap-northeast-2.amazonaws.com/ikiningyou.portfolio.s3.bucket/doorlock/Images/tsconfig.png"></img>
+        <img src="https://s3.ap-northeast-2.amazonaws.com/ikiningyou.portfolio.s3.bucket/doorlock/Images/tsconfig.png"/>
         tsconfig.json
         
     - 컴파일 과정에서 절대 경로 표시 (@/src/**) 를 인식할 수 있도록 packge.json에 babel-plugin-module-resolver 를 추가하고 babel.config.json 에서 plugins 도 추가했습니다.
