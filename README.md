@@ -120,14 +120,14 @@
         tsconfig.json
         
     - 컴파일 과정에서 절대 경로 표시 (@/src/**) 를 인식할 수 있도록 packge.json에 babel-plugin-module-resolver 를 추가하고 babel.config.json 에서 plugins 도 추가했습니다.
-        ![[babel.png]]
+        <image src="https://s3.ap-northeast-2.amazonaws.com/ikiningyou.portfolio.s3.bucket/Images/doorlock/babel.png"/>
         
 
 ### 디자인 과정
 
 - 모바일에서 대세인 메뉴는?
     - 초기에 메뉴를 설계할 때, 단순히 처음 화면에서 버튼 목록을 생성하고, 버튼을 통해 화면을 이동했다가 돌아오는 방식으로 설계했었습니다.
-        ![[모바일 메뉴 과거.png]]
+        <image src="https://s3.ap-northeast-2.amazonaws.com/ikiningyou.portfolio.s3.bucket/Images/doorlock/%E1%84%86%E1%85%A9%E1%84%87%E1%85%A1%E1%84%8B%E1%85%B5%E1%86%AF+%E1%84%86%E1%85%A6%E1%84%82%E1%85%B2+%E1%84%80%E1%85%AA%E1%84%80%E1%85%A5.png"/>
         초기 메뉴 설계 예시 (wekdev의 NFC Tools)
         
     - 하지만 다른 화면을 가기위해서는 항상 처음 화면에 돌아와야 한다는 것에, UX 관점에서 불편함을 많이 느꼈습니다.
@@ -136,20 +136,20 @@
         
     - 우선 기본 어플인 전화, 앱스토어에서 부터 카톡, 유튜브, 인스타그램, Gmail 등, 대부분의 어플의 메뉴는 아이콘이 하단에 있는 Bottom Tab 방식이었습니다.
         
-        ![[모바일 메뉴 현재.png]]
+        <image src="https://s3.ap-northeast-2.amazonaws.com/ikiningyou.portfolio.s3.bucket/Images/doorlock/%E1%84%86%E1%85%A9%E1%84%87%E1%85%A1%E1%84%8B%E1%85%B5%E1%86%AF+%E1%84%86%E1%85%A6%E1%84%82%E1%85%B2+%E1%84%92%E1%85%A7%E1%86%AB%E1%84%8C%E1%85%A2.png"/>
         Bottom Tab 방식 (Gmail)
         
     - 많은 어플이 이 방식을 쓰고 있기 때문에 디자인적으로 선호되고 있다고 판단해, 초기 메뉴 방식에서 Bottom Tab 방식으로 메뉴를 구성했습니다.
         
 - 목록 표현 방식
 	- 각종 커뮤니티 사이트를 비롯한 게시판에서 게시글을 나열할 때, 가장 첫번째 열에는 글 제목, 작성자, 조회수, 작성일 등 컬럼을 표시하고 그 밑으로 각각의 게시글을 나열합니다.
-	    ![[커뮤니티 게시글 예시.png]]
+	    <image src="https://s3.ap-northeast-2.amazonaws.com/ikiningyou.portfolio.s3.bucket/Images/doorlock/%E1%84%8F%E1%85%A5%E1%84%86%E1%85%B2%E1%84%82%E1%85%B5%E1%84%90%E1%85%B5+%E1%84%80%E1%85%A6%E1%84%89%E1%85%B5%E1%84%80%E1%85%B3%E1%86%AF+%E1%84%8B%E1%85%A8%E1%84%89%E1%85%B5.png"/>
 	    첫번째 열에는 컬럼, 두번째 열부터 게시글이 나열됨(네어버 언리얼 엔진 공식카페)
     
 - 가장 무난한 방식이긴 하지만, 컬럼 수가 늘어날수록 화면의 가로 폭이 넓어야 합니다.
     
 - 가로 폭이 넓어야 하는 점은 모바일에서는 상당히 불리하기 때문에 많은 사이트에서 반응형 웹을 지원할 때, 가장 첫 줄의 컬럼을 제외하고 하나의 게시글당 2줄 이상으로 구성했습니다.
-    ![[커뮤니티 게시글 모바일 예시.jpeg]]
+    <image src="https://s3.ap-northeast-2.amazonaws.com/ikiningyou.portfolio.s3.bucket/Images/doorlock/%E1%84%8F%E1%85%A5%E1%84%86%E1%85%B2%E1%84%82%E1%85%B5%E1%84%90%E1%85%B5+%E1%84%80%E1%85%A6%E1%84%89%E1%85%B5%E1%84%80%E1%85%B3%E1%86%AF+%E1%84%86%E1%85%A9%E1%84%87%E1%85%A1%E1%84%8B%E1%85%B5%E1%86%AF+%E1%84%8B%E1%85%A8%E1%84%89%E1%85%B5.jpeg"/>
     게시글 첫번째 줄에 제목, 두번째 줄에 나머지 정보가 있음(네어버 언리얼 엔진 공식카페)
     
 - 이번 프로젝트에서도 이와 같은 방식으로 카드 정보, 유저 정보를 표시하려 했지만, 디자인으로 프로젝트의 컨셉을 조금이라도 살리고 싶어서 다른 방식을 고안했습니다.
@@ -159,28 +159,28 @@
 ## Flow Chart
 
 - **로그인**
-    ![[로그인-플로우차트.jpg]]
+    ![[로그인-플로우차트.jpg]]<image src="https://s3.ap-northeast-2.amazonaws.com/ikiningyou.portfolio.s3.bucket/Images/doorlock/%E1%84%85%E1%85%A9%E1%84%80%E1%85%B3%E1%84%8B%E1%85%B5%E1%86%AB-%E1%84%91%E1%85%B3%E1%86%AF%E1%84%85%E1%85%A9%E1%84%8B%E1%85%AE%E1%84%8E%E1%85%A1%E1%84%90%E1%85%B3.jpg"/>
     
 - **로그아웃**
-    ![[로그아웃-플로우차트.jpg]]
+    <image src="https://s3.ap-northeast-2.amazonaws.com/ikiningyou.portfolio.s3.bucket/Images/doorlock/%E1%84%85%E1%85%A9%E1%84%80%E1%85%B3%E1%84%8B%E1%85%A1%E1%84%8B%E1%85%AE%E1%86%BA-%E1%84%91%E1%85%B3%E1%86%AF%E1%84%85%E1%85%A9%E1%84%8B%E1%85%AE%E1%84%8E%E1%85%A1%E1%84%90%E1%85%B3.jpg"/>
     
 - **카드 분실 신고**
-	![[카드분실신고-플로우차트.jpg]]
+	<image src="https://s3.ap-northeast-2.amazonaws.com/ikiningyou.portfolio.s3.bucket/Images/doorlock/%E1%84%8F%E1%85%A1%E1%84%83%E1%85%B3%E1%84%87%E1%85%AE%E1%86%AB%E1%84%89%E1%85%B5%E1%86%AF%E1%84%89%E1%85%B5%E1%86%AB%E1%84%80%E1%85%A9-%E1%84%91%E1%85%B3%E1%86%AF%E1%84%85%E1%85%A9%E1%84%8B%E1%85%AE%E1%84%8E%E1%85%A1%E1%84%90%E1%85%B3.jpg"/>
     
 - **카드 분실 신고 취소**
-    ![[카드분실신고취소-플로우차트.jpg]]
+    <image src="https://s3.ap-northeast-2.amazonaws.com/ikiningyou.portfolio.s3.bucket/Images/doorlock/%E1%84%8F%E1%85%A1%E1%84%83%E1%85%B3%E1%84%87%E1%85%AE%E1%86%AB%E1%84%89%E1%85%B5%E1%86%AF%E1%84%89%E1%85%B5%E1%86%AB%E1%84%80%E1%85%A9%E1%84%8E%E1%85%B1%E1%84%89%E1%85%A9-%E1%84%91%E1%85%B3%E1%86%AF%E1%84%85%E1%85%A9%E1%84%8B%E1%85%AE%E1%84%8E%E1%85%A1%E1%84%90%E1%85%B3.jpg"/>
     
 - 분실 카드 처리
-    ![[분실카드처리-플로우차트.jpg]]
+    <image src="https://s3.ap-northeast-2.amazonaws.com/ikiningyou.portfolio.s3.bucket/Images/doorlock/%E1%84%87%E1%85%AE%E1%86%AB%E1%84%89%E1%85%B5%E1%86%AF%E1%84%8F%E1%85%A1%E1%84%83%E1%85%B3%E1%84%8E%E1%85%A5%E1%84%85%E1%85%B5-%E1%84%91%E1%85%B3%E1%86%AF%E1%84%85%E1%85%A9%E1%84%8B%E1%85%AE%E1%84%8E%E1%85%A1%E1%84%90%E1%85%B3.jpg"/>
     
 - 예약 변경 요청
-    ![[예약변경요청-플로우차트.jpg]]
+    <image src="https://s3.ap-northeast-2.amazonaws.com/ikiningyou.portfolio.s3.bucket/Images/doorlock/%E1%84%8B%E1%85%A8%E1%84%8B%E1%85%A3%E1%86%A8%E1%84%87%E1%85%A7%E1%86%AB%E1%84%80%E1%85%A7%E1%86%BC%E1%84%8B%E1%85%AD%E1%84%8E%E1%85%A5%E1%86%BC-%E1%84%91%E1%85%B3%E1%86%AF%E1%84%85%E1%85%A9%E1%84%8B%E1%85%AE%E1%84%8E%E1%85%A1%E1%84%90%E1%85%B3.jpg"/>
     
 - 예약 변경 요청 처리
-    ![[예약변경요청처리-플로우차트.jpg]]
+    <image src="https://s3.ap-northeast-2.amazonaws.com/ikiningyou.portfolio.s3.bucket/Images/doorlock/%E1%84%8B%E1%85%A8%E1%84%8B%E1%85%A3%E1%86%A8%E1%84%87%E1%85%A7%E1%86%AB%E1%84%80%E1%85%A7%E1%86%BC%E1%84%8B%E1%85%AD%E1%84%8E%E1%85%A5%E1%86%BC%E1%84%8E%E1%85%A5%E1%84%85%E1%85%B5-%E1%84%91%E1%85%B3%E1%86%AF%E1%84%85%E1%85%A9%E1%84%8B%E1%85%AE%E1%84%8E%E1%85%A1%E1%84%90%E1%85%B3.jpg"/>
     
 - 예약 변경
-    ![[예약변경-플로우차트.jpg]]
+    <image src="https://s3.ap-northeast-2.amazonaws.com/ikiningyou.portfolio.s3.bucket/Images/doorlock/%E1%84%8B%E1%85%A8%E1%84%8B%E1%85%A3%E1%86%A8%E1%84%87%E1%85%A7%E1%86%AB%E1%84%80%E1%85%A7%E1%86%BC-%E1%84%91%E1%85%B3%E1%86%AF%E1%84%85%E1%85%A9%E1%84%8B%E1%85%AE%E1%84%8E%E1%85%A1%E1%84%90%E1%85%B3.jpg"/>
 
 ## APIs
 
@@ -189,4 +189,4 @@ API 문서는 Postman 으로 작성했습니다.
 [Postman API 문서](https://documenter.getpostman.com/view/21615276/2s9YC5xCPu)
 
 ## DB 설계
-	![[db.png]]
+<image src="https://s3.ap-northeast-2.amazonaws.com/ikiningyou.portfolio.s3.bucket/Images/doorlock/db.png"/>
