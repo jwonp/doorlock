@@ -51,18 +51,18 @@
 
 ### 데브옵스 (현재 배포되어 있지 않습니다)
 <table class="images_box">
-	<div>
-		<div class="image">
+	<tr>
+		<td class="image">
 			<image src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1629987467/noticon/o0ua9qgyuuoazjqwwvas.png" width="120px" height="120px"/>
-		</div>
-		<div class="text">AWS EC2</div>
-	</div>
-	<div>
-		<div class="image">
+		</td>
+		<td class="image">
 			<image src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1683592944/noticon/plcvyiwmdh4adlt8dxgo.png"  width="120px" height="120px"/>
-		</div>
-		<div class="text">AWS RDS</div>
-	</div>
+		</td>
+	</tr>
+	<tr>
+		<td class="text">AWS RDS</td>
+  		<td class="text">AWS EC2</td>
+	</tr>
 
 </table>
 
