@@ -143,13 +143,13 @@
         
 - 목록 표현 방식
 	- 각종 커뮤니티 사이트를 비롯한 게시판에서 게시글을 나열할 때, 가장 첫번째 열에는 글 제목, 작성자, 조회수, 작성일 등 컬럼을 표시하고 그 밑으로 각각의 게시글을 나열합니다.
-	    <image src="https://s3.ap-northeast-2.amazonaws.com/ikiningyou.portfolio.s3.bucket/Images/doorlock/%E1%84%8F%E1%85%A5%E1%84%86%E1%85%B2%E1%84%82%E1%85%B5%E1%84%90%E1%85%B5+%E1%84%80%E1%85%A6%E1%84%89%E1%85%B5%E1%84%80%E1%85%B3%E1%86%AF+%E1%84%8B%E1%85%A8%E1%84%89%E1%85%B5.png" height="540px"/>
+	    <div><image src="https://s3.ap-northeast-2.amazonaws.com/ikiningyou.portfolio.s3.bucket/Images/doorlock/%E1%84%8F%E1%85%A5%E1%84%86%E1%85%B2%E1%84%82%E1%85%B5%E1%84%90%E1%85%B5+%E1%84%80%E1%85%A6%E1%84%89%E1%85%B5%E1%84%80%E1%85%B3%E1%86%AF+%E1%84%8B%E1%85%A8%E1%84%89%E1%85%B5.png" height="540px"/></div>
 	    <div>첫번째 열에는 컬럼, 두번째 열부터 게시글이 나열됨(네어버 언리얼 엔진 공식카페)</div>
     
 - 가장 무난한 방식이긴 하지만, 컬럼 수가 늘어날수록 화면의 가로 폭이 넓어야 합니다.
     
 - 가로 폭이 넓어야 하는 점은 모바일에서는 상당히 불리하기 때문에 많은 사이트에서 반응형 웹을 지원할 때, 가장 첫 줄의 컬럼을 제외하고 하나의 게시글당 2줄 이상으로 구성했습니다.
-    <image src="https://s3.ap-northeast-2.amazonaws.com/ikiningyou.portfolio.s3.bucket/Images/doorlock/%E1%84%8F%E1%85%A5%E1%84%86%E1%85%B2%E1%84%82%E1%85%B5%E1%84%90%E1%85%B5+%E1%84%80%E1%85%A6%E1%84%89%E1%85%B5%E1%84%80%E1%85%B3%E1%86%AF+%E1%84%86%E1%85%A9%E1%84%87%E1%85%A1%E1%84%8B%E1%85%B5%E1%86%AF+%E1%84%8B%E1%85%A8%E1%84%89%E1%85%B5.jpeg" height="540px"/>
+    <div><image src="https://s3.ap-northeast-2.amazonaws.com/ikiningyou.portfolio.s3.bucket/Images/doorlock/%E1%84%8F%E1%85%A5%E1%84%86%E1%85%B2%E1%84%82%E1%85%B5%E1%84%90%E1%85%B5+%E1%84%80%E1%85%A6%E1%84%89%E1%85%B5%E1%84%80%E1%85%B3%E1%86%AF+%E1%84%86%E1%85%A9%E1%84%87%E1%85%A1%E1%84%8B%E1%85%B5%E1%86%AF+%E1%84%8B%E1%85%A8%E1%84%89%E1%85%B5.jpeg" height="540px"/></div>
     <div>게시글 첫번째 줄에 제목, 두번째 줄에 나머지 정보가 있음(네어버 언리얼 엔진 공식카페)</div>
     
 - 이번 프로젝트에서도 이와 같은 방식으로 카드 정보, 유저 정보를 표시하려 했지만, 디자인으로 프로젝트의 컨셉을 조금이라도 살리고 싶어서 다른 방식을 고안했습니다.
