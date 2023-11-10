@@ -29,29 +29,28 @@
 </table>
 
 ### 백엔드
-<div class="images_box">
-	<div>
-		<div class="image">
+<table class="images_box">
+	<tr>
+		<td class="image">
 			<image src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1583139980/noticon/vtzecmjzn39cifnjtonx.png" width="120px" height="120px"/>
-		</div>
-		<div class="text">Spring Boot</div>
-	</div>
-	<div>
-		<div class="image">
+		</td>
+		<td class="image">
 			<image src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1687307488/noticon/o9lxyva5z8zbwyeaxers.png" width="120px" height="120px"/>
-		</div>
-		<div class="text">Spring Data JPA</div>
-	</div>
-	<div>
-		<div class="image">
+		</td>
+		<td class="image">
 			<image src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1686935854/noticon/r7w1ipwmdmhlfzqfw69h.png" width="120px" height="120px"/>
-		</div>
-		<div class="text">Spring Security</div>
-	</div>
-</div>
+		</td>
+	</tr>
+	<tr>
+		<td class="text">Spring Boot</td>
+		<td class="text">Spring Data JPA</td>
+		<td class="text">Spring Security</td>
+	</tr>
+
+</table>
 
 ### 데브옵스 (현재 배포되어 있지 않습니다)
-<div class="images_box">
+<table class="images_box">
 	<div>
 		<div class="image">
 			<image src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1629987467/noticon/o0ua9qgyuuoazjqwwvas.png" width="120px" height="120px"/>
@@ -65,7 +64,7 @@
 		<div class="text">AWS RDS</div>
 	</div>
 
-</div>
+</table>
 
 
 
