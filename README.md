@@ -5,7 +5,7 @@
 ## 기술스택
 ### 프론트엔드
 
-<table class="images_box">
+<table class="images_box" border="0">
 	<tr>
 		<td class="image">
 			<image src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1566879300/noticon/fvty9lnsbjol5lq9u3by.svg" width="120px" height="120px"/>
@@ -13,23 +13,23 @@
 		<td class="text">Next.js 13</td>
 	</tr>
 	<tr>
-		<div class="image">
+		<td class="image">
 			<image src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1613069004/noticon/ugcstxkq5uzhbhknrr80.png" width="120px" height="120px"/>
-		</div>
-		<div class="text">React Native</div>
+		</td>
+		<td class="text">React Native</td>
 	</tr>
-	<div>
-		<div class="image">
+	<tr>
+		<td class="image">
 			<image src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1691760811/noticon/mj67k1iwrb1vjrrntob2.png" width="120px" height="120px"/>
-		</div>
-		<div class="text">SWR</div>
-	</div>
-	<div>
-		<div class="image">
+		</td>
+		<td class="text">SWR</td>
+	</tr>
+	<tr>
+		<td class="image">
 			<image src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1567749614/noticon/zgdaxpaif5ojeduonygb.png" width="120px" height="120px"/>
-		</div>
-		<div class="text">Redux</div>
-	</div>
+		</td>
+		<td class="text">Redux</td>
+	</tr>
 </table>
 
 ### 백엔드
