@@ -8,25 +8,25 @@
 <div class="images_box">
 	<div>
 		<div class="image">
-			<image src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1566879300/noticon/fvty9lnsbjol5lq9u3by.svg"/>
+			<image src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1566879300/noticon/fvty9lnsbjol5lq9u3by.svg" width="120px" height="120px"/>
 		</div>
 		<div class="text">Next.js 13</div>
 	</div>
 	<div>
 		<div class="image">
-			<image src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1613069004/noticon/ugcstxkq5uzhbhknrr80.png"/>
+			<image src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1613069004/noticon/ugcstxkq5uzhbhknrr80.png" width="120px" height="120px"/>
 		</div>
 		<div class="text">React Native</div>
 	</div>
 	<div>
 		<div class="image">
-			<image src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1691760811/noticon/mj67k1iwrb1vjrrntob2.png"/>
+			<image src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1691760811/noticon/mj67k1iwrb1vjrrntob2.png" width="120px" height="120px"/>
 		</div>
 		<div class="text">SWR</div>
 	</div>
 	<div>
 		<div class="image">
-			<image src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1567749614/noticon/zgdaxpaif5ojeduonygb.png"/>
+			<image src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1567749614/noticon/zgdaxpaif5ojeduonygb.png" width="120px" height="120px"/>
 		</div>
 		<div class="text">Redux</div>
 	</div>
@@ -36,19 +36,19 @@
 <div class="images_box">
 	<div>
 		<div class="image">
-			<image src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1583139980/noticon/vtzecmjzn39cifnjtonx.png"/>
+			<image src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1583139980/noticon/vtzecmjzn39cifnjtonx.png" width="120px" height="120px"/>
 		</div>
 		<div class="text">Spring Boot</div>
 	</div>
 	<div>
 		<div class="image">
-			<image src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1687307488/noticon/o9lxyva5z8zbwyeaxers.png"/>
+			<image src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1687307488/noticon/o9lxyva5z8zbwyeaxers.png" width="120px" height="120px"/>
 		</div>
 		<div class="text">Spring Data JPA</div>
 	</div>
 	<div>
 		<div class="image">
-			<image src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1686935854/noticon/r7w1ipwmdmhlfzqfw69h.png"/>
+			<image src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1686935854/noticon/r7w1ipwmdmhlfzqfw69h.png" width="120px" height="120px"/>
 		</div>
 		<div class="text">Spring Security</div>
 	</div>
@@ -58,13 +58,13 @@
 <div class="images_box">
 	<div>
 		<div class="image">
-			<image src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1629987467/noticon/o0ua9qgyuuoazjqwwvas.png"/>
+			<image src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1629987467/noticon/o0ua9qgyuuoazjqwwvas.png" width="120px" height="120px"/>
 		</div>
 		<div class="text">AWS EC2</div>
 	</div>
 	<div>
 		<div class="image">
-			<image src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1683592944/noticon/plcvyiwmdh4adlt8dxgo.png"/>
+			<image src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1683592944/noticon/plcvyiwmdh4adlt8dxgo.png"  width="120px" height="120px"/>
 		</div>
 		<div class="text">AWS RDS</div>
 	</div>
@@ -121,7 +121,7 @@
     환경 설정 과정
     
     - 우선 tsconfig.json 에서 기본적인 절대 경로에 대한 설정을 추가했습니다.
-        ![[tsconfig.png]]
+        <img src="https://s3.ap-northeast-2.amazonaws.com/ikiningyou.portfolio.s3.bucket/doorlock/Images/tsconfig.png"></img>
         tsconfig.json
         
     - 컴파일 과정에서 절대 경로 표시 (@/src/**) 를 인식할 수 있도록 packge.json에 babel-plugin-module-resolver 를 추가하고 babel.config.json 에서 plugins 도 추가했습니다.
