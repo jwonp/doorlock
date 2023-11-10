@@ -10,24 +10,20 @@
 		<td class="image">
 			<image src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1566879300/noticon/fvty9lnsbjol5lq9u3by.svg" width="120px" height="120px"/>
 		</td>
-		<td class="text">Next.js 13</td>
-	</tr>
-	<tr>
-		<td class="image">
+						<td class="image">
 			<image src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1613069004/noticon/ugcstxkq5uzhbhknrr80.png" width="120px" height="120px"/>
 		</td>
-		<td class="text">React Native</td>
-	</tr>
-	<tr>
-		<td class="image">
+						<td class="image">
 			<image src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1691760811/noticon/mj67k1iwrb1vjrrntob2.png" width="120px" height="120px"/>
 		</td>
-		<td class="text">SWR</td>
-	</tr>
-	<tr>
-		<td class="image">
+						<td class="image">
 			<image src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1567749614/noticon/zgdaxpaif5ojeduonygb.png" width="120px" height="120px"/>
 		</td>
+	</tr>
+	<tr>
+		<td class="text">Next.js 13</td>
+		<td class="text">React Native</td>
+		<td class="text">SWR</td>
 		<td class="text">Redux</td>
 	</tr>
 </table>
