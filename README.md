@@ -4,27 +4,8 @@
 
 ## 기술스택
 ### 프론트엔드
-<style>
-.images_box {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 30px;
-}
 
-.image {
-    width: 100%;
-
-}
-
-.text {
-    text-align: center;
-}
-
-.cancel-line {
-    text-decoration: line-through;
-}
-<style>
-<div style="display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:30px;">
+<div class="images_box" style="background-color:powderblue;">
 	<div>
 		<div class="image">
 			<image src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1566879300/noticon/fvty9lnsbjol5lq9u3by.svg" width="120px" height="120px"/>
