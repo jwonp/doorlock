@@ -5,19 +5,19 @@
 ## 기술스택
 ### 프론트엔드
 
-<div class="images_box" style="background-color:powderblue;">
-	<div>
-		<div class="image">
+<table class="images_box">
+	<tr>
+		<td class="image">
 			<image src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1566879300/noticon/fvty9lnsbjol5lq9u3by.svg" width="120px" height="120px"/>
-		</div>
-		<div class="text">Next.js 13</div>
-	</div>
-	<div>
+		</td>
+		<td class="text">Next.js 13</td>
+	</tr>
+	<tr>
 		<div class="image">
 			<image src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1613069004/noticon/ugcstxkq5uzhbhknrr80.png" width="120px" height="120px"/>
 		</div>
 		<div class="text">React Native</div>
-	</div>
+	</tr>
 	<div>
 		<div class="image">
 			<image src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1691760811/noticon/mj67k1iwrb1vjrrntob2.png" width="120px" height="120px"/>
@@ -30,7 +30,7 @@
 		</div>
 		<div class="text">Redux</div>
 	</div>
-</div>
+</table>
 
 ### 백엔드
 <div class="images_box">
